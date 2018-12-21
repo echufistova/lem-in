@@ -1,39 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.h                                           :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ychufist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/18 14:33:27 by ychufist          #+#    #+#             */
-/*   Updated: 2018/12/18 14:33:30 by ychufist         ###   ########.fr       */
+/*   Created: 2018/06/28 17:12:57 by ychufist          #+#    #+#             */
+/*   Updated: 2018/07/16 17:16:22 by ychufist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEM_IN_H
-# define LEM_IN_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# define BUFF_SIZE 10
 
-# include "libft/libft.h"
-# include "libft/get_next_line.h"
-# include "libft/ft_printf.h"
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
-typedef struct 		s_point
-{
-	int x;
-	int y;
-}					t_point;
+# include <string.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
 
-typedef struct		s_room
-{
-	char		*room_name;
-	t_point		room_coord;
-	char		**room_links;  	
-}					t_room;
-
-typedef struct		s_farm
-{
-	int				ants_amount;
-	t_room			*rooms;
-}					t_farm;
+int get_next_line(int fd, char **line);
 
 #endif
