@@ -12,89 +12,156 @@
 
 #include "lem_in.h"
 
-t_farm new_farm(int k, t_farm farm)
+void add_link(t_farm *farm, char *line, int i)
 {
-	t_farm dop_farm;
+	int j;
+	t_room dop_room;
+
+	j = 0;
+//	ft_printf("hello7\n");
+	dop_room.links = (char**)malloc(sizeof(char*) * (farm->rooms[i].links_amount + 1));
+	while (j < farm->rooms[i].links_amount)
+	{
+		dop_room.links[j] = farm->rooms[i].links[j];
+		j++;
+	}
+	j = 0;
+	while (j < farm->rooms[i].links_amount)
+		ft_bzero(farm->rooms[i].links[j++], sizeof(char*));
+	farm->rooms[i].links = (char**)malloc(sizeof(char*) * (farm->rooms[i].links_amount + 1));
+	while (j < farm->rooms[i].links_amount)
+	{
+		farm->rooms[i].links[j] = dop_room.links[j];
+		j++;
+	}
+	farm->rooms[i].links[j] = line;
+	j = 0;
+	while (j < dop_room.links_amount)
+		ft_bzero(dop_room.links[j++], sizeof(char*));
+	farm->rooms[i].links_amount++;
+}
+
+void find_link(t_farm *farm, char *line)
+{
 	int i;
+	int j;
+	char *dop;
+	char *name;
 
 	i = 0;
-	ft_printf("%s\n", "hello2");
-	dop_farm.rooms = (t_room*)malloc(sizeof(t_room) * k);
-	while (i < k)
-	{	
-		dop_farm.rooms[i].room_name = farm.rooms[k].room_name;
-		dop_farm.rooms[i].room_coord.x = farm.rooms[k].room_coord.x;
-		dop_farm.rooms[i].room_coord.y = farm.rooms[k].room_coord.y;
+	j = 0;
+	dop = ft_strchr(line, '-');
+	ft_printf("hello5\n");
+	name = ft_strsub(line, 0, dop - line);
+	dop++;
+	while (i < farm->room_amount && ft_strcmp(farm->rooms[i].name, name) != 0)
+		i++;
+	if (ft_strcmp(farm->rooms[i].name, name) == 0)
+	{
+		while (j < farm->rooms[i].links_amount && ft_strlen(farm->rooms[i].links[j]) != 0)
+		{
+			if (ft_strcmp(farm->rooms[i].links[j], dop) == 0)
+				break;
+			j++;
+		}
+		if (j == farm->rooms[i].links_amount || ft_strlen(farm->rooms[i].links[j]) == 0)
+		{
+			ft_printf("hello6\n");
+			add_link(farm, dop, i);
+		}
 	}
-	ft_printf("%s\n", "hello3");
-	return (dop_farm);
 }
 
-void get_info(int i, int *k, char *line, t_farm *farm)
+void add_room(t_farm *farm)
+{
+	t_room *dop_rooms;
+	int i;
+
+	ft_printf("hello1\n");
+	i = 0;
+	if (farm->room_amount > 0) {
+		dop_rooms = (t_room*)malloc(sizeof(t_room) * (farm->room_amount + 1));
+		while (i < farm->room_amount) {
+			dop_rooms[i].name = farm->rooms[i].name;
+			dop_rooms[i].coord.x = farm->rooms[i].coord.x;
+			dop_rooms[i].coord.y = farm->rooms[i].coord.y;
+			i++;
+		}
+		ft_printf("hello2\n");
+		i = 0;
+		ft_bzero(farm->rooms, sizeof(t_room *));
+		farm->rooms = (t_room*)malloc(sizeof(t_room) * (farm->room_amount + 1));
+		while (i < farm->room_amount)
+		{
+			farm->rooms[i].name = dop_rooms[i].name;
+			farm->rooms[i].coord.x = dop_rooms[i].coord.x;
+			farm->rooms[i].coord.y = dop_rooms[i].coord.y;
+			i++;
+		}
+	}
+	farm->rooms[i].name = NULL;
+	farm->rooms[i].coord.x = 0;
+	farm->rooms[i].coord.y = 0;
+}
+
+void get_info(t_farm *farm, char *line, int *i)
 {
 	char *dop;
-	t_farm dop_farm;
 
-	// ft_printf("\n\n%s\n\n", line);
-
-	farm->ants_amount = (i == 0) ? ft_atoi(line) : farm->ants_amount;
-	ft_printf("%s\n", "hello1");
-	
-	if (i != 0 && ft_strchr(line, '-') == NULL && ft_strchr(line, '#') == NULL)
+	ft_printf("hello\n");
+	if ((*i)++ == 0)
+		farm->ants_amount = ft_atoi(line);
+	else if (ft_strchr(line, '-') == NULL)
 	{
-		dop_farm = new_farm(*k, *farm);
-		ft_printf("%s\n", "hello4");
-		ft_bzero(farm, sizeof(t_farm));
-		ft_printf("%s\n", "hello5");
-		*farm = new_farm(*k, dop_farm);
-		ft_printf("%s\n", "hello6");
+		add_room(farm);
 		dop = ft_strchr(line, ' ');
-		farm->rooms[*k].room_name = ft_strsub(line, 0, dop - line);
-		ft_printf("NAME %s\n", farm->rooms[*k].room_name);
-		farm->rooms[*k].room_coord.x = ft_atoi(dop++);
-		farm->rooms[*k].room_coord.y = ft_atoi(ft_strchr(dop, ' '));
-		ft_printf("room name %s ", farm->rooms[*k].room_name);
-		ft_printf("room coord x %d ", farm->rooms[*k].room_coord.x);
-		ft_printf("room coord y %d\n", farm->rooms[*k].room_coord.y);
-		(*k)++;
+		farm->rooms[farm->room_amount].name = ft_strsub(line, 0, dop - line);
+		farm->rooms[farm->room_amount].coord.x = ft_atoi(dop++);
+		farm->rooms[farm->room_amount].coord.y = ft_atoi(ft_strchr(dop, ' '));
+		farm->rooms[farm->room_amount].links_amount = 0;
+		farm->room_amount++;
+	}
+	else if (ft_strchr(line, '-') != NULL)
+	{
+		ft_printf("hello4\n");
+		find_link(farm, line);
 	}
 }
 
-int main()
+int main(int ac, char **av)
 {
 	int i;
-	int k;
 	int fd;
 	char *line;
 	t_farm farm;
 
 	i = 0;
-	k = 0;
-	fd = open("test", O_RDONLY);
+	fd = open("/Users/ychufist/lem-in/test", O_RDONLY);
 	line = NULL;
+	//init(&farm);
+	farm.room_amount = 0;
+	farm.rooms = (t_room*)malloc(sizeof(t_room) * (farm.room_amount + 1));
 	while (get_next_line(fd, &line) > 0)
 	{
-		ft_printf("gnl : %s\n", line);
-		ft_printf("%s\n", "hello");
-		if (ft_strcmp(line, "##start") == 0 && ft_strcmp(line, "##start") == 0)
-			continue;
-		else 
-			get_info(i, &k, line, &farm);
-		if (i == 0)
-			ft_printf("farm.ants_amount %d\n", farm.ants_amount);
-		// if (k > 0)
-		// {
-		// 	ft_printf("here %s ", farm.rooms[k].room_name);
-		// 	ft_printf("%d ", farm.rooms[k].room_coord.x);
-		// 	ft_printf("%d\n", farm.rooms[k].room_coord.y);
-		// }
-		i = (ft_strcmp(line, "##start") == 0) ? 1 : i;
-		i = (ft_strcmp(line, "##end") == 0) ? 2 : i;
-		i = (i == 0) ? 3 : i;
+//		ft_printf("gnl : %s\n", line);
+		if (ft_strchr(line, '#') == NULL)
+			get_info(&farm, line, &i);
 		ft_strdel(&line);
-		//k++;
 	}
-	ft_strdel(&line);
-	system("leaks lem-in");
+	i = 0;
+	while (i < farm.room_amount)
+	{
+		ft_printf("room name %s ", farm.rooms[i].name);
+		ft_printf("room coord x %d ", farm.rooms[i].coord.x);
+		ft_printf("room coord y %d ", farm.rooms[i].coord.y);
+		ft_printf("links amount %d\n", farm.rooms[i].links_amount);
+		i++;
+	}
+	i = 0;
+	while (i < farm.rooms[0].links_amount)
+	{
+		ft_printf("%s-%s\n", farm.rooms[0].name, farm.rooms[0].links[i]);
+		i++;
+	}
 	return (0);
 }

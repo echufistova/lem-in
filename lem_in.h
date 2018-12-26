@@ -25,14 +25,16 @@ typedef struct 		s_point
 
 typedef struct		s_room
 {
-	char		*room_name;
-	t_point		room_coord;
-	char		**room_links;  	
+	char		*name;
+	t_point		coord;
+	char		**links;
+	int 		links_amount;
 }					t_room;
 
 typedef struct		s_farm
 {
 	int				ants_amount;
+	int 			room_amount;
 	t_room			*rooms;
 }					t_farm;
 
