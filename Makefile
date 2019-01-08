@@ -16,7 +16,7 @@ LIBFT = ./libft/libftprintf.a
 
 FLAGS = -Wall -Wextra -Werror
 
-SRC = parse.c
+SRC = parse.c ft_adds.c
 
 OUT = $(SRC:.c=.o)
 
