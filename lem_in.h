@@ -29,6 +29,7 @@ typedef struct		s_room
 	t_point		coord;
 	char		**links;
 	int         links_amount;
+	int         level;
 	int         flag;
 }					t_room;
 
@@ -41,6 +42,16 @@ typedef struct		s_farm
 	int             end_room_id;
 	t_room			*rooms;
 }					t_farm;
+
+typedef struct      s_list_room
+{
+    char		*name;
+    t_point		coord;
+    char		**links;
+    int         links_amount;
+    int         level;
+    int         flag;
+}                   t_list_room;
 
 void add_room(t_farm *farm);
 void add_link(t_farm *farm, char *line, int i);

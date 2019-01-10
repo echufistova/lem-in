@@ -149,8 +149,8 @@ int main(void) {
     }
 	//write(1, "\e[0m", 4);
 	i = 0;
-	while (i < farm.rooms[farm.end_room_id].links_amount) {
-		ft_printf("%s-%s\n", farm.rooms[farm.end_room_id].name, farm.rooms[farm.end_room_id].links[i]);
+	while (i < farm.rooms[4].links_amount) {
+		ft_printf("%s-%s\n", farm.rooms[4].name, farm.rooms[4].links[i]);
 		i++;
 	}
 	ft_printf("\n\nokk");
