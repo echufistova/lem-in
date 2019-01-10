@@ -1,19 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
-<<<<<<< HEAD
-project(lem-in C)
-
-set(CMAKE_C_STANDARD 99)
-
-add_executable(lem_in parse.c libft/ft_printf.c libft/ft_atoi.c libft/ft_strchr.c libft/ft_strsub.c
-        libft/ft_bzero.c
-        libft/ft_strcmp.c libft/ft_strdel.c libft/get_next_line.c libft/ft_print_id.c libft/ft_print_x_u.c
-        libft/ft_print_o.c	libft/ft_print_c.c libft/ft_print_p.c libft/ft_print_s.c libft/ft_print_bigs.c
-        libft/ft_strlen.c libft/ft_putstr.c libft/ft_strjoin.c libft/ft_putchar.c libft/ft_params.c
-        libft/ft_itoa.c libft/ft_strdup.c libft/ft_itoa_unsigned.c libft/ft_memalloc.c
-        libft/ft_flags.c libft/ft_intlength.c libft/ft_strcpy.c libft/ft_dopfile.c libft/ft_dopfile1.c
-        libft/ft_new_tout.c libft/ft_strnew.c libft/ft_presflags.c libft/ft_octflag.c libft/ft_strstr.c ft_adds.c
-	lem_in.h)
-=======
+cmake_minimum_required(VERSION 3.13)
 project(lem_in C)
 
 set(CMAKE_C_STANDARD 11)
@@ -107,6 +92,6 @@ add_executable(lem_in
         libft/get_next_line.c
         libft/get_next_line.h
         libft/libft.h
+        ft_adds.c
         lem_in.h
         parse.c)
->>>>>>> 034f97cf9a848ec5d8f411045e977e846311b432

@@ -6,19 +6,10 @@
 
 #IncludeRegexTransform: 
 
-<<<<<<< HEAD
-/Users/ychufist/lem-in/lem-in/lem_in.h
-libft/libft.h
-/Users/ychufist/lem-in/lem-in/libft/libft.h
-libft/get_next_line.h
-/Users/ychufist/lem-in/lem-in/libft/get_next_line.h
-libft/ft_printf.h
-/Users/ychufist/lem-in/lem-in/libft/ft_printf.h
+/Users/ychufist/lem-in/ft_adds.c
+lem_in.h
+/Users/ychufist/lem-in/lem_in.h
 
-/Users/ychufist/lem-in/lem-in/libft/ft_printf.h
-libft.h
-/Users/ychufist/lem-in/lem-in/libft/libft.h
-=======
 /Users/ychufist/lem-in/lem_in.h
 libft/libft.h
 /Users/ychufist/lem-in/libft/libft.h
@@ -30,7 +21,6 @@ libft/ft_printf.h
 /Users/ychufist/lem-in/libft/ft_printf.h
 libft.h
 /Users/ychufist/lem-in/libft/libft.h
->>>>>>> 034f97cf9a848ec5d8f411045e977e846311b432
 unistd.h
 -
 stdio.h
@@ -50,11 +40,7 @@ locale.h
 wchar.h
 -
 
-<<<<<<< HEAD
-/Users/ychufist/lem-in/lem-in/libft/get_next_line.h
-=======
 /Users/ychufist/lem-in/libft/get_next_line.h
->>>>>>> 034f97cf9a848ec5d8f411045e977e846311b432
 sys/types.h
 -
 sys/stat.h
@@ -70,11 +56,7 @@ unistd.h
 stdio.h
 -
 
-<<<<<<< HEAD
-/Users/ychufist/lem-in/lem-in/libft/libft.h
-=======
 /Users/ychufist/lem-in/libft/libft.h
->>>>>>> 034f97cf9a848ec5d8f411045e977e846311b432
 unistd.h
 -
 stdio.h
@@ -87,14 +69,4 @@ ctype.h
 -
 stdint.h
 -
-
-<<<<<<< HEAD
-/Users/ychufist/lem-in/lem-in/parse.c
-lem_in.h
-/Users/ychufist/lem-in/lem-in/lem_in.h
-=======
-/Users/ychufist/lem-in/parse.c
-lem_in.h
-/Users/ychufist/lem-in/lem_in.h
->>>>>>> 034f97cf9a848ec5d8f411045e977e846311b432
 

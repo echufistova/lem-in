@@ -84,6 +84,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/ychufist/lem-in/ft_adds.c">
+			<Option target="lem_in"/>
+		</Unit>
 		<Unit filename="/Users/ychufist/lem-in/lem_in.h">
 			<Option target="lem_in"/>
 		</Unit>

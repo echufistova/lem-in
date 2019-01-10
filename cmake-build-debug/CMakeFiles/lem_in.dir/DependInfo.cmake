@@ -4,44 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-<<<<<<< HEAD
-  "/Users/ychufist/lem-in/lem-in/ft_adds.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/ft_adds.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_atoi.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_atoi.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_bzero.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_bzero.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_dopfile.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_dopfile.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_dopfile1.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_dopfile1.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_flags.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_flags.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_intlength.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_intlength.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_itoa.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_itoa.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_itoa_unsigned.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_itoa_unsigned.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_memalloc.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_memalloc.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_new_tout.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_new_tout.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_octflag.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_octflag.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_params.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_params.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_presflags.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_presflags.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_print_bigs.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_print_bigs.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_print_c.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_print_c.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_print_id.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_print_id.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_print_o.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_print_o.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_print_p.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_print_p.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_print_s.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_print_s.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_print_x_u.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_print_x_u.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_printf.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_printf.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_putchar.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_putchar.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_putstr.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_putstr.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_strchr.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_strchr.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_strcmp.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_strcmp.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_strcpy.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_strcpy.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_strdel.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_strdel.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_strdup.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_strdup.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_strjoin.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_strjoin.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_strlen.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_strlen.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_strnew.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_strnew.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_strstr.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_strstr.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/ft_strsub.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_strsub.c.o"
-  "/Users/ychufist/lem-in/lem-in/libft/get_next_line.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/get_next_line.c.o"
-  "/Users/ychufist/lem-in/lem-in/parse.c" "/Users/ychufist/lem-in/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/parse.c.o"
-=======
+  "/Users/ychufist/lem-in/ft_adds.c" "/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/ft_adds.c.o"
   "/Users/ychufist/lem-in/libft/ft_atoi.c" "/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_atoi.c.o"
   "/Users/ychufist/lem-in/libft/ft_bzero.c" "/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_bzero.c.o"
   "/Users/ychufist/lem-in/libft/ft_cl.c" "/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_cl.c.o"
@@ -125,17 +88,13 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/ychufist/lem-in/libft/ft_toupper.c" "/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_toupper.c.o"
   "/Users/ychufist/lem-in/libft/get_next_line.c" "/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/get_next_line.c.o"
   "/Users/ychufist/lem-in/parse.c" "/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/parse.c.o"
->>>>>>> 034f97cf9a848ec5d8f411045e977e846311b432
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH
-<<<<<<< HEAD
-=======
   "../."
   "../libft"
->>>>>>> 034f97cf9a848ec5d8f411045e977e846311b432
   )
 
 # Targets to which this target links.

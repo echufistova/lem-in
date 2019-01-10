@@ -34,32 +34,38 @@ void add_room(t_farm *farm)
     farm->rooms[i].coord.y = 0;
 }
 
+
+void freeshka(int size, char **links)
+{
+    int j;
+
+    j = -1;
+    while (++j < size)
+    {
+        ft_bzero(links[j], sizeof(char*));
+        free(links[j]);
+    }
+    free(links);
+}
+
 void add_link(t_farm *farm, char *line, int i)
 {
     int j;
     t_room dop_room;
 
-    j = 0;
-    dop_room.links = (char**)malloc(sizeof(char*) * (farm->rooms[i].links_amount + 1));
+    j = -1;
+    ft_printf("добавляем к комнате %s линк %s\n", farm->rooms[i].name, line);
+    dop_room.links = (char**)malloc(sizeof(char*) * (farm->rooms[i].links_amount));
     dop_room.links_amount = farm->rooms[i].links_amount;
-    while (j < farm->rooms[i].links_amount - 1)
-    {
+    while (++j < farm->rooms[i].links_amount)
         dop_room.links[j] = ft_strdup(farm->rooms[i].links[j]);
-        j++;
-    }
-    j = 0;
-    while (j < farm->rooms[i].links_amount - 1)
-        ft_bzero(farm->rooms[i].links[j++], sizeof(char*));
+    freeshka(farm->rooms[i].links_amount, farm->rooms[i].links);
     farm->rooms[i].links = (char**)malloc(sizeof(char*) * (farm->rooms[i].links_amount + 1));
-    while (j < farm->rooms[i].links_amount - 1)
-    {
+    j = -1;
+    while (++j < farm->rooms[i].links_amount)
         farm->rooms[i].links[j] = ft_strdup(dop_room.links[j]);
-        j++;
-    }
     farm->rooms[i].links[j] = ft_strdup(line);
-    j = 0;
-    while (j < dop_room.links_amount - 1)
-        ft_bzero(dop_room.links[j++], sizeof(char*));
+    freeshka(dop_room.links_amount, dop_room.links);
     farm->rooms[i].links_amount++;
-
+    ft_printf("у комнаты %s %d линк(а)\n\n", farm->rooms[i].name, farm->rooms[i].links_amount);
 }
