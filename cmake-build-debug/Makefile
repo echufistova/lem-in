@@ -150,6 +150,33 @@ ft_adds.c.s:
 	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/ft_adds.c.s
 .PHONY : ft_adds.c.s
 
+ft_list_room.o: ft_list_room.c.o
+
+.PHONY : ft_list_room.o
+
+# target to build an object file
+ft_list_room.c.o:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/ft_list_room.c.o
+.PHONY : ft_list_room.c.o
+
+ft_list_room.i: ft_list_room.c.i
+
+.PHONY : ft_list_room.i
+
+# target to preprocess a source file
+ft_list_room.c.i:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/ft_list_room.c.i
+.PHONY : ft_list_room.c.i
+
+ft_list_room.s: ft_list_room.c.s
+
+.PHONY : ft_list_room.s
+
+# target to generate assembly for a file
+ft_list_room.c.s:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/ft_list_room.c.s
+.PHONY : ft_list_room.c.s
+
 libft/ft_atoi.o: libft/ft_atoi.c.o
 
 .PHONY : libft/ft_atoi.o
@@ -2403,6 +2430,9 @@ help:
 	@echo "... ft_adds.o"
 	@echo "... ft_adds.i"
 	@echo "... ft_adds.s"
+	@echo "... ft_list_room.o"
+	@echo "... ft_list_room.i"
+	@echo "... ft_list_room.s"
 	@echo "... libft/ft_atoi.o"
 	@echo "... libft/ft_atoi.i"
 	@echo "... libft/ft_atoi.s"

@@ -51,10 +51,13 @@ typedef struct      s_list_room
     int         links_amount;
     int         level;
     int         flag;
+    struct s_list_room	*next;
 }                   t_list_room;
 
 void add_room(t_farm *farm);
 void add_link(t_farm *farm, char *line, int i);
 int is_room(t_farm farm, char *name);
+t_list_room *ft_list_room_new(t_room room);
+void ft_list_room_add(t_list_room **alst, t_list_room *new);
 
 #endif

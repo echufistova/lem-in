@@ -12,6 +12,27 @@
 
 #include "lem_in.h"
 
+int is_answer(t_farm farm)
+{
+    int i;
+    int j;
+    t_list_room *list;
+
+    i = 0;
+    j = 0;
+    list = ft_list_room_new(farm.rooms[farm.start_room_id]);
+    while (i < farm.room_amount)
+    {
+        if (ft_strcmp(list->name, "end") == 0)
+            return (1);
+        while (j < farm.rooms[i].links_amount)
+        {
+            
+        }
+    }
+    return (0);
+}
+
 int is_valid_name(const char *name)
 {
     if (name[0] == 'L' || name[0] == '#')
@@ -47,32 +68,17 @@ int find_link(t_farm *farm, char *line, int k)
     name = ft_strsub(line, 0, dop - line);
     dop++;
     ij.x = is_room(*farm, name);
-//    ft_printf("is room dop : %d\n", is_room(*farm, dop));
     if (ij.x > -1 && is_room(*farm, dop) > -1)
     {
-        ft_printf("room %s - %d\n", farm->rooms[ij.x].name, farm->rooms[ij.x].links_amount);
-        int l = 0;
-        while (l < farm->rooms[ij.x].links_amount)
-        {
-            ft_printf("link: %s\n", farm->rooms[ij.x].links[l]);
-            l++;
-        }
-        ft_printf("hello\n");
         while (++ij.y < farm->rooms[ij.x].links_amount)
-        {
             if (ft_strcmp(farm->rooms[ij.x].links[ij.y], dop) == 0)
-            {
-                //farm->rooms[is_room(*farm, dop)].links_amount++;
                 return (1);
-            }
-        }
         if ((ij.y == farm->rooms[ij.x].links_amount ||
             ft_strlen(farm->rooms[ij.x].links[ij.y]) == 0))
             add_link(farm, dop, ij.x);
         if (++k < 2)
         {
             dop = ft_strcat(ft_strcat(dop, "-"), name);
-//            ft_printf("dop : %s\n", dop);
             find_link(farm, dop, k);
         }
         ft_strdel(&name);
@@ -135,6 +141,7 @@ int main(void) {
 			farm.end_room_id = farm.room_amount;
 		ft_strdel(&line);
 	}
+
 	i = 0;
 	ft_printf("room amount %d\n", farm.room_amount);
     while (i < farm.room_amount)
