@@ -16,20 +16,36 @@ int is_answer(t_farm farm)
 {
     int i;
     int j;
-    t_list_room *list;
+    t_list_room *room_list;
+    t_list_room *dop;
 
     i = 0;
-    j = 0;
-    list = ft_list_room_new(farm.rooms[farm.start_room_id]);
-    while (i < farm.room_amount)
+    room_list = ft_list_room_new(farm.rooms[farm.start_room_id]);
+    dop = room_list;
+    ft_printf("rooom list: %s\n", room_list->name);
+    while (ft_list_size(room_list) < farm.room_amount)
     {
-        if (ft_strcmp(list->name, "end") == 0)
+        ft_printf("\n\nlist size %d\n", ft_list_size(dop));
+        if (ft_strcmp(room_list->name, "end") == 0)
+        {
+            ft_printf("hello end\n");
             return (1);
+        }
+        ft_printf("у комнаты %s - %d линка \n", room_list->name, room_list->links_amount);
+        j = 0;
         while (j < farm.rooms[i].links_amount)
         {
-            
+            if (ft_list_room_find(room_list, farm.rooms[i].links[j]))
+            {
+                room_list->next = ft_list_room_new(farm.rooms[is_room(farm, farm.rooms[i].links[j])]);
+                room_list = room_list->next;
+            }
+            j++;
+            ft_printf("добавили %s \n", room_list->name);
         }
+        i++;
     }
+
     return (0);
 }
 
@@ -122,14 +138,14 @@ int main(void) {
 	t_farm farm;
 
 	i = 0;
-	fd = open("/Users/ychufist/lem-in/test", O_RDONLY);
+	fd = open("/home/echufy/lem-in/test", O_RDONLY);//("/Users/ychufist/lem-in/test", O_RDONLY);
 	line = NULL;
 	farm.flag = 0;
 	farm.room_amount = 0;
 	farm.rooms = (t_room *) malloc(sizeof(t_room) * (farm.room_amount + 1));
 	while (get_next_line(fd, &line) > 0)
 	{
-//		ft_printf("gnl : %s\n", line);
+		ft_printf("gnl : %s\n", line);
 		if (line[0] != '#')
 		{
 			if (!get_info(&farm, line, &i))
@@ -160,6 +176,7 @@ int main(void) {
 		ft_printf("%s-%s\n", farm.rooms[4].name, farm.rooms[4].links[i]);
 		i++;
 	}
+	is_answer(farm);
 	ft_printf("\n\nokk");
 	return (0);
 }

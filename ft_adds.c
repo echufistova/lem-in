@@ -9,9 +9,10 @@ void add_room(t_farm *farm)
     t_room *dop_rooms;
     int i;
 
-    i = -1;
+    i = 0;
     if (farm->room_amount > 0)
     {
+        i = -1;
         dop_rooms = (t_room*)malloc(sizeof(t_room) * (farm->room_amount + 1));
         while (++i < farm->room_amount)
         {
