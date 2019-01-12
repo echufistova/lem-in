@@ -61,5 +61,6 @@ t_list_room *ft_list_room_new(t_room room);
 void ft_list_room_add(t_list_room **alst, t_list_room *new);
 int ft_list_room_find(t_list_room *room_list, char *name);
 int ft_list_size(t_list_room *room_list);
+void print_list(t_list_room *room_list);
 
 #endif
