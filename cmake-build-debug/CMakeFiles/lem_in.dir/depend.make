@@ -7,6 +7,12 @@ CMakeFiles/lem_in.dir/ft_adds.c.o: ../libft/ft_printf.h
 CMakeFiles/lem_in.dir/ft_adds.c.o: ../libft/get_next_line.h
 CMakeFiles/lem_in.dir/ft_adds.c.o: ../libft/libft.h
 
+CMakeFiles/lem_in.dir/ft_is.c.o: ../ft_is.c
+CMakeFiles/lem_in.dir/ft_is.c.o: ../lem_in.h
+CMakeFiles/lem_in.dir/ft_is.c.o: ../libft/ft_printf.h
+CMakeFiles/lem_in.dir/ft_is.c.o: ../libft/get_next_line.h
+CMakeFiles/lem_in.dir/ft_is.c.o: ../libft/libft.h
+
 CMakeFiles/lem_in.dir/ft_list_room.c.o: ../ft_list_room.c
 CMakeFiles/lem_in.dir/ft_list_room.c.o: ../lem_in.h
 CMakeFiles/lem_in.dir/ft_list_room.c.o: ../libft/ft_printf.h

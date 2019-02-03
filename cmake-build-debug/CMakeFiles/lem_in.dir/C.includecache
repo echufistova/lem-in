@@ -6,17 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/Users/ychufist/lem-in/lem_in.h
+/home/echufy/lem-in/lem_in.h
 libft/libft.h
-/Users/ychufist/lem-in/libft/libft.h
+/home/echufy/lem-in/libft/libft.h
 libft/get_next_line.h
-/Users/ychufist/lem-in/libft/get_next_line.h
+/home/echufy/lem-in/libft/get_next_line.h
 libft/ft_printf.h
-/Users/ychufist/lem-in/libft/ft_printf.h
+/home/echufy/lem-in/libft/ft_printf.h
 
-/Users/ychufist/lem-in/libft/ft_printf.h
+/home/echufy/lem-in/libft/ft_printf.h
 libft.h
-/Users/ychufist/lem-in/libft/libft.h
+/home/echufy/lem-in/libft/libft.h
 unistd.h
 -
 stdio.h
@@ -36,7 +36,7 @@ locale.h
 wchar.h
 -
 
-/Users/ychufist/lem-in/libft/get_next_line.h
+/home/echufy/lem-in/libft/get_next_line.h
 sys/types.h
 -
 sys/stat.h
@@ -52,7 +52,7 @@ unistd.h
 stdio.h
 -
 
-/Users/ychufist/lem-in/libft/libft.h
+/home/echufy/lem-in/libft/libft.h
 unistd.h
 -
 stdio.h
@@ -66,7 +66,7 @@ ctype.h
 stdint.h
 -
 
-/Users/ychufist/lem-in/parse.c
+/home/echufy/lem-in/parse.c
 lem_in.h
-/Users/ychufist/lem-in/lem_in.h
+/home/echufy/lem-in/lem_in.h
 

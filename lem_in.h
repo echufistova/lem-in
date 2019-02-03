@@ -38,6 +38,7 @@ typedef struct		s_farm
 	int				ants_amount;
 	int             room_amount;
 	int             flag;
+	int             level;
 	int             start_room_id;
 	int             end_room_id;
 	t_room			*rooms;
@@ -62,5 +63,6 @@ void ft_list_room_add(t_list_room **alst, t_list_room *new);
 int ft_list_room_find(t_list_room *room_list, char *name);
 int ft_list_size(t_list_room *room_list);
 void print_list(t_list_room *room_list);
+int is_valid_name(const char *name);
 
 #endif

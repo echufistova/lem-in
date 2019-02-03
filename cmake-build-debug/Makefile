@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
+CMAKE_COMMAND = /home/echufy/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/183.5153.40/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
+RM = /home/echufy/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/183.5153.40/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/ychufist/lem-in
+CMAKE_SOURCE_DIR = /home/echufy/lem-in
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/ychufist/lem-in/cmake-build-debug
+CMAKE_BINARY_DIR = /home/echufy/lem-in/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /Users/ychufist/lem-in/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/home/echufy/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/183.5153.40/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/home/echufy/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/183.5153.40/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ychufist/lem-in/cmake-build-debug/CMakeFiles /Users/ychufist/lem-in/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/echufy/lem-in/cmake-build-debug/CMakeFiles /home/echufy/lem-in/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ychufist/lem-in/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/echufy/lem-in/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -149,6 +149,33 @@ ft_adds.s: ft_adds.c.s
 ft_adds.c.s:
 	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/ft_adds.c.s
 .PHONY : ft_adds.c.s
+
+ft_is.o: ft_is.c.o
+
+.PHONY : ft_is.o
+
+# target to build an object file
+ft_is.c.o:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/ft_is.c.o
+.PHONY : ft_is.c.o
+
+ft_is.i: ft_is.c.i
+
+.PHONY : ft_is.i
+
+# target to preprocess a source file
+ft_is.c.i:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/ft_is.c.i
+.PHONY : ft_is.c.i
+
+ft_is.s: ft_is.c.s
+
+.PHONY : ft_is.s
+
+# target to generate assembly for a file
+ft_is.c.s:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/ft_is.c.s
+.PHONY : ft_is.c.s
 
 ft_list_room.o: ft_list_room.c.o
 
@@ -2425,11 +2452,14 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... edit_cache"
 	@echo "... lem_in"
+	@echo "... edit_cache"
 	@echo "... ft_adds.o"
 	@echo "... ft_adds.i"
 	@echo "... ft_adds.s"
+	@echo "... ft_is.o"
+	@echo "... ft_is.i"
+	@echo "... ft_is.s"
 	@echo "... ft_list_room.o"
 	@echo "... ft_list_room.i"
 	@echo "... ft_list_room.s"

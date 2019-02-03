@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-int is_answer(t_farm farm, char *line, int id)
+int is_answer(t_farm farm)
 {
     int j;
     t_list_room *room_list;
@@ -21,12 +21,12 @@ int is_answer(t_farm farm, char *line, int id)
 
     room_list = ft_list_room_new(farm.rooms[farm.start_room_id]);
     dop = room_list;
-    dop2 = room_list;;
+    dop2 = room_list;
     while (dop2)
     {
         if (ft_strcmp(dop2->name, "end") == 0)
         {
-            print_list(dop);
+//            print_list(dop);
             return (1);
         }
         j = -1;
@@ -45,56 +45,68 @@ int is_answer(t_farm farm, char *line, int id)
     return (0);
 }
 
-//void *no_traffic_jams(t_farm farm)
-//{
-//    int i;
-//    int j;
-//    t_list_room **way;
-//
-//    i = 0;
-//    j = 0;
-//    way = (t_list_room**)malloc(sizeof(t_list_room*) *
-//            farm.rooms[farm.end_room_id].links_amount);//ft_list_room_new(farm.rooms[farm.end_room_id]);
-//    while (i < farm.rooms[farm.end_room_id].links_amount)
-//    {
-//        way[i] = ft_list_room_new(farm.rooms[is_room(farm,
-//                                             farm.rooms[farm.end_room_id].links[i])]);
-//        farm.rooms[is_room(farm,
-//                           farm.rooms[farm.end_room_id].links[i])].flag = 1;
-//        j = farm.rooms[is_room(farm, farm.rooms[farm.end_room_id].links[i])];
-//        while (j < )
-//        print_list(way[i]);
-//        i++;
-//    }
-//    while (dop)
-//    {
-//
-//        dop = dop->next;
-//    }
-//}
-
-int is_valid_name(const char *name)
-{
-    if (name[0] == 'L' || name[0] == '#')
-    {
-        ft_printf("NAME ERROR\n");
-        return (0);
-    }
-    return (1);
-}
-
-int is_room(t_farm farm, char *name)
+t_list_room *no_traffic_jams(t_farm farm)
 {
     int i;
+    int j;
+    t_list_room **way;
+    t_list_room *dop;
+    t_list_room *dop2;
 
     i = 0;
-    while (i < farm.room_amount)
+    j = 0;
+    // ПЛОХО ВЫДЕЛЕНА ПАМЯТЬ!!!!!!!
+    way = (t_list_room**)malloc(sizeof(t_list_room*) * farm.room_amount);
+
+    dop = way[0];
+    dop2 = way[1];
+//    dop = way;
+//    dop2 = way;
+    while (i < farm.rooms[farm.end_room_id].links_amount)
     {
-        if (ft_strcmp(farm.rooms[i].name, name) == 0)
-            return (i);
+        way[i] = ft_list_room_new(farm.rooms[farm.end_room_id]);
+        while (ft_strcmp(way[i]->name, "start") != 0)
+        {
+            if (farm.rooms[is_room(farm, way[i]->name)].flag == 0)
+            {
+                ft_printf("flag: %d \n", farm.rooms[is_room(farm, way[i]->name)].flag);
+                ft_printf("way[i]->name : %s\n", way[i]->name);
+                way[i]->level = ft_list_size(dop);
+                ft_printf("hello\n");
+                if (farm.rooms[is_room(farm, way[i]->name)].links_amount < 3 &&
+                farm.rooms[is_room(farm, way[i]->name) - 1].links_amount < 3 &&
+                ft_strcmp(way[i]->name, "end") != 0 && farm.rooms[is_room(farm, way[i]->name)].flag == 0)
+                {
+                    ft_printf("(if2)  way[i]->name : %s\n", way[i]->name);
+                    farm.rooms[is_room(farm, way[i]->name)].flag = 1;
+                    ft_printf("(if 2)  flag: %d \n ", farm.rooms[is_room(farm, way[i]->name)].flag);
+                }
+                if (farm.rooms[is_room(farm, way[i]->links[j])].flag == 0)
+                {
+                    way[i]->next = ft_list_room_new(farm.rooms[is_room(farm, way[i]->links[j])]);
+                    ft_printf("hello1\n");
+                    way[i] = way[i]->next;
+                    ft_printf("( if1 ) way[i]->name : %s\n", way[i]->name);
+                    ft_printf("( if1 )  flag: %d \n ", farm.rooms[is_room(farm, way[i]->name)].flag);
+                }
+                else
+                {
+                    j++;
+                    continue;
+                }
+            }
+
+        }
+        ft_printf("\n\nhere\n\n");
+        print_list(dop);
+        ft_printf("len : %d\n", ft_list_size(dop));
+        print_list(dop2);
+        ft_printf("len : %d\n", ft_list_size(dop2));
         i++;
+        j++;
     }
-    return (-1);
+
+    return (NULL);
 }
 
 int find_link(t_farm *farm, char *line, int k)
@@ -163,7 +175,7 @@ int main(void) {
 	t_list_room *way;
 
 	i = 0;
-	fd = open("/Users/ychufist/lem-in/test", O_RDONLY);//("/home/echufy/lem-in/test", O_RDONLY);
+	fd = open("/home/echufy/lem-in/test", O_RDONLY);//"/Users/ychufist/lem-in/test", O_RDONLY);//(
 	line = NULL;
 	farm.flag = 0;
 	farm.room_amount = 0;
@@ -201,9 +213,9 @@ int main(void) {
 		ft_printf("%s-%s\n", farm.rooms[4].name, farm.rooms[4].links[i]);
 		i++;
 	}
-	if (is_answer(farm, "end", farm.start_room_id))
+	if (is_answer(farm))
     {
-//	    no_traffic_jams(farm);
+	    way = no_traffic_jams(farm);
         //way =
         //print_list(way);
     }
