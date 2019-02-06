@@ -66,5 +66,7 @@ int ft_list_room_find(t_list_room *room_list, char *name);
 int ft_list_size(t_list_room *room_list);
 void print_list(t_list_room *room_list);
 int is_valid_name(const char *name);
+void get_way(t_farm *farm, t_list_room *way);
+t_list_room *find_ways(t_farm farm);
 
 #endif

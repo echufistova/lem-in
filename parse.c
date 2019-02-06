@@ -76,6 +76,7 @@ void get_way(t_farm *farm, t_list_room *way)
         farm->rooms[is_room(*farm, rm.parent)].flag = 1;
         rm = find_parent(rm.parent, dop);
     }
+    find_ways(*farm);
 }
 
 t_list_room *find_ways(t_farm farm)
@@ -91,7 +92,6 @@ t_list_room *find_ways(t_farm farm)
     dop2 = way;
     while (dop2)
     {
-//        ft_printf("DOP2: %s\n", farm.rooms[is_room(farm, dop2->name)].name);
         if (is_room(farm, dop2->name) == farm.start_room_id)
         {
             ft_printf("end: ");
@@ -103,17 +103,18 @@ t_list_room *find_ways(t_farm farm)
         j = -1;
         while (++j < dop2->links_amount)
         {
+            ft_printf("flag - %d u room - %s\n", farm.rooms[is_room(farm, dop2->links[j])].flag, farm.rooms[is_room(farm, dop2->links[j])].name);
             if (farm.rooms[is_room(farm, dop2->links[j])].flag != 1)
             {
                 if (is_room(farm, way->name) != farm.end_room_id)
                     farm.rooms[is_room(farm, way->name)].flag = 1;// просмотрена
                 if (is_room(farm, dop2->links[j]) != farm.end_room_id)//надо сделать проверку на предыдущую связь
                 {
-                way->next = ft_list_room_new(farm.rooms[is_room(farm, dop2->links[j])]);
-//                    ft_printf("next room : %s\n", farm.rooms[is_room(farm, dop2->links[j])].name);
-                way = way->next;
-                way->parent = farm.rooms[is_room(farm, dop2->name)].name;
-//                ft_printf("parent : %s\n", farm.rooms[is_room(farm, dop2->name)].name);
+                    way->next = ft_list_room_new(farm.rooms[is_room(farm, dop2->links[j])]);
+                    ft_printf("room : %s\n", farm.rooms[is_room(farm, dop2->links[j])].name);
+                    way = way->next;
+                    way->parent = farm.rooms[is_room(farm, dop2->name)].name;
+                  ft_printf("parent : %s\n", farm.rooms[is_room(farm, dop2->name)].name);
                 }
             }
         }
