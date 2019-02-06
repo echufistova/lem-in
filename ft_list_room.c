@@ -66,29 +66,16 @@ void ft_list_room_add(t_list_room **alst, t_list_room *new)
         new->next = *alst;
     *alst = new;
 }
-//
-//void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
-//{
-//    t_list	*dop;
-//
-//    if (alst && *alst && del)
-//    {
-//        dop = (*alst)->next;
-//        del((*alst)->content, (*alst)->content_size);
-//        free(*alst);
-//        *alst = NULL;
-//    }
-//}
-//
-//void	ft_lst_delone_room(t_list_room **alst, void (*del)(void *, size_t))
-//{
-//    t_list	*dop;
-//
-//    if (alst && *alst && del)
-//    {
-//        dop = (*alst)->next;
-//        del((*alst)->name, (*alst)->ft_strlen((*alst)->name));
-//        free(*alst);
-//        *alst = NULL;
-//    }
-//}
+
+t_list_room find_parent(char *room_name, t_list_room *way)
+{
+    t_list_room *dop;
+
+    dop = way;
+    while (ft_strcmp(way->name, room_name) != 0)
+    {
+        way = way->next;
+    }
+//    ft_printf("PARENT : %s\n", way->parent);
+    return (*way);
+}

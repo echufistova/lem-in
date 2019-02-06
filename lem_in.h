@@ -50,6 +50,7 @@ typedef struct      s_list_room
     t_point		coord;
     char		**links;
     int         links_amount;
+    char        *parent;
     int         level;
     int         flag;
     struct s_list_room	*next;
@@ -59,6 +60,7 @@ void add_room(t_farm *farm);
 void add_link(t_farm *farm, char *line, int i);
 int is_room(t_farm farm, char *name);
 t_list_room *ft_list_room_new(t_room room);
+t_list_room find_parent(char *room_name, t_list_room *way);
 void ft_list_room_add(t_list_room **alst, t_list_room *new);
 int ft_list_room_find(t_list_room *room_list, char *name);
 int ft_list_size(t_list_room *room_list);
