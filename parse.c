@@ -27,10 +27,7 @@ int is_answer(t_farm farm)
     while (dop2)
     {
         if (is_room(farm, dop2->name) == farm.end_room_id)
-        {
-//            print_list(dop);
             return (1);
-        }
         j = -1;
         while (++j < dop2->links_amount)
         {
@@ -39,8 +36,6 @@ int is_answer(t_farm farm)
                 room_list->next = ft_list_room_new(farm.rooms[is_room(farm, dop2->links[j])]);
                 if (is_room(farm, dop2->links[j]) != farm.end_room_id)
                     farm.rooms[is_room(farm, dop2->links[j])].level = counter;
-//                ft_printf("name - %s, level - %d\n", farm.rooms[is_room(farm, dop2->links[j])].name,
-//                farm.rooms[is_room(farm, dop2->links[j])].flag);
                 room_list = room_list->next;
             }
         }
@@ -52,31 +47,66 @@ int is_answer(t_farm farm)
     return (0);
 }
 
+void bzero_ways(t_farm *farm)
+{
+    int i;
 
+    i = 0;
+    while (i < farm->room_amount)
+    {
+        if (farm->rooms[i].flag != 2)
+            farm->rooms[i].flag = 0;
+//        ft_printf("room -  \"%s\", flag - %d \n", farm->rooms[i].name, farm->rooms[i].flag);
+        i++;
+    }
+}
 
 void get_way(t_farm *farm, t_list_room *way)
 {
     int i;
-    t_list_room rm;
+    t_list_room *rm;
     t_list_room *dop;
-    t_list_room *dop2;
 
     i = 0;
-    dop = way;
-    dop2 = way;
+
+    bzero_ways(farm);
     while (way->next)
         way = way->next;
-    ft_printf("\nway :%s\n", way->name);
-    ft_printf("dop :%s\n", dop->name);
-    rm = *way;
-    while (ft_strcmp(rm.name, farm->rooms[farm->end_room_id].name) != 0)
+    farm->ways[farm->ways_amount] = ft_list_room_new(farm->rooms[farm->start_room_id]);
+    dop = farm->ways[farm->ways_amount];
+    ft_printf("\n\nway : %s\n", way->name);
+    ft_printf("dop : %s\n", dop->name);
+    rm = way->prev;
+    while (ft_strcmp(rm->name, farm->rooms[farm->end_room_id].name) != 0)
     {
-        rm = find_parent(rm.name, dop);
-        ft_printf("parent : %s\n", rm.parent);
-        farm->rooms[is_room(*farm, rm.parent)].flag = 1;
-        rm = find_parent(rm.parent, dop);
+        farm->ways[farm->ways_amount]->next = ft_list_room_new(farm->rooms[is_room(*farm, rm->name)]);
+        farm->ways[farm->ways_amount] = farm->ways[farm->ways_amount]->next;
+        ft_printf("parent : %s\n", rm->name);
+        farm->rooms[is_room(*farm, rm->name)].flag = 2;
+        rm = rm->prev;
     }
+    farm->ways[farm->ways_amount]->next = ft_list_room_new(farm->rooms[is_room(*farm, rm->name)]);
+    farm->ways[farm->ways_amount] = dop;
+    ft_printf("\n");
+    farm->ways[farm->ways_amount]->size = ft_list_size(farm->ways[farm->ways_amount]) - 2;
+    print_list(farm->ways[farm->ways_amount]);
+    farm->ways_amount++;
+    ft_printf("\n");
     find_ways(*farm);
+}
+
+void print_farm(t_farm farm)
+{
+    int i = 0;
+
+    ft_printf("print farm \n");
+    while (i < farm.ways_amount)
+    {
+        ft_printf("list size: %d, ", farm.ways[i]->size);
+        print_list(farm.ways[i]);
+        ft_printf("\n");
+        i++;
+    }
 }
 
 t_list_room *find_ways(t_farm farm)
@@ -92,29 +122,31 @@ t_list_room *find_ways(t_farm farm)
     dop2 = way;
     while (dop2)
     {
-        if (is_room(farm, dop2->name) == farm.start_room_id)
-        {
-            ft_printf("end: ");
-            print_list(dop);
-            get_way(&farm, dop);
-            ft_printf("\n");
-            return (way);
-        }
         j = -1;
         while (++j < dop2->links_amount)
         {
-            ft_printf("flag - %d u room - %s\n", farm.rooms[is_room(farm, dop2->links[j])].flag, farm.rooms[is_room(farm, dop2->links[j])].name);
-            if (farm.rooms[is_room(farm, dop2->links[j])].flag != 1)
+//            ft_printf("flag - %d u room - %s\n", farm.rooms[is_room(farm, dop2->links[j])].flag, farm.rooms[is_room(farm, dop2->links[j])].name);
+            if (farm.rooms[is_room(farm, dop2->links[j])].flag != 1 &&
+                    farm.rooms[is_room(farm, dop2->links[j])].flag != 2)
             {
                 if (is_room(farm, way->name) != farm.end_room_id)
                     farm.rooms[is_room(farm, way->name)].flag = 1;// просмотрена
                 if (is_room(farm, dop2->links[j]) != farm.end_room_id)//надо сделать проверку на предыдущую связь
                 {
                     way->next = ft_list_room_new(farm.rooms[is_room(farm, dop2->links[j])]);
-                    ft_printf("room : %s\n", farm.rooms[is_room(farm, dop2->links[j])].name);
+                    ft_printf("room : %s, ", farm.rooms[is_room(farm, dop2->links[j])].name);
                     way = way->next;
-                    way->parent = farm.rooms[is_room(farm, dop2->name)].name;
-                  ft_printf("parent : %s\n", farm.rooms[is_room(farm, dop2->name)].name);
+                    way->prev = dop2;
+                    ft_printf("dop2: %s\n", dop2->name);
+                    ft_printf("parent : %s\n", farm.rooms[is_room(farm, dop2->name)].name);
+                    if (is_room(farm, way->name) == farm.start_room_id)
+                    {
+                        ft_printf("end: ");
+                        print_list(dop);
+                        get_way(&farm, dop);
+                        ft_printf("\n");
+                        return (way);
+                    }
                 }
             }
         }
@@ -122,74 +154,11 @@ t_list_room *find_ways(t_farm farm)
     }
     ft_printf("stranno\n");
     print_list(dop);
+    ft_printf("\n\n");
+    bzero_ways(&farm);
+    print_farm(farm);
     return (NULL);
 }
-
-
-
-//t_list_room **no_traffic_jams(t_farm farm)
-//{
-//    int i;
-//    int j;
-//    int k;
-//    t_list_room **way;
-//    t_list_room *dop;
-//    t_list_room *dop2;
-//
-//    i = 0;
-//    j = 0;
-//    k = 0;
-//    // ПЛОХО ВЫДЕЛЕНА ПАМЯТЬ!!!!!!!
-//    way = (t_list_room**)malloc(sizeof(t_list_room*) * farm.room_amount);
-//
-//    while (i < farm.rooms[farm.end_room_id].links_amount)
-//    {
-//        way[i] = ft_list_room_new(farm.rooms[farm.end_room_id]);
-//        dop = way[i];
-//        while (is_room(farm, way[i]->name) != farm.start_room_id)// while not start
-//        {
-//            ft_printf("flag: %d \n", farm.rooms[is_room(farm, way[i]->name)].flag);
-//            ft_printf("way[i]->name : %s\n", way[i]->name);
-//            way[i]->level = ft_list_size(dop);
-//            ft_printf("hello\n");
-//            if (farm.rooms[is_room(farm, way[i]->links[j])].flag != 1)
-//            {
-//                way[i]->next = ft_list_room_new(farm.rooms[is_room(farm, way[i]->links[j])]);
-//                ft_printf("hello1\n");
-//                if (is_room(farm, way[i]->name) != farm.end_room_id)
-//                        farm.rooms[is_room(farm, way[i]->name)].flag = 1;
-//                ft_printf("flag: %d \n", farm.rooms[is_room(farm, way[i]->name)].flag);
-//                ft_printf("FLAG : %s\n", way[i]->name);
-//                way[i] = way[i]->next;
-//                ft_printf("( if1 ) way[i]->name : %s\n", way[i]->name);
-//                ft_printf("( if1 )  flag: %d \n", farm.rooms[is_room(farm, way[i]->name)].flag);
-//            }
-//            else
-//                {
-//                ft_printf("ELSE\n\n");
-//                ft_printf("j : %d, link am %d\n", j, way[i]->links_amount);
-//                while (same_name(dop, farm.rooms[is_room(farm, way[i]->links[k])].name) != 1
-//                && k < way[i]->links_amount && farm.rooms[is_room(farm, way[i]->links[k])].flag != 1)
-//                    k++;
-//                if (k == 0)
-//                {
-//                    ft_printf("end:");
-//                    print_list(dop);
-//                    ft_printf("\n");
-//                    return (way);
-//                }
-//                ft_printf("k: %d\n", k);
-//                j = k;
-//                }
-//        }
-//        ft_printf("\n\nhere\n\n");
-//        print_list(dop);
-//        ft_printf("len : %d\n\n", ft_list_size(dop));
-//        i++;
-//        j++;
-//    }
-//    return (NULL);
-//}
 
 int find_link(t_farm *farm, char *line, int k)
 {
@@ -261,7 +230,9 @@ int main(void) {
 	line = NULL;
 	farm.flag = 0;
 	farm.room_amount = 0;
-	farm.rooms = (t_room *) malloc(sizeof(t_room) * (farm.room_amount + 1));
+	farm.ways_amount = 0;
+	farm.rooms = (t_room*) malloc(sizeof(t_room) * (farm.room_amount + 1));
+    farm.ways = (t_list_room**) malloc(sizeof(t_list_room*));
 	while (get_next_line(fd, &line) > 0)
 	{
 		ft_printf("gnl : %s\n", line);

@@ -33,16 +33,7 @@ typedef struct		s_room
 	int         flag;
 }					t_room;
 
-typedef struct		s_farm
-{
-	int				ants_amount;
-	int             room_amount;
-	int             flag;
-	int             level;
-	int             start_room_id;
-	int             end_room_id;
-	t_room			*rooms;
-}					t_farm;
+
 
 typedef struct      s_list_room
 {
@@ -50,11 +41,25 @@ typedef struct      s_list_room
     t_point		coord;
     char		**links;
     int         links_amount;
-    char        *parent;
-    int         level;
+
+    int         size;
     int         flag;
+    struct s_list_room	*prev;
     struct s_list_room	*next;
 }                   t_list_room;
+
+typedef struct		s_farm
+{
+    int				ants_amount;
+    int             room_amount;
+    int             ways_amount;
+    int             flag;
+    int             level;
+    int             start_room_id;
+    int             end_room_id;
+    t_room			*rooms;
+    t_list_room     **ways;
+}					t_farm;
 
 void add_room(t_farm *farm);
 void add_link(t_farm *farm, char *line, int i);
