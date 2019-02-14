@@ -6,22 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/echufy/lem-in/ft_adds.c
-lem_in.h
-/home/echufy/lem-in/lem_in.h
-
-/home/echufy/lem-in/ft_ants.c
-lem_in.h
-/home/echufy/lem-in/lem_in.h
-
-/home/echufy/lem-in/ft_is.c
-lem_in.h
-/home/echufy/lem-in/lem_in.h
-
-/home/echufy/lem-in/ft_list_room.c
-lem_in.h
-/home/echufy/lem-in/lem_in.h
-
 /home/echufy/lem-in/lem_in.h
 libft/libft.h
 /home/echufy/lem-in/libft/libft.h

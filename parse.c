@@ -34,8 +34,6 @@ int is_answer(t_farm farm)
             if (!ft_list_room_find(dop, dop2->links[j]))
             {
                 room_list->next = ft_list_room_new(farm.rooms[is_room(farm, dop2->links[j])]);
-//                if (is_room(farm, dop2->links[j]) != farm.end_room_id)
-//                    farm.rooms[is_room(farm, dop2->links[j])].level = counter;
                 room_list = room_list->next;
             }
         }
@@ -217,27 +215,36 @@ void print_ant(t_ant ant) {
     ft_printf("nubmer: %d; currnet_index: %d;\n", ant.number, ant.currnet_index);
 }
 
+
+int allAntsGotEnd(t_ant * ants, int ants_amount) {
+    int i;
+
+    i = -1;
+    while(++i < ants_amount)
+    {
+        if(ants[i].currnet_index <= ants[i].way_size ) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 void print_ants_movings(t_ant * ants, int ants_amount) {
     int  i;
     int  j;
-    char * way_name;
     t_list_room     *tmp_way;
 
-    i = 0;
-    while(i < ants_amount) {
+    i = -1;
+    while(++i < ants_amount) {
         if(ants[i].currnet_index > ants[i].way_size) {
-            i++;
             continue;
         }
         tmp_way = ants[i].way;
-        j = 0;
-        while(j < ants[i].currnet_index) {
+        j = -1;
+        while(++j < ants[i].currnet_index) {
             tmp_way = tmp_way->next;
-            j++;
         }
-
         if(ants[i].currnet_index != 0) ft_printf("L%d-%s ", ants[i].number, tmp_way->name);
-        i++;
     }
 }
 
@@ -253,41 +260,40 @@ void move_ants2(t_farm farm, t_ant *ants)
     current_ants_number = 1;
     while (current_ants_number <= farm.ants_amount)
     {
-        check_exp = 0;
-        i = 0;
-        while (i < farm.ways_amount)
+        i = -1;
+        while (++i < farm.ways_amount)
         {
-            if(i == 0 && current_ants_number <= farm.ants_amount) {
+            check_exp = 0;
+            j = -1;
+            while(i != 0 && ++j < i)
+            {
+                check_exp += farm.ways[i]->size - farm.ways[j]->size;
+            }
+            if(farm.ants_amount - current_ants_number >= check_exp)
+            {
                 ants[current_ants_number - 1].way = farm.ways[i];
                 ants[current_ants_number - 1].way_size = ft_list_size(farm.ways[i]) - 1;
                 ants[current_ants_number - 1].currnet_index++;
-
-                //print_ant(ants[current_ants_number - 1]);
-                //print_ants_movings(ants, current_ants_number);
                 current_ants_number++;
-            } else{
-                j = 0;
-                while(j < i) {
-                    check_exp += farm.ways[i]->size - farm.ways[j]->size;
-                    j++;
-                }
-                if(farm.ants_amount - current_ants_number > check_exp) {
-                    ants[current_ants_number - 1].way = farm.ways[i];
-                    ants[current_ants_number - 1].way_size = ft_list_size(farm.ways[i]) - 1;
-                    ants[current_ants_number - 1].currnet_index++;
-
-                    //print_ant(ants[current_ants_number - 1]);
-                    current_ants_number++;
-                }
             }
-            i++;
         }
         print_ants_movings(ants, current_ants_number - 1);
         counter++;
-        j = 0;
-        while(j < current_ants_number - 1) {
+        j = -1;
+        while(++j < current_ants_number - 1)
+        {
             ants[j].currnet_index++;
-            j++;
+        }
+        ft_printf("\n");
+    }
+    while(!allAntsGotEnd(ants, farm.ants_amount))
+    {
+        print_ants_movings(ants, current_ants_number - 1);
+        counter++;
+        j = -1;
+        while(++j < current_ants_number - 1)
+        {
+            ants[j].currnet_index++;
         }
         ft_printf("\n");
     }
