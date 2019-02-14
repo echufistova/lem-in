@@ -49,7 +49,6 @@ typedef struct		s_farm
     int             room_amount;
     int             ways_amount;
     int             flag;
-    int             level;
     int             start_room_id;
     int             end_room_id;
     t_room			*rooms;

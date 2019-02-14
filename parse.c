@@ -227,11 +227,11 @@ void move_ants2(t_farm farm, t_ant *ants)
 {
     int i;
     int j;
-    //int counter;
+    int counter;
     int check_exp;
     int current_ants_number;
 
-    //counter = 0;
+    counter = 0;
     current_ants_number = 1;
     while (current_ants_number <= farm.ants_amount || !allAntsGotEnd(ants, farm.ants_amount))
     {
@@ -254,12 +254,12 @@ void move_ants2(t_farm farm, t_ant *ants)
             }
         }
         print_ants_movings(ants, current_ants_number - 1);
-        //counter++;
+        counter++;
         j = -1;
         while(++j < current_ants_number - 1)
             ants[j].currnet_index++;
     }
-    //ft_printf("\nlines - %d\n", counter);
+    ft_printf("\nlines - %d\n", counter);
 }
 
 int get_info(t_farm *farm, char *line, int *i)
@@ -290,22 +290,26 @@ int get_info(t_farm *farm, char *line, int *i)
     return (1);
 }
 
-int main(void) {
+void init(t_farm *farm)
+{
+    farm->flag = 0;
+    farm->room_amount = 0;
+    farm->ways_amount = 0;
+    farm->rooms = (t_room*) malloc(sizeof(t_room) * (farm->room_amount + 1));
+}
+
+int main(void)
+{
 	int i;
 	int fd;
 	char *line;
 	t_farm farm;
-	t_list_room *way;
     t_ant *ants;
 
 	i = 0;
 	fd = open("/home/echufy/lem-in/test", O_RDONLY);//"/Users/ychufist/lem-in/test", O_RDONLY);//
 	line = NULL;
-	farm.flag = 0;
-	farm.room_amount = 0;
-	farm.ways_amount = 0;
-	farm.rooms = (t_room*) malloc(sizeof(t_room) * (farm.room_amount + 1));
-    farm.ways = (t_list_room**) malloc(sizeof(t_list_room*));
+    init(&farm);
 	while (get_next_line(fd, &line) > 0)
 	{
 		ft_printf("gnl : %s\n", line);
@@ -320,37 +324,12 @@ int main(void) {
 			farm.end_room_id = farm.room_amount;
 		ft_strdel(&line);
 	}
-
-	i = 0;
-	ft_printf("room amount %d\n", farm.room_amount);
-    ft_printf("start %s\n", farm.rooms[farm.start_room_id].name);
-    ft_printf("end %s\n", farm.rooms[farm.end_room_id].name);
-    while (i < farm.room_amount)
-    {
-	//write(1, "\e[34m", 5);
-	ft_printf("%d) ", i);
-	ft_printf("room name %s ", farm.rooms[i].name);
-	ft_printf("room coord x %d ", farm.rooms[i].coord.x);
-	ft_printf("room coord y %d ", farm.rooms[i].coord.y);
-	ft_printf("links amount %d\n", farm.rooms[i].links_amount);
-	i++;
-    }
-	//write(1, "\e[0m", 4);
-	i = 0;
-	while (i < farm.rooms[299].links_amount) {
-		ft_printf("%s-%s\n", farm.rooms[299].name, farm.rooms[299].links[i]);
-		i++;
-	}
 	if (is_answer(farm))
     {
-	    find_ways(&farm);
-	    for( i = 0; i < farm.ways_amount; i++ ) {
-            print_list(farm.ways[i]);
-	    }
-        ft_printf("    ways am: %d\n", farm.ways_amount);
+        farm.ways = (t_list_room**) malloc(sizeof(t_list_room*));
+        find_ways(&farm);
 	    ants = create_ants(farm.ants_amount);
         move_ants2(farm, ants);
     }
-	ft_printf("\nokk");
 	return (0);
 }
