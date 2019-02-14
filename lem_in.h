@@ -29,11 +29,9 @@ typedef struct		s_room
 	t_point		coord;
 	char		**links;
 	int         links_amount;
-	int         level;
+//	int         level;
 	int         flag;
 }					t_room;
-
-
 
 typedef struct      s_list_room
 {
@@ -41,9 +39,7 @@ typedef struct      s_list_room
     t_point		coord;
     char		**links;
     int         links_amount;
-
     int         size;
-    int         flag;
     struct s_list_room	*prev;
     struct s_list_room	*next;
 }                   t_list_room;
@@ -61,6 +57,14 @@ typedef struct		s_farm
     t_list_room     **ways;
 }					t_farm;
 
+typedef struct		s_ant
+{
+	int number;
+	t_list_room     *way;
+	int way_size;
+	int currnet_index;
+}					t_ant;
+
 void add_room(t_farm *farm);
 void add_link(t_farm *farm, char *line, int i);
 int is_room(t_farm farm, char *name);
@@ -72,6 +76,7 @@ int ft_list_size(t_list_room *room_list);
 void print_list(t_list_room *room_list);
 int is_valid_name(const char *name);
 void get_way(t_farm *farm, t_list_room *way);
-t_list_room *find_ways(t_farm farm);
+t_list_room *find_ways(t_farm *farm);
+t_ant *create_ants(int ants_amount);
 
 #endif

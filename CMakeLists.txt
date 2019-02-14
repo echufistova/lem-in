@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.13)
 project(lem_in C)
 
 set(CMAKE_C_STANDARD 11)
@@ -93,7 +93,7 @@ add_executable(lem_in
         libft/get_next_line.h
         libft/libft.h
         ft_adds.c
+        ft_is.c
         ft_list_room.c
         lem_in.h
-        parse.c
-        ft_is.c)
+        parse.c ft_ants.c)

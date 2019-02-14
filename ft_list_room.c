@@ -19,7 +19,6 @@ t_list_room *ft_list_room_new(t_room room)
     }
     res->name = room.name;
     res->links_amount = room.links_amount;
-    res->flag = 0;
     res->links = (char**)malloc(sizeof(char*) * room.links_amount);
     while (++i < room.links_amount)
         res->links[i] = room.links[i];
@@ -55,9 +54,13 @@ void print_list(t_list_room *room_list)
 {
     while (room_list)
     {
-        ft_printf("%s->", room_list->name);
+        ft_printf("%s", room_list->name);
         room_list = room_list->next;
+        if(room_list) {
+            ft_printf("->");
+        }
     }
+    ft_printf("\n");
 }
 
 void ft_list_room_add(t_list_room **alst, t_list_room *new)

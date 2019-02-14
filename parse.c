@@ -34,8 +34,8 @@ int is_answer(t_farm farm)
             if (!ft_list_room_find(dop, dop2->links[j]))
             {
                 room_list->next = ft_list_room_new(farm.rooms[is_room(farm, dop2->links[j])]);
-                if (is_room(farm, dop2->links[j]) != farm.end_room_id)
-                    farm.rooms[is_room(farm, dop2->links[j])].level = counter;
+//                if (is_room(farm, dop2->links[j]) != farm.end_room_id)
+//                    farm.rooms[is_room(farm, dop2->links[j])].level = counter;
                 room_list = room_list->next;
             }
         }
@@ -88,11 +88,11 @@ void get_way(t_farm *farm, t_list_room *way)
     farm->ways[farm->ways_amount]->next = ft_list_room_new(farm->rooms[is_room(*farm, rm->name)]);
     farm->ways[farm->ways_amount] = dop;
     ft_printf("\n");
-    farm->ways[farm->ways_amount]->size = ft_list_size(farm->ways[farm->ways_amount]) - 2;
+    farm->ways[farm->ways_amount]->size = ft_list_size(farm->ways[farm->ways_amount]) - 1;
     print_list(farm->ways[farm->ways_amount]);
     farm->ways_amount++;
     ft_printf("\n");
-    find_ways(*farm);
+    find_ways(farm);
 }
 
 void print_farm(t_farm farm)
@@ -109,7 +109,7 @@ void print_farm(t_farm farm)
     }
 }
 
-t_list_room *find_ways(t_farm farm)
+t_list_room *find_ways(t_farm *farm)
 {
     int i;
     int j;
@@ -117,7 +117,7 @@ t_list_room *find_ways(t_farm farm)
     t_list_room *dop2;
     t_list_room *dop;
 
-    way = ft_list_room_new(farm.rooms[farm.end_room_id]);
+    way = ft_list_room_new(farm->rooms[farm->end_room_id]);
     dop = way;
     dop2 = way;
     while (dop2)
@@ -126,24 +126,25 @@ t_list_room *find_ways(t_farm farm)
         while (++j < dop2->links_amount)
         {
 //            ft_printf("flag - %d u room - %s\n", farm.rooms[is_room(farm, dop2->links[j])].flag, farm.rooms[is_room(farm, dop2->links[j])].name);
-            if (farm.rooms[is_room(farm, dop2->links[j])].flag != 1 &&
-                    farm.rooms[is_room(farm, dop2->links[j])].flag != 2)
+            if (farm->rooms[is_room(*farm, dop2->links[j])].flag != 1 &&
+                    farm->rooms[is_room(*farm, dop2->links[j])].flag != 2)
             {
-                if (is_room(farm, way->name) != farm.end_room_id)
-                    farm.rooms[is_room(farm, way->name)].flag = 1;// просмотрена
-                if (is_room(farm, dop2->links[j]) != farm.end_room_id)//надо сделать проверку на предыдущую связь
+                if (is_room(*farm, way->name) != farm->end_room_id)
+                    farm->rooms[is_room(*farm, way->name)].flag = 1;// просмотрена
+                if (is_room(*farm, dop2->links[j]) != farm->end_room_id)//надо сделать проверку на предыдущую связь
                 {
-                    way->next = ft_list_room_new(farm.rooms[is_room(farm, dop2->links[j])]);
-                    ft_printf("room : %s, ", farm.rooms[is_room(farm, dop2->links[j])].name);
+                    way->next = ft_list_room_new(farm->rooms[is_room(*farm, dop2->links[j])]);
+                    ft_printf("room : %s, ", farm->rooms[is_room(*farm, dop2->links[j])].name);
                     way = way->next;
                     way->prev = dop2;
                     ft_printf("dop2: %s\n", dop2->name);
-                    ft_printf("parent : %s\n", farm.rooms[is_room(farm, dop2->name)].name);
-                    if (is_room(farm, way->name) == farm.start_room_id)
+                    ft_printf("parent : %s\n", farm->rooms[is_room(*farm, dop2->name)].name);
+                    if (is_room(*farm, way->name) == farm->start_room_id)
                     {
                         ft_printf("end: ");
                         print_list(dop);
-                        get_way(&farm, dop);
+                        ft_printf("    ways am: %d\n", farm->ways_amount);
+                        get_way(farm, dop);
                         ft_printf("\n");
                         return (way);
                     }
@@ -155,8 +156,8 @@ t_list_room *find_ways(t_farm farm)
     ft_printf("stranno\n");
     print_list(dop);
     ft_printf("\n\n");
-    bzero_ways(&farm);
-    print_farm(farm);
+    bzero_ways(farm);
+    print_farm(*farm);
     return (NULL);
 }
 
@@ -188,6 +189,109 @@ int find_link(t_farm *farm, char *line, int k)
         return (1);
     }
     return (0);
+}
+
+void move_ants(t_farm farm)
+{
+    int i;
+    int sum_len;
+
+    sum_len = 0;
+    while (farm.ants_amount > 0)
+    {
+        i = 0;
+        while (i < farm.ways_amount)
+        {
+            if (farm.ants_amount > 2 * farm.ways[i]->size - 1 - sum_len) {
+                ft_printf("move ant in way#%d\n", i);
+                farm.ants_amount--;
+            }
+            sum_len += farm.ways[i]->size;
+            i++;
+        }
+
+    }
+}
+
+void print_ant(t_ant ant) {
+    ft_printf("nubmer: %d; currnet_index: %d;\n", ant.number, ant.currnet_index);
+}
+
+void print_ants_movings(t_ant * ants, int ants_amount) {
+    int  i;
+    int  j;
+    char * way_name;
+    t_list_room     *tmp_way;
+
+    i = 0;
+    while(i < ants_amount) {
+        if(ants[i].currnet_index > ants[i].way_size) {
+            i++;
+            continue;
+        }
+        tmp_way = ants[i].way;
+        j = 0;
+        while(j < ants[i].currnet_index) {
+            tmp_way = tmp_way->next;
+            j++;
+        }
+
+        if(ants[i].currnet_index != 0) ft_printf("L%d-%s ", ants[i].number, tmp_way->name);
+        i++;
+    }
+}
+
+void move_ants2(t_farm farm, t_ant *ants)
+{
+    int i;
+    int j;
+    int counter;
+    int check_exp;
+    int current_ants_number;
+
+    counter = 0;
+    current_ants_number = 1;
+    while (current_ants_number <= farm.ants_amount)
+    {
+        check_exp = 0;
+        i = 0;
+        while (i < farm.ways_amount)
+        {
+            if(i == 0 && current_ants_number <= farm.ants_amount) {
+                ants[current_ants_number - 1].way = farm.ways[i];
+                ants[current_ants_number - 1].way_size = ft_list_size(farm.ways[i]) - 1;
+                ants[current_ants_number - 1].currnet_index++;
+
+                //print_ant(ants[current_ants_number - 1]);
+                //print_ants_movings(ants, current_ants_number);
+                current_ants_number++;
+            } else{
+                j = 0;
+                while(j < i) {
+                    check_exp += farm.ways[i]->size - farm.ways[j]->size;
+                    j++;
+                }
+                if(farm.ants_amount - current_ants_number > check_exp) {
+                    ants[current_ants_number - 1].way = farm.ways[i];
+                    ants[current_ants_number - 1].way_size = ft_list_size(farm.ways[i]) - 1;
+                    ants[current_ants_number - 1].currnet_index++;
+
+                    //print_ant(ants[current_ants_number - 1]);
+                    current_ants_number++;
+                }
+            }
+            i++;
+        }
+        print_ants_movings(ants, current_ants_number - 1);
+        counter++;
+        j = 0;
+        while(j < current_ants_number - 1) {
+            ants[j].currnet_index++;
+            j++;
+        }
+        ft_printf("\n");
+    }
+    ft_printf("\nlines - %d\n", counter);
 }
 
 int get_info(t_farm *farm, char *line, int *i)
@@ -224,9 +328,10 @@ int main(void) {
 	char *line;
 	t_farm farm;
 	t_list_room *way;
+    t_ant *ants;
 
 	i = 0;
-	fd = open("/Users/ychufist/lem-in/test", O_RDONLY);//"/home/echufy/lem-in/test", O_RDONLY);//
+	fd = open("/home/echufy/lem-in/test", O_RDONLY);//"/Users/ychufist/lem-in/test", O_RDONLY);//
 	line = NULL;
 	farm.flag = 0;
 	farm.room_amount = 0;
@@ -270,10 +375,14 @@ int main(void) {
 	}
 	if (is_answer(farm))
     {
-	    way = find_ways(farm);
-        //way =
-        //print_list(way);
+	    find_ways(&farm);
+	    for( i = 0; i < farm.ways_amount; i++ ) {
+            print_list(farm.ways[i]);
+	    }
+        ft_printf("    ways am: %d\n", farm.ways_amount);
+	    ants = create_ants(farm.ants_amount);
+        move_ants2(farm, ants);
     }
-	ft_printf("\n\nokk");
+	ft_printf("\nokk");
 	return (0);
 }
