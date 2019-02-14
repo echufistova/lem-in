@@ -189,33 +189,6 @@ int find_link(t_farm *farm, char *line, int k)
     return (0);
 }
 
-void move_ants(t_farm farm)
-{
-    int i;
-    int sum_len;
-
-    sum_len = 0;
-    while (farm.ants_amount > 0)
-    {
-        i = 0;
-        while (i < farm.ways_amount)
-        {
-            if (farm.ants_amount > 2 * farm.ways[i]->size - 1 - sum_len) {
-                ft_printf("move ant in way#%d\n", i);
-                farm.ants_amount--;
-            }
-            sum_len += farm.ways[i]->size;
-            i++;
-        }
-
-    }
-}
-
-void print_ant(t_ant ant) {
-    ft_printf("nubmer: %d; currnet_index: %d;\n", ant.number, ant.currnet_index);
-}
-
-
 int allAntsGotEnd(t_ant * ants, int ants_amount) {
     int i;
 

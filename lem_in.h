@@ -29,7 +29,6 @@ typedef struct		s_room
 	t_point		coord;
 	char		**links;
 	int         links_amount;
-//	int         level;
 	int         flag;
 }					t_room;
 
