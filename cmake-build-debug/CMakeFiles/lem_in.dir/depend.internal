@@ -25,6 +25,12 @@ CMakeFiles/lem_in.dir/ft_list_room.c.o
  /home/echufy/lem-in/libft/ft_printf.h
  /home/echufy/lem-in/libft/get_next_line.h
  /home/echufy/lem-in/libft/libft.h
+CMakeFiles/lem_in.dir/ft_ways.c.o
+ /home/echufy/lem-in/ft_ways.c
+ /home/echufy/lem-in/lem_in.h
+ /home/echufy/lem-in/libft/ft_printf.h
+ /home/echufy/lem-in/libft/get_next_line.h
+ /home/echufy/lem-in/libft/libft.h
 CMakeFiles/lem_in.dir/libft/ft_atoi.c.o
  /home/echufy/lem-in/libft/ft_atoi.c
  /home/echufy/lem-in/libft/libft.h

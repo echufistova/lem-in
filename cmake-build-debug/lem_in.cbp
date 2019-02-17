@@ -94,6 +94,9 @@
 		<Unit filename="/home/echufy/lem-in/ft_list_room.c">
 			<Option target="lem_in"/>
 		</Unit>
+		<Unit filename="/home/echufy/lem-in/ft_ways.c">
+			<Option target="lem_in"/>
+		</Unit>
 		<Unit filename="/home/echufy/lem-in/lem_in.h">
 			<Option target="lem_in"/>
 		</Unit>

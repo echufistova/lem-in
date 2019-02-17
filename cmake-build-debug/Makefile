@@ -231,6 +231,33 @@ ft_list_room.c.s:
 	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/ft_list_room.c.s
 .PHONY : ft_list_room.c.s
 
+ft_ways.o: ft_ways.c.o
+
+.PHONY : ft_ways.o
+
+# target to build an object file
+ft_ways.c.o:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/ft_ways.c.o
+.PHONY : ft_ways.c.o
+
+ft_ways.i: ft_ways.c.i
+
+.PHONY : ft_ways.i
+
+# target to preprocess a source file
+ft_ways.c.i:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/ft_ways.c.i
+.PHONY : ft_ways.c.i
+
+ft_ways.s: ft_ways.c.s
+
+.PHONY : ft_ways.s
+
+# target to generate assembly for a file
+ft_ways.c.s:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/ft_ways.c.s
+.PHONY : ft_ways.c.s
+
 libft/ft_atoi.o: libft/ft_atoi.c.o
 
 .PHONY : libft/ft_atoi.o
@@ -2493,6 +2520,9 @@ help:
 	@echo "... ft_list_room.o"
 	@echo "... ft_list_room.i"
 	@echo "... ft_list_room.s"
+	@echo "... ft_ways.o"
+	@echo "... ft_ways.i"
+	@echo "... ft_ways.s"
 	@echo "... libft/ft_atoi.o"
 	@echo "... libft/ft_atoi.i"
 	@echo "... libft/ft_atoi.s"

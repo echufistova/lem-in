@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/home/echufy/lem-in/ft_ants.c" "/home/echufy/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/ft_ants.c.o"
   "/home/echufy/lem-in/ft_is.c" "/home/echufy/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/ft_is.c.o"
   "/home/echufy/lem-in/ft_list_room.c" "/home/echufy/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/ft_list_room.c.o"
+  "/home/echufy/lem-in/ft_ways.c" "/home/echufy/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/ft_ways.c.o"
   "/home/echufy/lem-in/libft/ft_atoi.c" "/home/echufy/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_atoi.c.o"
   "/home/echufy/lem-in/libft/ft_bzero.c" "/home/echufy/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_bzero.c.o"
   "/home/echufy/lem-in/libft/ft_cl.c" "/home/echufy/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/libft/ft_cl.c.o"

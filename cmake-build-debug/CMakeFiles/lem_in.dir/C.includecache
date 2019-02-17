@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/echufy/lem-in/ft_ways.c
+lem_in.h
+/home/echufy/lem-in/lem_in.h
+
 /home/echufy/lem-in/lem_in.h
 libft/libft.h
 /home/echufy/lem-in/libft/libft.h

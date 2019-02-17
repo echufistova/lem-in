@@ -50,35 +50,4 @@ int ft_list_size(t_list_room *room_list)
     return (i);
 }
 
-void print_list(t_list_room *room_list)
-{
-    while (room_list)
-    {
-        ft_printf("%s", room_list->name);
-        room_list = room_list->next;
-        if(room_list) {
-            ft_printf("->");
-        }
-    }
-    ft_printf("\n");
-}
 
-void ft_list_room_add(t_list_room **alst, t_list_room *new)
-{
-    if (alst && *alst)
-        new->next = *alst;
-    *alst = new;
-}
-
-t_list_room find_parent(char *room_name, t_list_room *way)
-{
-    t_list_room *dop;
-
-    dop = way;
-    while (ft_strcmp(way->name, room_name) != 0)
-    {
-        way = way->next;
-    }
-//    ft_printf("PARENT : %s\n", way->parent);
-    return (*way);
-}

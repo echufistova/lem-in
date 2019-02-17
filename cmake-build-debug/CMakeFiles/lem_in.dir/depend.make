@@ -25,6 +25,12 @@ CMakeFiles/lem_in.dir/ft_list_room.c.o: ../libft/ft_printf.h
 CMakeFiles/lem_in.dir/ft_list_room.c.o: ../libft/get_next_line.h
 CMakeFiles/lem_in.dir/ft_list_room.c.o: ../libft/libft.h
 
+CMakeFiles/lem_in.dir/ft_ways.c.o: ../ft_ways.c
+CMakeFiles/lem_in.dir/ft_ways.c.o: ../lem_in.h
+CMakeFiles/lem_in.dir/ft_ways.c.o: ../libft/ft_printf.h
+CMakeFiles/lem_in.dir/ft_ways.c.o: ../libft/get_next_line.h
+CMakeFiles/lem_in.dir/ft_ways.c.o: ../libft/libft.h
+
 CMakeFiles/lem_in.dir/libft/ft_atoi.c.o: ../libft/ft_atoi.c
 CMakeFiles/lem_in.dir/libft/ft_atoi.c.o: ../libft/libft.h
 

@@ -66,15 +66,14 @@ typedef struct		s_ant
 void add_room(t_farm *farm);
 void add_link(t_farm *farm, char *line, int i);
 int is_room(t_farm farm, char *name);
+int find_link(t_farm *farm, char *line, int k);
 t_list_room *ft_list_room_new(t_room room);
-t_list_room find_parent(char *room_name, t_list_room *way);
-void ft_list_room_add(t_list_room **alst, t_list_room *new);
 int ft_list_room_find(t_list_room *room_list, char *name);
 int ft_list_size(t_list_room *room_list);
-void print_list(t_list_room *room_list);
 int is_valid_name(const char *name);
 void get_way(t_farm *farm, t_list_room *way);
 t_list_room *find_ways(t_farm *farm);
 t_ant *create_ants(int ants_amount);
+void move_ants(t_farm farm, t_ant *ants);
 
 #endif
