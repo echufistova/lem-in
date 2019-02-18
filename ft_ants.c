@@ -47,12 +47,24 @@ void print_ants_movings(t_ant * ants, int ants_amount) {
     ft_printf("\n");
 }
 
+int calculateCheckSum(int i, t_farm farm) {
+    int check_exp;
+    int j;
+
+    if(i == 0) return 0;
+
+    check_exp = 0;
+    j = -1;
+    while (++j < i)
+        check_exp += farm.ways[i]->size - farm.ways[j]->size;
+    return check_exp;
+}
+
 void move_ants(t_farm farm, t_ant *ants)
 {
     int i;
     int j;
     int counter;
-    int check_exp;
     int current_ants_number;
 
     counter = 0;
@@ -64,11 +76,7 @@ void move_ants(t_farm farm, t_ant *ants)
             i = -1;
             while (++i < farm.ways_amount)
             {
-                check_exp = 0;
-                j = -1;
-                while (i != 0 && ++j < i)
-                    check_exp += farm.ways[i]->size - farm.ways[j]->size;
-                if (farm.ants_amount - current_ants_number >= check_exp)
+                if (farm.ants_amount - current_ants_number >= calculateCheckSum(i, farm))
                 {
                     ants[current_ants_number - 1].way = farm.ways[i];
                     ants[current_ants_number - 1].way_size = ft_list_size(farm.ways[i]) - 1;
