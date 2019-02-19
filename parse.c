@@ -101,6 +101,21 @@ void init(t_farm *farm)
     farm->dop = farm->init;
 }
 
+void free_farm(t_farm *farm)
+{
+    int i;
+
+    i = -1;
+    while (++i < farm->room_amount)
+    {
+        free_links(farm->rooms[i].links_amount, farm->rooms[i].links);
+        ft_strdel(&farm->rooms[i].name);
+    }
+    free(farm->rooms);
+    i = -1;
+
+}
+
 int main(void)
 {
 	int i;
@@ -110,7 +125,7 @@ int main(void)
     t_ant *ants;
 
 	i = 0;
-	fd = open("/Users/ychufist/lem-in/test", O_RDONLY);//"/home/echufy/lem-in/test", O_RDONLY);
+	fd = 0;//open("/Users/ychufist/lem-in/test", O_RDONLY);//"/home/echufy/lem-in/test", O_RDONLY);
 	line = NULL;
     init(&farm);
     while (get_next_line(fd, &line) > 0)
@@ -162,7 +177,9 @@ int main(void)
 //        print_ways(farm);
 	    ants = create_ants(farm.ants_amount);
         move_ants(farm, ants);
+
     }
-//    system("leaks lem-in");
+	free_farm(&farm);
+    system("leaks lem-in");
 	return (0);
 }

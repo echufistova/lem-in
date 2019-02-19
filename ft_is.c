@@ -1,6 +1,14 @@
-//
-// Created by echufy on 31.01.19.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_is.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ychufist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/19 18:23:08 by ychufist          #+#    #+#             */
+/*   Updated: 2019/02/19 18:23:11 by ychufist         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lem_in.h"
 
@@ -59,15 +67,8 @@ int is_valid_map(t_farm farm)
         write_error("THERE IS NO END ROOM");
         return (0);
     }
-//    farm.room_amount++;
-//    while (--farm.room_amount)
-//    {
-//        if (farm.rooms[farm.room_amount].links_amount < 1)
-//        {
-//            write_error("THE ROOM HAS NO LINKS");
-//            return(0);
-//        }
-//    }
+    if (farm.room_amount < 3)
+        return (0);
     return (1);
 }
 
@@ -90,4 +91,3 @@ int is_coord(t_farm farm, t_list_room *room)
     }
     return (1);
 }
-
