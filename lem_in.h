@@ -25,7 +25,7 @@ typedef struct 		s_point
 
 typedef struct		s_room
 {
-	int id;
+	int 		id;
 	char		*name;
 	t_point		coord;
 	char		**links;
@@ -55,6 +55,8 @@ typedef struct		s_farm
     int             end_room_id;
 	int             is_start;
 	int             is_end;
+	t_list_room		*init;
+	t_list_room		*dop;
     t_room			*rooms;
     t_list_room     **ways;
 }					t_farm;
@@ -81,5 +83,6 @@ t_ant *create_ants(int ants_amount);
 void move_ants(t_farm farm, t_ant *ants);
 void print_ways(t_farm farm);
 void print_list(t_list_room *room_list);
+int is_valid_map(t_farm farm);
 
 #endif

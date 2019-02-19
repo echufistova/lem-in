@@ -4,6 +4,14 @@
 
 #include "lem_in.h"
 
+void dop(t_farm *farm, char *name, t_point ij, int i, int id)
+{
+    farm->rooms[i].id = id;
+    farm->rooms[i].name = name;
+    farm->rooms[i].coord.x = ij.x;
+    farm->rooms[i].coord.y = ij.y;
+}
+
 void add_room(t_farm *farm)
 {
     t_room *dop_rooms;
@@ -16,6 +24,7 @@ void add_room(t_farm *farm)
         dop_rooms = (t_room*)malloc(sizeof(t_room) * (farm->room_amount + 1));
         while (++i < farm->room_amount)
         {
+            dop_rooms[i].id = farm->rooms[i].id;
             dop_rooms[i].name = farm->rooms[i].name;
             dop_rooms[i].coord.x = farm->rooms[i].coord.x;
             dop_rooms[i].coord.y = farm->rooms[i].coord.y;
@@ -24,11 +33,8 @@ void add_room(t_farm *farm)
         ft_bzero(farm->rooms, sizeof(t_room *));
         farm->rooms = (t_room*)malloc(sizeof(t_room) * (farm->room_amount + 1));
         while (++i < farm->room_amount)
-        {
-            farm->rooms[i].name = dop_rooms[i].name;
-            farm->rooms[i].coord.x = dop_rooms[i].coord.x;
-            farm->rooms[i].coord.y = dop_rooms[i].coord.y;
-        }
+            dop(farm, dop_rooms[i].name, dop_rooms[i].coord, i, dop_rooms[i].id);
+        ft_bzero(dop_rooms, sizeof(t_room *));
     }
     farm->rooms[i].name = NULL;
     farm->rooms[i].coord.x = 0;
@@ -104,8 +110,10 @@ int is_room(t_farm farm, char *name)
     int i;
 
     i = 0;
-    if (name) {
-        while (i < farm.room_amount) {
+    if (name)
+    {
+        while (i < farm.room_amount)
+        {
             if (ft_strcmp(farm.rooms[i].name, name) == 0)
                 return (i);
             i++;
