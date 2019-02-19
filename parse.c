@@ -40,7 +40,7 @@ int is_answer(t_farm farm)
         dop2 = dop2->next;
         counter++;
     }
-    ft_printf("NO WAY TO END :(\n");
+    write_error("NO WAY TO END :(");
     return (0);
 }
 
@@ -78,6 +78,8 @@ int get_info(t_farm *farm, char *line, int *i)
         farm->init->name = ft_strsub(line, 0, dop - line);
         farm->init->coord.x = ft_atoi(dop++);
         farm->init->coord.y = ft_atoi(ft_strchr(dop, ' '));
+        if (!is_coord(*farm, farm->init))
+            return (0);
         farm->init->links_amount = 0;
         farm->init->next = (t_list_room*)malloc(sizeof(t_list_room));
         farm->init = farm->init->next;
@@ -108,41 +110,49 @@ int main(void)
     t_ant *ants;
 
 	i = 0;
-	fd = 0;//open("/Users/ychufist/lem-in/test", O_RDONLY);//"/home/echufy/lem-in/test", O_RDONLY);
+	fd = open("/Users/ychufist/lem-in/test", O_RDONLY);//"/home/echufy/lem-in/test", O_RDONLY);
 	line = NULL;
     init(&farm);
     while (get_next_line(fd, &line) > 0)
     {
-
         if (ft_strlen(line) != 0) {
             write(1, line, ft_strlen(line));
+            write(1, "\n", 1);
             if (line[0] != '#' && ft_strchr(line, '-') == NULL) // infa o komnatah
             {
                 if (!get_info(&farm, line, &i))
                     return (0);
-            } else if (line[0] != '#' && ft_strchr(line, '-') != NULL) // infao sviaziah
+            }
+            else if (line[0] != '#' && ft_strchr(line, '-') != NULL) // infao sviaziah
             {
-                if (farm.flag == 0) {
+                if (farm.flag == 0)
+                {
                     make_room(&farm);// сделали комнаты
                     farm.flag = 1;
                 }
-                if (!find_link(&farm, line, 0)) {
+                if (!find_link(&farm, line, 0))
+                {
                     ft_printf("\n\nNO SUCH ROOM OR LINK. ERROR\n");
                     return (0);
                 }
-            } else if (ft_strstr(line, "start") != NULL) {
+            } else if (ft_strstr(line, "start") != NULL)
+            {
                 farm.start_room_id = farm.room_amount;
                 farm.is_start = 1;
-            } else if (ft_strstr(line, "end") != NULL) {
+            }
+            else if (ft_strstr(line, "end") != NULL)
+            {
                 farm.end_room_id = farm.room_amount;
                 farm.is_end = 1;
             }
+            ft_strdel(&line);
         }
         else
+        {
+            make_room(&farm);
             break;
-        ft_strdel(&line);
+        }
     }
-
 	if (is_valid_map(farm) && is_answer(farm))
     {
         ft_printf("\n");
@@ -153,5 +163,6 @@ int main(void)
 	    ants = create_ants(farm.ants_amount);
         move_ants(farm, ants);
     }
+//    system("leaks lem-in");
 	return (0);
 }

@@ -71,19 +71,22 @@ int is_valid_map(t_farm farm)
     return (1);
 }
 
-int is_coord(t_farm farm, t_room room)
+int is_coord(t_farm farm, t_list_room *room)
 {
     int i;
+    t_list_room *dop2;
 
     i = -1;
-    while (++i < farm.room_amount)
+    dop2 = farm.dop;
+    while (dop2->next)
     {
-        if (room.coord.x == farm.rooms[i].coord.x &&
-            room.coord.y == farm.rooms[i].coord.y)
+        if (dop2->coord.x == room->coord.x &&
+                dop2->coord.y == room->coord.y)
         {
             write_error("THE ROOM WITH THE SAME COORD IS PRESENT");
             return (0);
         }
+        dop2 = dop2->next;
     }
     return (1);
 }

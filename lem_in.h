@@ -84,5 +84,7 @@ void move_ants(t_farm farm, t_ant *ants);
 void print_ways(t_farm farm);
 void print_list(t_list_room *room_list);
 int is_valid_map(t_farm farm);
+int is_coord(t_farm farm, t_list_room *room);
+void write_error(char *s);
 
 #endif
