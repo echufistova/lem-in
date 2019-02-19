@@ -82,11 +82,11 @@ file(REMOVE_RECURSE
   "CMakeFiles/lem_in.dir/libft/ft_toupper.c.o"
   "CMakeFiles/lem_in.dir/libft/get_next_line.c.o"
   "CMakeFiles/lem_in.dir/ft_adds.c.o"
+  "CMakeFiles/lem_in.dir/ft_ants.c.o"
   "CMakeFiles/lem_in.dir/ft_is.c.o"
   "CMakeFiles/lem_in.dir/ft_list_room.c.o"
-  "CMakeFiles/lem_in.dir/parse.c.o"
-  "CMakeFiles/lem_in.dir/ft_ants.c.o"
   "CMakeFiles/lem_in.dir/ft_ways.c.o"
+  "CMakeFiles/lem_in.dir/parse.c.o"
   "lem_in.pdb"
   "lem_in"
 )

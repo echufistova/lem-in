@@ -104,11 +104,12 @@ int is_room(t_farm farm, char *name)
     int i;
 
     i = 0;
-    while (i < farm.room_amount)
-    {
-        if (ft_strcmp(farm.rooms[i].name, name) == 0)
-            return (i);
-        i++;
+    if (name) {
+        while (i < farm.room_amount) {
+            if (ft_strcmp(farm.rooms[i].name, name) == 0)
+                return (i);
+            i++;
+        }
     }
     return (-1);
 }

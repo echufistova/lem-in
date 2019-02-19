@@ -93,7 +93,9 @@ add_executable(lem_in
         libft/get_next_line.h
         libft/libft.h
         ft_adds.c
+        ft_ants.c
         ft_is.c
         ft_list_room.c
+        ft_ways.c
         lem_in.h
-        parse.c ft_ants.c ft_ways.c)
+        parse.c)

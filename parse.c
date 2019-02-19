@@ -89,7 +89,7 @@ int main(void)
     t_ant *ants;
 
 	i = 0;
-	fd = open("/home/echufy/lem-in/test", O_RDONLY);//"/Users/ychufist/lem-in/test", O_RDONLY);//
+	fd = open("/Users/ychufist/lem-in/test", O_RDONLY);//"/home/echufy/lem-in/test", O_RDONLY);
 	line = NULL;
     init(&farm);
 	while (get_next_line(fd, &line) > 0)
