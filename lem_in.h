@@ -25,6 +25,7 @@ typedef struct 		s_point
 
 typedef struct		s_room
 {
+	int id;
 	char		*name;
 	t_point		coord;
 	char		**links;
@@ -34,6 +35,7 @@ typedef struct		s_room
 
 typedef struct      s_list_room
 {
+	int id;
     char		*name;
     t_point		coord;
     char		**links;
@@ -75,5 +77,7 @@ void get_way(t_farm *farm, t_list_room *way);
 t_list_room *find_ways(t_farm *farm);
 t_ant *create_ants(int ants_amount);
 void move_ants(t_farm farm, t_ant *ants);
+void print_ways(t_farm farm);
+void print_list(t_list_room *room_list);
 
 #endif

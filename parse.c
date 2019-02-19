@@ -89,7 +89,7 @@ int main(void)
     t_ant *ants;
 
 	i = 0;
-	fd = open("/home/echufy/lem-in/test", O_RDONLY);//"/Users/ychufist/lem-in/test", O_RDONLY);//
+	fd = open("/Users/ychufist/lem-in/map9(big-superposition).dms", O_RDONLY);//"/home/echufy/lem-in/test", O_RDONLY);
 	line = NULL;
     init(&farm);
 	while (get_next_line(fd, &line) > 0)
@@ -111,6 +111,8 @@ int main(void)
         ft_printf("\n");
         farm.ways = (t_list_room**) malloc(sizeof(t_list_room*));
         find_ways(&farm);
+        ft_printf("kolvo ways %d\n", farm.ways_amount);
+//        print_ways(farm);
 	    ants = create_ants(farm.ants_amount);
         move_ants(farm, ants);
     }
