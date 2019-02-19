@@ -53,6 +53,8 @@ typedef struct		s_farm
     int             flag;
     int             start_room_id;
     int             end_room_id;
+	int             is_start;
+	int             is_end;
     t_room			*rooms;
     t_list_room     **ways;
 }					t_farm;

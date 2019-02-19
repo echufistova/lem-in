@@ -89,23 +89,25 @@ int main(void)
     t_ant *ants;
 
 	i = 0;
-	fd = open("/Users/ychufist/lem-in/map9(big-superposition).dms", O_RDONLY);//"/home/echufy/lem-in/test", O_RDONLY);
+	fd = open("/Users/ychufist/lem-in/test", O_RDONLY);//"/home/echufy/lem-in/test", O_RDONLY);
 	line = NULL;
     init(&farm);
-	while (get_next_line(fd, &line) > 0)
-	{
-		ft_printf("%s\n", line);
-		if (line[0] != '#')
-		{
-			if (!get_info(&farm, line, &i))
-				return (0);
-		}
-		else if (ft_strstr(line, "start") != NULL)
-			farm.start_room_id = farm.room_amount;
-		else if (ft_strstr(line, "end") != NULL)
-			farm.end_room_id = farm.room_amount;
-		ft_strdel(&line);
-	}
+    while (get_next_line(fd, &line) > 0)
+    {
+        ft_printf("%s\n", line);
+        if (ft_strlen(line) == 0)
+            break;
+        else if (line[0] != '#')
+        {
+            if (!get_info(&farm, line, &i))
+                return (0);
+        }
+        else if (ft_strstr(line, "start") != NULL)
+            farm.start_room_id = farm.room_amount;
+        else if (ft_strstr(line, "end") != NULL)
+            farm.end_room_id = farm.room_amount;
+        ft_strdel(&line);
+    }
 	if (is_answer(farm))
     {
         ft_printf("\n");

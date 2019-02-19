@@ -16,7 +16,7 @@ void add_room(t_farm *farm)
         dop_rooms = (t_room*)malloc(sizeof(t_room) * (farm->room_amount + 1));
         while (++i < farm->room_amount)
         {
-            dop_rooms[i].name = ft_strdup(farm->rooms[i].name);
+            dop_rooms[i].name = farm->rooms[i].name;
             dop_rooms[i].coord.x = farm->rooms[i].coord.x;
             dop_rooms[i].coord.y = farm->rooms[i].coord.y;
         }
@@ -25,7 +25,7 @@ void add_room(t_farm *farm)
         farm->rooms = (t_room*)malloc(sizeof(t_room) * (farm->room_amount + 1));
         while (++i < farm->room_amount)
         {
-            farm->rooms[i].name = ft_strdup(dop_rooms[i].name);
+            farm->rooms[i].name = dop_rooms[i].name;
             farm->rooms[i].coord.x = dop_rooms[i].coord.x;
             farm->rooms[i].coord.y = dop_rooms[i].coord.y;
         }

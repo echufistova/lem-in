@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/Users/ychufist/lem-in/ft_ways.c
-lem_in.h
-/Users/ychufist/lem-in/lem_in.h
-
 /Users/ychufist/lem-in/lem_in.h
 libft/libft.h
 /Users/ychufist/lem-in/libft/libft.h
@@ -69,4 +65,8 @@ ctype.h
 -
 stdint.h
 -
+
+/Users/ychufist/lem-in/parse.c
+lem_in.h
+/Users/ychufist/lem-in/lem_in.h
 
