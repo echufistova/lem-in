@@ -72,7 +72,8 @@ t_list_room *find_ways(t_farm *farm)
             if (farm->rooms[is_room(*farm, dop2->links[j])].flag != 1 &&
                 farm->rooms[is_room(*farm, dop2->links[j])].flag != 2)
             {
-                if (is_room(*farm, way->name) != farm->end_room_id)
+                if (is_room(*farm, way->name) != farm->end_room_id &&
+                is_room(*farm, way->name) != -1)
                     farm->rooms[is_room(*farm, way->name)].flag = 1;
                 if (is_room(*farm, dop2->links[j]) != farm->end_room_id)
                 {

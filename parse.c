@@ -53,7 +53,6 @@ void make_room(t_farm *farm)
     farm->rooms = (t_room*)malloc(sizeof(t_room) * farm->room_amount);
     while (farm->dop)
     {
-        farm->rooms[i].id = farm->dop->id;
         farm->rooms[i].name = farm->dop->name;
         farm->rooms[i].coord.x = farm->dop->coord.x;
         farm->rooms[i].coord.y = farm->dop->coord.y;
@@ -75,7 +74,6 @@ int get_info(t_farm *farm, char *line, int *i)
         dop = ft_strchr(line, ' ');
         if (!is_valid_name(*farm, ft_strsub(line, 0, dop - line)))
             return (0);
-        farm->init->id = farm->room_amount;
         farm->init->name = ft_strsub(line, 0, dop - line);
         farm->init->coord.x = ft_atoi(dop++);
         farm->init->coord.y = ft_atoi(ft_strchr(dop, ' '));

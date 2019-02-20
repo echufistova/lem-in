@@ -16,7 +16,8 @@ t_ant *create_ants(int ants_amount) {
     int  i;
 
     i = 0;
-    t_ant *ants = (t_ant*)malloc(sizeof(t_ant) * ants_amount);
+    t_ant *ants;
+    ants = (t_ant*)malloc(sizeof(t_ant) * ants_amount);
     while( i < ants_amount ) {
         ants[i].number = i + 1;
         ants[i].way = NULL;
@@ -51,7 +52,7 @@ void print_ants_movings(t_ant * ants, int ants_amount) {
             continue;
         tmp_way = ants[i].way;
         j = -1;
-        while(++j < ants[i].currnet_index)// && tmp_way->next)
+        while(++j < ants[i].currnet_index)
             tmp_way = tmp_way->next;
         if(ants[i].currnet_index != 0)
             ft_printf("L%d-%s ", ants[i].number, tmp_way->name);
@@ -59,12 +60,35 @@ void print_ants_movings(t_ant * ants, int ants_amount) {
     ft_printf("\n");
 }
 
-void move_ants(t_farm farm, t_ant *ants)
+int get_ants(t_farm farm, t_ant *ants, int current_ants_number)
 {
     int i;
     int j;
-    int counter;
     int check_exp;
+
+    i = -1;
+    while (++i < farm.ways_amount)
+    {
+        check_exp = 0;
+        j = -1;
+        while (i != 0 && ++j < i)
+            check_exp += farm.ways[i]->size - farm.ways[j]->size;
+        if (farm.ants_amount - current_ants_number >= check_exp)
+        {
+            ants[current_ants_number - 1].way = farm.ways[i];
+            ants[current_ants_number - 1].way_size =
+                    ft_list_size(farm.ways[i]) - 1;
+            ants[current_ants_number - 1].currnet_index++;
+            current_ants_number++;
+        }
+    }
+    return (current_ants_number);
+}
+
+void move_ants(t_farm farm, t_ant *ants)
+{
+    int j;
+    int counter;
     int current_ants_number;
 
     counter = 0;
@@ -73,26 +97,7 @@ void move_ants(t_farm farm, t_ant *ants)
     !allAntsGotEnd(ants, farm.ants_amount))
     {
         if(current_ants_number <= farm.ants_amount)
-        {
-            i = -1;
-            while (++i < farm.ways_amount)
-            {
-                check_exp = 0;
-                j = -1;
-                while (i != 0 && ++j < i)
-                    check_exp += farm.ways[i]->size - farm.ways[j]->size;
-                if (farm.ants_amount - current_ants_number >= check_exp)
-                {
-//                    if (current_ants_number == 89)
-//                        ft_printf("hello");
-                    ants[current_ants_number - 1].way = farm.ways[i];
-                    ants[current_ants_number - 1].way_size =
-                            ft_list_size(farm.ways[i]) - 1;
-                    ants[current_ants_number - 1].currnet_index++;
-                    current_ants_number++;
-                }
-            }
-        }
+            current_ants_number = get_ants(farm, ants, current_ants_number);
         print_ants_movings(ants, current_ants_number - 1);
         counter++;
         j = -1;
