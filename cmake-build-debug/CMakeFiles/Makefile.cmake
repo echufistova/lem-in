@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
+<<<<<<< HEAD
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/CMakeCCompiler.cmake.in"
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/CMakeCCompilerABI.c"
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/CMakeCInformation.cmake"
@@ -20,10 +21,16 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/CMakeDetermineSystem.cmake"
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/CMakeExtraGeneratorDetermineCompilerMacrosAndIncludeDirs.cmake"
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/CMakeFindBinUtils.cmake"
+=======
+  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/CMakeCInformation.cmake"
+  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/CMakeCommonLanguageInclude.cmake"
+  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/CMakeExtraGeneratorDetermineCompilerMacrosAndIncludeDirs.cmake"
+>>>>>>> origin/dop
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/CMakeFindCodeBlocks.cmake"
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/CMakeGenericSystem.cmake"
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/CMakeInitializeConfigs.cmake"
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/CMakeLanguageInformation.cmake"
+<<<<<<< HEAD
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/CMakeParseImplicitLinkInfo.cmake"
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/CMakeSystem.cmake.in"
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/CMakeSystemSpecificInformation.cmake"
@@ -69,6 +76,14 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/Compiler/XL-C-DetermineCompiler.cmake"
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/Compiler/zOS-C-DetermineCompiler.cmake"
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/Internal/FeatureTesting.cmake"
+=======
+  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/CMakeSystemSpecificInformation.cmake"
+  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/CMakeSystemSpecificInitialize.cmake"
+  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/Compiler/AppleClang-C.cmake"
+  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/Compiler/Clang.cmake"
+  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/Compiler/GNU.cmake"
+>>>>>>> origin/dop
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/Platform/Apple-AppleClang-C.cmake"
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/Platform/Apple-Clang-C.cmake"
   "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.13/Modules/Platform/Apple-Clang.cmake"

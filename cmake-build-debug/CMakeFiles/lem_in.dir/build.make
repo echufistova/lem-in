@@ -1135,6 +1135,7 @@ CMakeFiles/lem_in.dir/ft_adds.c.i: cmake_force
 CMakeFiles/lem_in.dir/ft_adds.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/lem_in.dir/ft_adds.c.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/ychufist/lem-in/ft_adds.c -o CMakeFiles/lem_in.dir/ft_adds.c.s
+<<<<<<< HEAD
 
 CMakeFiles/lem_in.dir/ft_ants.c.o: CMakeFiles/lem_in.dir/flags.make
 CMakeFiles/lem_in.dir/ft_ants.c.o: ../ft_ants.c
@@ -1152,6 +1153,12 @@ CMakeFiles/lem_in.dir/ft_ants.c.s: cmake_force
 CMakeFiles/lem_in.dir/ft_is.c.o: CMakeFiles/lem_in.dir/flags.make
 CMakeFiles/lem_in.dir/ft_is.c.o: ../ft_is.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_85) "Building C object CMakeFiles/lem_in.dir/ft_is.c.o"
+=======
+
+CMakeFiles/lem_in.dir/ft_is.c.o: CMakeFiles/lem_in.dir/flags.make
+CMakeFiles/lem_in.dir/ft_is.c.o: ../ft_is.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_84) "Building C object CMakeFiles/lem_in.dir/ft_is.c.o"
+>>>>>>> origin/dop
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/lem_in.dir/ft_is.c.o   -c /Users/ychufist/lem-in/ft_is.c
 
 CMakeFiles/lem_in.dir/ft_is.c.i: cmake_force
@@ -1164,7 +1171,11 @@ CMakeFiles/lem_in.dir/ft_is.c.s: cmake_force
 
 CMakeFiles/lem_in.dir/ft_list_room.c.o: CMakeFiles/lem_in.dir/flags.make
 CMakeFiles/lem_in.dir/ft_list_room.c.o: ../ft_list_room.c
+<<<<<<< HEAD
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_86) "Building C object CMakeFiles/lem_in.dir/ft_list_room.c.o"
+=======
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_85) "Building C object CMakeFiles/lem_in.dir/ft_list_room.c.o"
+>>>>>>> origin/dop
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/lem_in.dir/ft_list_room.c.o   -c /Users/ychufist/lem-in/ft_list_room.c
 
 CMakeFiles/lem_in.dir/ft_list_room.c.i: cmake_force
@@ -1174,10 +1185,43 @@ CMakeFiles/lem_in.dir/ft_list_room.c.i: cmake_force
 CMakeFiles/lem_in.dir/ft_list_room.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/lem_in.dir/ft_list_room.c.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/ychufist/lem-in/ft_list_room.c -o CMakeFiles/lem_in.dir/ft_list_room.c.s
+<<<<<<< HEAD
 
 CMakeFiles/lem_in.dir/ft_ways.c.o: CMakeFiles/lem_in.dir/flags.make
 CMakeFiles/lem_in.dir/ft_ways.c.o: ../ft_ways.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_87) "Building C object CMakeFiles/lem_in.dir/ft_ways.c.o"
+=======
+
+CMakeFiles/lem_in.dir/parse.c.o: CMakeFiles/lem_in.dir/flags.make
+CMakeFiles/lem_in.dir/parse.c.o: ../parse.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_86) "Building C object CMakeFiles/lem_in.dir/parse.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/lem_in.dir/parse.c.o   -c /Users/ychufist/lem-in/parse.c
+
+CMakeFiles/lem_in.dir/parse.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/lem_in.dir/parse.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/ychufist/lem-in/parse.c > CMakeFiles/lem_in.dir/parse.c.i
+
+CMakeFiles/lem_in.dir/parse.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/lem_in.dir/parse.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/ychufist/lem-in/parse.c -o CMakeFiles/lem_in.dir/parse.c.s
+
+CMakeFiles/lem_in.dir/ft_ants.c.o: CMakeFiles/lem_in.dir/flags.make
+CMakeFiles/lem_in.dir/ft_ants.c.o: ../ft_ants.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_87) "Building C object CMakeFiles/lem_in.dir/ft_ants.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/lem_in.dir/ft_ants.c.o   -c /Users/ychufist/lem-in/ft_ants.c
+
+CMakeFiles/lem_in.dir/ft_ants.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/lem_in.dir/ft_ants.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/ychufist/lem-in/ft_ants.c > CMakeFiles/lem_in.dir/ft_ants.c.i
+
+CMakeFiles/lem_in.dir/ft_ants.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/lem_in.dir/ft_ants.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/ychufist/lem-in/ft_ants.c -o CMakeFiles/lem_in.dir/ft_ants.c.s
+
+CMakeFiles/lem_in.dir/ft_ways.c.o: CMakeFiles/lem_in.dir/flags.make
+CMakeFiles/lem_in.dir/ft_ways.c.o: ../ft_ways.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_88) "Building C object CMakeFiles/lem_in.dir/ft_ways.c.o"
+>>>>>>> origin/dop
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/lem_in.dir/ft_ways.c.o   -c /Users/ychufist/lem-in/ft_ways.c
 
 CMakeFiles/lem_in.dir/ft_ways.c.i: cmake_force
@@ -1187,6 +1231,7 @@ CMakeFiles/lem_in.dir/ft_ways.c.i: cmake_force
 CMakeFiles/lem_in.dir/ft_ways.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/lem_in.dir/ft_ways.c.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/ychufist/lem-in/ft_ways.c -o CMakeFiles/lem_in.dir/ft_ways.c.s
+<<<<<<< HEAD
 
 CMakeFiles/lem_in.dir/parse.c.o: CMakeFiles/lem_in.dir/flags.make
 CMakeFiles/lem_in.dir/parse.c.o: ../parse.c
@@ -1200,6 +1245,8 @@ CMakeFiles/lem_in.dir/parse.c.i: cmake_force
 CMakeFiles/lem_in.dir/parse.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/lem_in.dir/parse.c.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/ychufist/lem-in/parse.c -o CMakeFiles/lem_in.dir/parse.c.s
+=======
+>>>>>>> origin/dop
 
 # Object files for target lem_in
 lem_in_OBJECTS = \

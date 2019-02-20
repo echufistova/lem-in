@@ -40,9 +40,28 @@ int is_answer(t_farm farm)
         dop2 = dop2->next;
         counter++;
     }
-    ft_printf("NO WAY TO END :(\n");
+    write_error("NO WAY TO END :(");
     return (0);
 }
+
+void make_room(t_farm *farm)
+{
+    int i;
+
+    i = 0;
+    farm->rooms = (t_room*)malloc(sizeof(t_room) * farm->room_amount);
+    while (farm->dop)
+    {
+        farm->rooms[i].id = farm->dop->id;
+        farm->rooms[i].name = farm->dop->name;
+        farm->rooms[i].coord.x = farm->dop->coord.x;
+        farm->rooms[i].coord.y = farm->dop->coord.y;
+        farm->rooms[i].links_amount = farm->dop->links_amount;
+        farm->dop = farm->dop->next;
+        i++;
+    }
+}
+
 
 int get_info(t_farm *farm, char *line, int *i)
 {
@@ -50,24 +69,22 @@ int get_info(t_farm *farm, char *line, int *i)
 
     if ((*i)++ == 0)
         farm->ants_amount = ft_atoi(line);
-    else if (ft_strchr(line, '-') == NULL && farm->flag == 0)
+    else if (ft_strchr(line, '-') == NULL)
     {
-        add_room(farm);
         dop = ft_strchr(line, ' ');
-        farm->rooms[farm->room_amount].name = ft_strsub(line, 0, dop - line);
-        if (!is_valid_name(farm->rooms[farm->room_amount].name))
+        if (!is_valid_name(*farm, ft_strsub(line, 0, dop - line)))
             return (0);
-        farm->rooms[farm->room_amount].coord.x = ft_atoi(dop++);
-        farm->rooms[farm->room_amount].coord.y = ft_atoi(ft_strchr(dop, ' '));
-        farm->rooms[farm->room_amount++].links_amount = 0;
-    }
-    else if (ft_strchr(line, '-') != NULL && farm->flag == 0)
-    {
-        if (!find_link(farm, line, 0))
-        {
-            ft_printf("\n\nNO SUCH ROOM OR LINK. ERROR\n");
+        farm->init->id = farm->room_amount;
+        farm->init->name = ft_strsub(line, 0, dop - line);
+        farm->init->coord.x = ft_atoi(dop++);
+        farm->init->coord.y = ft_atoi(ft_strchr(dop, ' '));
+        if (!is_coord(*farm, farm->init))
             return (0);
-        }
+        farm->init->links_amount = 0;
+        farm->init->next = (t_list_room*)malloc(sizeof(t_list_room));
+        farm->init = farm->init->next;
+        farm->init->next = NULL;
+        farm->room_amount++;
     }
     return (1);
 }
@@ -77,7 +94,26 @@ void init(t_farm *farm)
     farm->flag = 0;
     farm->room_amount = 0;
     farm->ways_amount = 0;
-    farm->rooms = (t_room*) malloc(sizeof(t_room) * (farm->room_amount + 1));
+    farm->is_start = 0;
+    farm->is_end = 0;
+    farm->init = (t_list_room*)malloc(sizeof(t_list_room));
+    farm->init->next = NULL;
+    farm->dop = farm->init;
+}
+
+void free_farm(t_farm *farm)
+{
+    int i;
+
+    i = -1;
+    while (++i < farm->room_amount)
+    {
+        free_links(farm->rooms[i].links_amount, farm->rooms[i].links);
+        ft_strdel(&farm->rooms[i].name);
+    }
+    free(farm->rooms);
+    i = -1;
+
 }
 
 int main(void)
@@ -92,27 +128,58 @@ int main(void)
 	fd = open("/Users/ychufist/lem-in/test", O_RDONLY);//"/home/echufy/lem-in/test", O_RDONLY);
 	line = NULL;
     init(&farm);
-	while (get_next_line(fd, &line) > 0)
-	{
-		ft_printf("%s\n", line);
-		if (line[0] != '#')
-		{
-			if (!get_info(&farm, line, &i))
-				return (0);
-		}
-		else if (ft_strstr(line, "start") != NULL)
-			farm.start_room_id = farm.room_amount;
-		else if (ft_strstr(line, "end") != NULL)
-			farm.end_room_id = farm.room_amount;
-		ft_strdel(&line);
-	}
-	if (is_answer(farm))
+    while (get_next_line(fd, &line) > 0)
+    {
+        if (ft_strlen(line) != 0) {
+            write(1, line, ft_strlen(line));
+            write(1, "\n", 1);
+            if (line[0] != '#' && ft_strchr(line, '-') == NULL) // infa o komnatah
+            {
+                if (!get_info(&farm, line, &i))
+                    return (0);
+            }
+            else if (line[0] != '#' && ft_strchr(line, '-') != NULL) // infao sviaziah
+            {
+                if (farm.flag == 0)
+                {
+                    make_room(&farm);// сделали комнаты
+                    farm.flag = 1;
+                }
+                if (!find_link(&farm, line, 0))
+                {
+                    ft_printf("\n\nNO SUCH ROOM OR LINK. ERROR\n");
+                    return (0);
+                }
+            } else if (ft_strstr(line, "start") != NULL)
+            {
+                farm.start_room_id = farm.room_amount;
+                farm.is_start = 1;
+            }
+            else if (ft_strstr(line, "end") != NULL)
+            {
+                farm.end_room_id = farm.room_amount;
+                farm.is_end = 1;
+            }
+            ft_strdel(&line);
+        }
+        else
+        {
+            make_room(&farm);
+            break;
+        }
+    }
+	if (is_valid_map(farm) && is_answer(farm))
     {
         ft_printf("\n");
         farm.ways = (t_list_room**) malloc(sizeof(t_list_room*));
         find_ways(&farm);
+        ft_printf("kolvo ways %d\n", farm.ways_amount);
+        print_ways(farm);
 	    ants = create_ants(farm.ants_amount);
         move_ants(farm, ants);
+
     }
+	free_farm(&farm);
+//    system("leaks lem-in");
 	return (0);
 }

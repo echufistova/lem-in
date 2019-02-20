@@ -1,6 +1,14 @@
-//
-// Created by echufy on 14.02.19.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ways.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ychufist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/19 18:26:31 by ychufist          #+#    #+#             */
+/*   Updated: 2019/02/19 18:26:35 by ychufist         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lem_in.h"
 
@@ -61,8 +69,8 @@ t_list_room *find_ways(t_farm *farm)
                 farm->rooms[is_room(*farm, dop2->links[j])].flag != 2)
             {
                 if (is_room(*farm, way->name) != farm->end_room_id)
-                    farm->rooms[is_room(*farm, way->name)].flag = 1;// просмотрена
-                if (is_room(*farm, dop2->links[j]) != farm->end_room_id)//надо сделать проверку на предыдущую связь
+                    farm->rooms[is_room(*farm, way->name)].flag = 1;
+                if (is_room(*farm, dop2->links[j]) != farm->end_room_id)
                 {
                     way->next = ft_list_room_new(farm->rooms[is_room(*farm, dop2->links[j])]);
                     way = way->next;
@@ -79,4 +87,29 @@ t_list_room *find_ways(t_farm *farm)
     }
     bzero_ways(farm);
     return (NULL);
+}
+
+void print_ways(t_farm farm)
+{
+    int i;
+    t_list_room *ways;
+
+    i = 0;
+
+    while (i < farm.ways_amount)
+    {
+        ways = farm.ways[i];
+        ft_printf("%d) %d : ",  i + 1, ways->size);
+        while (ways)
+        {
+            ft_printf("%s -> ", ways->name);
+            if (ways->next)
+                ways = ways->next;
+            else
+                break;
+        }
+        ft_printf("\n");
+        i++;
+    }
+    ft_printf("\n");
 }

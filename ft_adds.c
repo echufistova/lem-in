@@ -1,42 +1,18 @@
-//
-// Created by echufy on 27.12.18.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_adds.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ychufist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/19 18:22:04 by ychufist          #+#    #+#             */
+/*   Updated: 2019/02/19 18:22:08 by ychufist         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lem_in.h"
 
-void add_room(t_farm *farm)
-{
-    t_room *dop_rooms;
-    int i;
-
-    i = 0;
-    if (farm->room_amount > 0)
-    {
-        i = -1;
-        dop_rooms = (t_room*)malloc(sizeof(t_room) * (farm->room_amount + 1));
-        while (++i < farm->room_amount)
-        {
-            dop_rooms[i].name = ft_strdup(farm->rooms[i].name);
-            dop_rooms[i].coord.x = farm->rooms[i].coord.x;
-            dop_rooms[i].coord.y = farm->rooms[i].coord.y;
-        }
-        i = -1;
-        ft_bzero(farm->rooms, sizeof(t_room *));
-        farm->rooms = (t_room*)malloc(sizeof(t_room) * (farm->room_amount + 1));
-        while (++i < farm->room_amount)
-        {
-            farm->rooms[i].name = ft_strdup(dop_rooms[i].name);
-            farm->rooms[i].coord.x = dop_rooms[i].coord.x;
-            farm->rooms[i].coord.y = dop_rooms[i].coord.y;
-        }
-    }
-    farm->rooms[i].name = NULL;
-    farm->rooms[i].coord.x = 0;
-    farm->rooms[i].coord.y = 0;
-}
-
-
-void freeshka(int size, char **links)
+void free_links(int size, char **links)
 {
     int j;
 
@@ -59,13 +35,13 @@ void add_link(t_farm *farm, char *line, int i)
     dop_room.links_amount = farm->rooms[i].links_amount;
     while (++j < farm->rooms[i].links_amount)
         dop_room.links[j] = ft_strdup(farm->rooms[i].links[j]);
-    freeshka(farm->rooms[i].links_amount, farm->rooms[i].links);
+    free_links(farm->rooms[i].links_amount, farm->rooms[i].links);
     farm->rooms[i].links = (char**)malloc(sizeof(char*) * (farm->rooms[i].links_amount + 1));
     j = -1;
     while (++j < farm->rooms[i].links_amount)
         farm->rooms[i].links[j] = ft_strdup(dop_room.links[j]);
     farm->rooms[i].links[j] = ft_strdup(line);
-    freeshka(dop_room.links_amount, dop_room.links);
+    free_links(dop_room.links_amount, dop_room.links);
     farm->rooms[i].links_amount++;
 }
 
@@ -104,8 +80,15 @@ int is_room(t_farm farm, char *name)
     int i;
 
     i = 0;
+<<<<<<< HEAD
     if (name) {
         while (i < farm.room_amount) {
+=======
+    if (name)
+    {
+        while (i < farm.room_amount)
+        {
+>>>>>>> origin/dop
             if (ft_strcmp(farm.rooms[i].name, name) == 0)
                 return (i);
             i++;
@@ -113,3 +96,18 @@ int is_room(t_farm farm, char *name)
     }
     return (-1);
 }
+
+//int is_room(t_farm farm, int id)
+//{
+//    int i;
+//
+//    i = 0;
+//
+//    while (i < farm.room_amount)
+//    {
+//        if (farm.rooms[i].id == id)
+//            return (i);
+//            i++;
+//        }
+//    return (-1);
+//}
