@@ -91,3 +91,18 @@ int is_room(t_farm farm, char *name)
     }
     return (-1);
 }
+
+//int is_room(t_farm farm, int id)
+//{
+//    int i;
+//
+//    i = 0;
+//
+//    while (i < farm.room_amount)
+//    {
+//        if (farm.rooms[i].id == id)
+//            return (i);
+//            i++;
+//        }
+//    return (-1);
+//}

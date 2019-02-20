@@ -51,7 +51,7 @@ void print_ants_movings(t_ant * ants, int ants_amount) {
             continue;
         tmp_way = ants[i].way;
         j = -1;
-        while(++j < ants[i].currnet_index)
+        while(++j < ants[i].currnet_index)// && tmp_way->next)
             tmp_way = tmp_way->next;
         if(ants[i].currnet_index != 0)
             ft_printf("L%d-%s ", ants[i].number, tmp_way->name);
@@ -82,6 +82,8 @@ void move_ants(t_farm farm, t_ant *ants)
                     check_exp += farm.ways[i]->size - farm.ways[j]->size;
                 if (farm.ants_amount - current_ants_number >= check_exp)
                 {
+//                    if (current_ants_number == 89)
+//                        ft_printf("hello");
                     ants[current_ants_number - 1].way = farm.ways[i];
                     ants[current_ants_number - 1].way_size = ft_list_size(farm.ways[i]) - 1;
                     ants[current_ants_number - 1].currnet_index++;

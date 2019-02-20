@@ -72,7 +72,7 @@ int get_info(t_farm *farm, char *line, int *i)
     else if (ft_strchr(line, '-') == NULL)
     {
         dop = ft_strchr(line, ' ');
-        if (!is_valid_name(ft_strsub(line, 0, dop - line)))
+        if (!is_valid_name(*farm, ft_strsub(line, 0, dop - line)))
             return (0);
         farm->init->id = farm->room_amount;
         farm->init->name = ft_strsub(line, 0, dop - line);
@@ -125,7 +125,7 @@ int main(void)
     t_ant *ants;
 
 	i = 0;
-	fd = 0;//open("/Users/ychufist/lem-in/test", O_RDONLY);//"/home/echufy/lem-in/test", O_RDONLY);
+	fd = open("/Users/ychufist/lem-in/test", O_RDONLY);//"/home/echufy/lem-in/test", O_RDONLY);
 	line = NULL;
     init(&farm);
     while (get_next_line(fd, &line) > 0)
@@ -174,12 +174,12 @@ int main(void)
         farm.ways = (t_list_room**) malloc(sizeof(t_list_room*));
         find_ways(&farm);
         ft_printf("kolvo ways %d\n", farm.ways_amount);
-//        print_ways(farm);
+        print_ways(farm);
 	    ants = create_ants(farm.ants_amount);
         move_ants(farm, ants);
 
     }
 	free_farm(&farm);
-    system("leaks lem-in");
+//    system("leaks lem-in");
 	return (0);
 }

@@ -19,36 +19,30 @@ void write_error(char *s)
     write(1, "\e[0m", 4);
 }
 
-int is_valid_name(const char *name)
+int is_valid_name(t_farm farm, const char *name)
 {
+    int i;
+    t_list_room *dop;
+
+    dop = farm.dop;
+
     if (name[0] == 'L' || name[0] == '#')
     {
-        ft_printf("NAME ERROR\n");
+        write_error("NAME ERROR\n");
         return (0);
+    }
+    i = -1;
+    while (dop->next)
+    {
+        if (ft_strcmp(dop->name, name) == 0)
+        {
+            write_error("THE SAME ROOM NAME IS PRESENT");
+            return (0);
+        }
+        dop = dop->next;
     }
     return (1);
 }
-
-//int is_valid_name(t_farm farm, const char *name)
-//{
-//    int i;
-//
-//    if (name[0] == 'L' || name[0] == '#')
-//    {
-//        write_error("NAME ERROR\n");
-//        return (0);
-//    }
-//    i = -1;
-//    while (++i < farm.room_amount)
-//    {
-//        if (ft_strcmp(farm.rooms[i].name, name) == 0)
-//        {
-//            write_error("THE SAME ROOM NAME IS PRESENT");
-//            return (0);
-//        }
-//    }
-//    return (1);
-//}
 
 int is_valid_map(t_farm farm)
 {
