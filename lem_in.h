@@ -19,24 +19,24 @@
 
 typedef struct 		s_point
 {
-	int x;
-	int y;
+    int x;
+    int y;
 }					t_point;
 
 typedef struct		s_room
 {
-	int 		id;
-	char		*name;
-	t_point		coord;
-	char		**links;
+    int 		id;
+    char		*name;
+    t_point		coord;
+    char		**links;
 //    int         **links;
-	int         links_amount;
-	int         flag;
+    int         links_amount;
+    int         flag;
 }					t_room;
 
 typedef struct      s_list_room
 {
-	int id;
+    int         id;
     char		*name;
     t_point		coord;
     char		**links;
@@ -54,20 +54,20 @@ typedef struct		s_farm
     int             flag;
     int             start_room_id;
     int             end_room_id;
-	int             is_start;
-	int             is_end;
-	t_list_room		*init;
-	t_list_room		*dop;
+    int             is_start;
+    int             is_end;
+    t_list_room		*init;
+    t_list_room		*dop;
     t_room			*rooms;
     t_list_room     **ways;
 }					t_farm;
 
 typedef struct		s_ant
 {
-	int number;
-	t_list_room     *way;
-	int way_size;
-	int currnet_index;
+    int number;
+    t_list_room     *way;
+    int way_size;
+    int currnet_index;
 }					t_ant;
 
 void add_link(t_farm *farm, char *line, int i);

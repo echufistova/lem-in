@@ -50,7 +50,7 @@ int is_valid_map(t_farm farm)
     {
         ft_printf("NAME ERROR\n");
         return (0);
-    }
+    }/////
     if (farm.is_start == 0)
     {
         write_error("THERE IS NO START ROOM");
@@ -76,7 +76,7 @@ int is_coord(t_farm farm, t_list_room *room)
     while (dop2->next)
     {
         if (dop2->coord.x == room->coord.x &&
-                dop2->coord.y == room->coord.y)
+            dop2->coord.y == room->coord.y)
         {
             write_error("THE ROOM WITH THE SAME COORD IS PRESENT");
             return (0);

@@ -33,7 +33,8 @@ int is_answer(t_farm farm)
         {
             if (!ft_list_room_find(dop, dop2->links[j]))
             {
-                room_list->next = ft_list_room_new(farm.rooms[is_room(farm, dop2->links[j])]);
+                room_list->next = ft_list_room_new(farm.rooms[is_room(farm,
+                                                          dop2->links[j])]);
                 room_list = room_list->next;
             }
         }
@@ -118,27 +119,27 @@ void free_farm(t_farm *farm)
 
 int main(void)
 {
-	int i;
-	int fd;
-	char *line;
-	t_farm farm;
+    int i;
+    int fd;
+    char *line;
+    t_farm farm;
     t_ant *ants;
 
-	i = 0;
-	fd = open("/Users/ychufist/lem-in/test", O_RDONLY);//"/home/echufy/lem-in/test", O_RDONLY);
-	line = NULL;
+    i = 0;
+    fd = open("/Users/ychufist/lem-in/test", O_RDONLY);
+    line = NULL;
     init(&farm);
     while (get_next_line(fd, &line) > 0)
     {
         if (ft_strlen(line) != 0) {
             write(1, line, ft_strlen(line));
             write(1, "\n", 1);
-            if (line[0] != '#' && ft_strchr(line, '-') == NULL) // infa o komnatah
+            if (line[0] != '#' && ft_strchr(line, '-') == NULL)
             {
                 if (!get_info(&farm, line, &i))
                     return (0);
             }
-            else if (line[0] != '#' && ft_strchr(line, '-') != NULL) // infao sviaziah
+            else if (line[0] != '#' && ft_strchr(line, '-') != NULL)
             {
                 if (farm.flag == 0)
                 {
@@ -168,18 +169,18 @@ int main(void)
             break;
         }
     }
-	if (is_valid_map(farm) && is_answer(farm))
+    if (is_valid_map(farm) && is_answer(farm))
     {
         ft_printf("\n");
         farm.ways = (t_list_room**) malloc(sizeof(t_list_room*));
         find_ways(&farm);
         ft_printf("kolvo ways %d\n", farm.ways_amount);
         print_ways(farm);
-	    ants = create_ants(farm.ants_amount);
+        ants = create_ants(farm.ants_amount);
         move_ants(farm, ants);
 
     }
-	free_farm(&farm);
+    free_farm(&farm);
 //    system("leaks lem-in");
-	return (0);
+    return (0);
 }
