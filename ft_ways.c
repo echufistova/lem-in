@@ -88,6 +88,7 @@ t_list_room *find_ways(t_farm *farm)
         }
         dop2 = dop2->next;
     }
+    ft_lstrm_del(&way);
     bzero_ways(farm);
     return (NULL);
 }

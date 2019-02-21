@@ -47,6 +47,7 @@ int is_answer(t_farm farm)
 void make_room(t_farm *farm)
 {
     int i;
+    t_list_room *dop;
 
     i = 0;
     farm->rooms = (t_room*)malloc(sizeof(t_room) * farm->room_amount);
@@ -57,7 +58,10 @@ void make_room(t_farm *farm)
         farm->rooms[i].coord.x = farm->dop->coord.x;
         farm->rooms[i].coord.y = farm->dop->coord.y;
         farm->rooms[i].links_amount = farm->dop->links_amount;
-        farm->dop = farm->dop->next;
+        dop = farm->dop->next;
+        free((farm->dop)->name);
+        free(farm->dop);
+        farm->dop = dop;
         i++;
     }
 }
@@ -66,14 +70,17 @@ void make_room(t_farm *farm)
 int get_info(t_farm *farm, char *line, int *i)
 {
     char *dop;
+    char *dop2;
 
     if ((*i)++ == 0)
         farm->ants_amount = ft_atoi(line);
     else if (ft_strchr(line, '-') == NULL)
     {
         dop = ft_strchr(line, ' ');
-        if (!is_valid_name(*farm, ft_strsub(line, 0, dop - line)))
+        dop2 = ft_strsub(line, 0, dop - line);
+        if (!is_valid_name(*farm, dop2))
             return (0);
+        ft_strdel(&dop2);
         farm->init->id = farm->room_amount;
         farm->init->name = ft_strsub(line, 0, dop - line);
         farm->init->coord.x = ft_atoi(dop++);
@@ -106,12 +113,16 @@ void free_farm(t_farm *farm)
     int i;
 
     i = -1;
-    while (++i < farm->room_amount)
-    {
+//    while (++i < farm->room_amount)
+//    {
 //        free_links(farm->rooms[i].links_amount, farm->rooms[i].links);
-        ft_strdel(&farm->rooms[i].name);
+//        ft_strdel(&farm->rooms[i].name);
+//    }
+//    free(farm->rooms);
+    while (++i < farm->ways_amount)
+    {
+        ft_lstrm_del(&farm->ways[i]);
     }
-    free(farm->rooms);
 
 }
 
@@ -188,7 +199,18 @@ int main(void)
         ants = create_ants(farm.ants_amount);
         move_ants(farm, ants);
     }
-    free_farm(&farm);
-//    system("leaks lem-in");
+    i = -1;
+    while (++i < farm.ways_amount)
+    {
+        ft_lstrm_del(&farm.ways[i]);
+    }
+    i = -1;
+    while (++i < farm.room_amount)
+    {
+        ft_strdel(&farm.rooms[i].name);
+    }
+//    free(farm.rooms);
+//    free_farm(&farm);
+    system("leaks lem-in");
     return (0);
 }

@@ -59,3 +59,31 @@ int ft_list_size(t_list_room *room_list)
     }
     return (i);
 }
+
+void	ft_lstrm_delone(t_list_room **alst)
+{
+    t_list_room	*dop;
+
+    if (alst && *alst)
+    {
+        dop = (*alst)->next;
+//        free((*alst)->name);
+        free(*alst);
+        *alst = NULL;
+    }
+}
+
+void	ft_lstrm_del(t_list_room **alst)
+{
+    t_list_room *dop;
+
+    if (alst && *alst)
+    {
+        while ((*alst))
+        {
+            dop = (*alst)->next;
+            ft_lstrm_delone(alst);
+            *alst = dop;
+        }
+    }
+}

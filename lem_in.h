@@ -28,7 +28,6 @@ typedef struct		s_room
     int         id;
     char		*name;
     t_point		coord;
-//    char		**links;
     int         *links;
     int         links_amount;
     int         flag;
@@ -39,7 +38,6 @@ typedef struct      s_list_room
     int         id;
     char		*name;
     t_point		coord;
-//    char		**links;
     int         *links;
     int         links_amount;
     int         size;
@@ -88,5 +86,7 @@ int is_valid_map(t_farm farm);
 int is_coord(t_farm farm, t_list_room *room);
 void write_error(char *s);
 void free_links(int size, int *links);
+void	ft_lstrm_del(t_list_room **alst);
+
 
 #endif
