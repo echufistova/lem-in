@@ -25,6 +25,7 @@ typedef struct 		s_point
 
 typedef struct		s_room
 {
+    int         id;
     char		*name;
     t_point		coord;
     char		**links;

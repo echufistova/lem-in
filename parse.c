@@ -53,6 +53,7 @@ void make_room(t_farm *farm)
     farm->rooms = (t_room*)malloc(sizeof(t_room) * farm->room_amount);
     while (farm->dop)
     {
+        farm->rooms[i].id = farm->room_amount;
         farm->rooms[i].name = farm->dop->name;
         farm->rooms[i].coord.x = farm->dop->coord.x;
         farm->rooms[i].coord.y = farm->dop->coord.y;
@@ -111,11 +112,21 @@ void free_farm(t_farm *farm)
         ft_strdel(&farm->rooms[i].name);
     }
     free(farm->rooms);
-    i = -1;
 
 }
 
-int main(void)
+void bonuses(t_farm farm, const char *b1, const char *b2)
+{
+    if (b1[0] == '-' && b1[1] == 'c')//to turn on colors
+        ft_printf("colors\n");
+    if (b2[0] == '-' && b2[1] == 'w')//to turn on colors
+    {
+        print_ways(farm);
+    }
+
+}
+
+int main(int ac, char **av)
 {
     int i;
     int fd;
@@ -124,7 +135,7 @@ int main(void)
     t_ant *ants;
 
     i = 0;
-    fd = open("/Users/ychufist/lem-in/test", O_RDONLY);
+    fd = 0;//open("/Users/ychufist/lem-in/test", O_RDONLY);
     line = NULL;
     init(&farm);
     while (get_next_line(fd, &line) > 0)
@@ -172,8 +183,8 @@ int main(void)
         ft_printf("\n");
         farm.ways = (t_list_room**) malloc(sizeof(t_list_room*));
         find_ways(&farm);
+        bonuses(farm, av[1], av[2]);
         ft_printf("kolvo ways %d\n", farm.ways_amount);
-        print_ways(farm);
         ants = create_ants(farm.ants_amount);
         move_ants(farm, ants);
 
