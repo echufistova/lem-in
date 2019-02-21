@@ -26,15 +26,14 @@ int is_answer(t_farm farm)
     dop2 = room_list;
     while (dop2)
     {
-        if (is_room(farm, dop2->name) == farm.end_room_id)
+        if (dop2->id == farm.end_room_id)
             return (1);
         j = -1;
         while (++j < dop2->links_amount)
         {
             if (!ft_list_room_find(dop, dop2->links[j]))
             {
-                room_list->next = ft_list_room_new(farm.rooms[is_room(farm,
-                                                          dop2->links[j])]);
+                room_list->next = ft_list_room_new(farm.rooms[dop2->links[j]]);
                 room_list = room_list->next;
             }
         }
@@ -53,8 +52,8 @@ void make_room(t_farm *farm)
     farm->rooms = (t_room*)malloc(sizeof(t_room) * farm->room_amount);
     while (farm->dop)
     {
-        farm->rooms[i].id = farm->room_amount;
-        farm->rooms[i].name = farm->dop->name;
+        farm->rooms[i].id = farm->dop->id;
+        farm->rooms[i].name = ft_strdup(farm->dop->name);
         farm->rooms[i].coord.x = farm->dop->coord.x;
         farm->rooms[i].coord.y = farm->dop->coord.y;
         farm->rooms[i].links_amount = farm->dop->links_amount;
@@ -75,6 +74,7 @@ int get_info(t_farm *farm, char *line, int *i)
         dop = ft_strchr(line, ' ');
         if (!is_valid_name(*farm, ft_strsub(line, 0, dop - line)))
             return (0);
+        farm->init->id = farm->room_amount;
         farm->init->name = ft_strsub(line, 0, dop - line);
         farm->init->coord.x = ft_atoi(dop++);
         farm->init->coord.y = ft_atoi(ft_strchr(dop, ' '));
@@ -108,7 +108,7 @@ void free_farm(t_farm *farm)
     i = -1;
     while (++i < farm->room_amount)
     {
-        free_links(farm->rooms[i].links_amount, farm->rooms[i].links);
+//        free_links(farm->rooms[i].links_amount, farm->rooms[i].links);
         ft_strdel(&farm->rooms[i].name);
     }
     free(farm->rooms);
@@ -126,7 +126,7 @@ void bonuses(t_farm farm, const char *b1, const char *b2)
 
 }
 
-int main(int ac, char **av)
+int main(void)
 {
     int i;
     int fd;
@@ -135,7 +135,7 @@ int main(int ac, char **av)
     t_ant *ants;
 
     i = 0;
-    fd = 0;//open("/Users/ychufist/lem-in/test", O_RDONLY);
+    fd = open("/Users/ychufist/lem-in/test", O_RDONLY);
     line = NULL;
     init(&farm);
     while (get_next_line(fd, &line) > 0)
@@ -183,11 +183,10 @@ int main(int ac, char **av)
         ft_printf("\n");
         farm.ways = (t_list_room**) malloc(sizeof(t_list_room*));
         find_ways(&farm);
-        bonuses(farm, av[1], av[2]);
+//        bonuses(farm, av[1], av[2]);
         ft_printf("kolvo ways %d\n", farm.ways_amount);
         ants = create_ants(farm.ants_amount);
         move_ants(farm, ants);
-
     }
     free_farm(&farm);
 //    system("leaks lem-in");

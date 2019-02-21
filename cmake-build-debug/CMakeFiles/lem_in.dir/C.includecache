@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/ychufist/lem-in/ft_ants.c
+/Users/ychufist/lem-in/ft_list_room.c
 lem_in.h
 /Users/ychufist/lem-in/lem_in.h
 
@@ -73,4 +73,8 @@ ctype.h
 -
 stdint.h
 -
+
+/Users/ychufist/lem-in/parse.c
+lem_in.h
+/Users/ychufist/lem-in/lem_in.h
 

@@ -28,17 +28,19 @@ typedef struct		s_room
     int         id;
     char		*name;
     t_point		coord;
-    char		**links;
-//    int         **links;
+//    char		**links;
+    int         *links;
     int         links_amount;
     int         flag;
 }					t_room;
 
 typedef struct      s_list_room
 {
+    int         id;
     char		*name;
     t_point		coord;
-    char		**links;
+//    char		**links;
+    int         *links;
     int         links_amount;
     int         size;
     struct s_list_room	*prev;
@@ -74,7 +76,7 @@ int is_room(t_farm farm, char *name);
 //int is_room(t_farm farm, int id);
 int find_link(t_farm *farm, char *line, int k);
 t_list_room *ft_list_room_new(t_room room);
-int ft_list_room_find(t_list_room *room_list, char *name);
+int ft_list_room_find(t_list_room *room_list, int id);
 int ft_list_size(t_list_room *room_list);
 int is_valid_name(t_farm farm, const char *name);
 void get_way(t_farm *farm, t_list_room *way);
@@ -85,6 +87,6 @@ void print_ways(t_farm farm);
 int is_valid_map(t_farm farm);
 int is_coord(t_farm farm, t_list_room *room);
 void write_error(char *s);
-void free_links(int size, char **links);
+void free_links(int size, int *links);
 
 #endif

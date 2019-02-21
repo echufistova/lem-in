@@ -13,15 +13,15 @@
 
 #include "lem_in.h"
 
-void free_links(int size, char **links)
+void free_links(int size, int *links)
 {
     int j;
 
     j = -1;
     while (++j < size)
     {
-        ft_bzero(links[j], sizeof(char*));
-        free(links[j]);
+        ft_bzero(links, sizeof(int*));
+//        free(links[j]);
     }
     free(links);
 }
@@ -32,18 +32,17 @@ void add_link(t_farm *farm, char *line, int i)
     t_room dop_room;
 
     j = -1;
-    dop_room.links = (char**)malloc(sizeof(char*) *
-            (farm->rooms[i].links_amount));
+    dop_room.links = (int*)malloc(sizeof(int) * (farm->rooms[i].links_amount));
     dop_room.links_amount = farm->rooms[i].links_amount;
     while (++j < farm->rooms[i].links_amount)
-        dop_room.links[j] = ft_strdup(farm->rooms[i].links[j]);
+        dop_room.links[j] = farm->rooms[i].links[j];
     free_links(farm->rooms[i].links_amount, farm->rooms[i].links);
-    farm->rooms[i].links = (char**)malloc(sizeof(char*) *
+    farm->rooms[i].links = (int*)malloc(sizeof(int) *
             (farm->rooms[i].links_amount + 1));
     j = -1;
     while (++j < farm->rooms[i].links_amount)
-        farm->rooms[i].links[j] = ft_strdup(dop_room.links[j]);
-    farm->rooms[i].links[j] = ft_strdup(line);
+        farm->rooms[i].links[j] = dop_room.links[j];
+    farm->rooms[i].links[j] = is_room(*farm, line);
     free_links(dop_room.links_amount, dop_room.links);
     farm->rooms[i].links_amount++;
 }
@@ -62,10 +61,10 @@ int find_link(t_farm *farm, char *line, int k)
     if (ij.x > -1 && is_room(*farm, dop) > -1)
     {
         while (++ij.y < farm->rooms[ij.x].links_amount)
-            if (ft_strcmp(farm->rooms[ij.x].links[ij.y], dop) == 0)
+            if (farm->rooms[ij.x].links[ij.y] == is_room(*farm, dop)) // можут не сработать тут
                 return (1);
         if ((ij.y == farm->rooms[ij.x].links_amount ||
-             ft_strlen(farm->rooms[ij.x].links[ij.y]) == 0))
+             ft_intlength(farm->rooms[ij.x].links[ij.y]) == 0))
             add_link(farm, dop, ij.x);
         if (++k < 2)
         {

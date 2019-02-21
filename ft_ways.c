@@ -37,16 +37,15 @@ void get_way(t_farm *farm, t_list_room *way)
             farm->start_room_id]);
     dop = farm->ways[farm->ways_amount];
     rm = way->prev;
-    while (ft_strcmp(rm->name, farm->rooms[farm->end_room_id].name) != 0)
+    while (rm->id!= farm->end_room_id)
     {
-        farm->ways[farm->ways_amount]->next = ft_list_room_new(farm->rooms[
-                is_room(*farm, rm->name)]);
+        farm->ways[farm->ways_amount]->next = ft_list_room_new(farm->rooms[rm->id]);
         farm->ways[farm->ways_amount] = farm->ways[farm->ways_amount]->next;
-        farm->rooms[is_room(*farm, rm->name)].flag = 2;
+        farm->rooms[rm->id].flag = 2;
         rm = rm->prev;
     }
     farm->ways[farm->ways_amount]->next = ft_list_room_new(farm->rooms[
-            is_room(*farm, rm->name)]);
+            rm->id]);
     farm->ways[farm->ways_amount] = dop;
     farm->ways[farm->ways_amount]->size = ft_list_size(farm->ways[
             farm->ways_amount]) - 1;
@@ -69,19 +68,17 @@ t_list_room *find_ways(t_farm *farm)
         j = -1;
         while (++j < dop2->links_amount)
         {
-            if (farm->rooms[is_room(*farm, dop2->links[j])].flag != 1 &&
-                farm->rooms[is_room(*farm, dop2->links[j])].flag != 2)
+            if (farm->rooms[dop2->links[j]].flag != 1 &&
+                farm->rooms[dop2->links[j]].flag != 2)
             {
-                if (is_room(*farm, way->name) != farm->end_room_id &&
-                is_room(*farm, way->name) != -1)
-                    farm->rooms[is_room(*farm, way->name)].flag = 1;
-                if (is_room(*farm, dop2->links[j]) != farm->end_room_id)
+                if (way->id != farm->end_room_id && way->id != -1)
+                    farm->rooms[way->id].flag = 1;
+                if (dop2->links[j] != farm->end_room_id)
                 {
-                    way->next = ft_list_room_new(farm->rooms[is_room(*farm,
-                                                             dop2->links[j])]);
+                    way->next = ft_list_room_new(farm->rooms[dop2->links[j]]);
                     way = way->next;
                     way->prev = dop2;
-                    if (is_room(*farm, way->name) == farm->start_room_id)
+                    if (way->id == farm->start_room_id)
                     {
                         get_way(farm, dop);
                         return (way);
