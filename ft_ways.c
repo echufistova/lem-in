@@ -50,6 +50,7 @@ void get_way(t_farm *farm, t_list_room *way)
     farm->ways[farm->ways_amount]->size = ft_list_size(farm->ways[
             farm->ways_amount]) - 1;
     farm->ways_amount++;
+    ft_lstrm_del(&way);
     find_ways(farm);
 }
 
