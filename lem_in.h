@@ -53,6 +53,7 @@ typedef struct		s_farm
     int             ways_amount;
     int             flag;
     int             col;
+    int             lines;
     int             start_room_id;
     int             end_room_id;
     char            **colors;
@@ -81,7 +82,7 @@ int is_valid_name(t_farm farm, const char *name);
 void get_way(t_farm *farm, t_list_room *way, int flag);
 t_list_room *find_ways(t_farm *farm, int flag);
 t_ant *create_ants(int ants_amount);
-void move_ants(t_farm farm, t_ant *ants);
+int move_ants(t_farm farm, t_ant *ants);
 void print_ways(t_farm farm);
 int is_valid_map(t_farm farm);
 int is_coord(t_farm farm, t_list_room *room);

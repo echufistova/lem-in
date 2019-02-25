@@ -116,6 +116,7 @@ void print_ways(t_farm farm)
 
     i = 0;
 
+    ft_printf("Amount of ways: %d\n", farm.ways_amount);
     while (i < farm.ways_amount)
     {
         ways = farm.ways[i];

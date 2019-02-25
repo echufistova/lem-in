@@ -14,7 +14,7 @@
 
 void write_error(char *s)
 {
-    write(1, "\e[31m", 5);
+    write(1, "\e[34m", 5);
     ft_printf("%s\n", s);
     write(1, "\e[0m", 4);
 }

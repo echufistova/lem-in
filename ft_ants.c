@@ -90,7 +90,7 @@ int get_ants(t_farm farm, t_ant *ants, int current_ants_number)
     return (current_ants_number);
 }
 
-void move_ants(t_farm farm, t_ant *ants)
+int move_ants(t_farm farm, t_ant *ants)
 {
     int j;
     int counter;
@@ -109,5 +109,5 @@ void move_ants(t_farm farm, t_ant *ants)
         while(++j < current_ants_number - 1)
             ants[j].currnet_index++;
     }
-    ft_printf("\nlines - %d\n", counter);
+    return (counter);
 }
