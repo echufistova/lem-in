@@ -133,33 +133,41 @@ void free_farm(t_farm *farm)
     int i;
 
     i = -1;
-//    while (++i < farm->room_amount)
-//    {
-//        free_links(farm->rooms[i].links_amount, farm->rooms[i].links);
-//        ft_strdel(&farm->rooms[i].name);
-//    }
-//    free(farm->rooms);
-    while (++i < farm->ways_amount)
+    if (farm->col != -1)
     {
-        ft_lstrm_del(&farm->ways[i]);
+        while (++i < 5)
+        {
+            ft_bzero(farm->colors[i], sizeof(char *));
+        }
+        free(farm->colors);
     }
-
+    if (farm->room_amount > 0)
+    {
+        i = -1;
+        while (++i < farm->room_amount)
+        {
+            ft_memdel((void**)&(farm->rooms[i].links));
+            ft_memdel((void**)&(farm->rooms[i].name));
+        }
+        ft_memdel((void**)&farm->rooms);
+    }
 }
 
-void bonus_ways(t_farm farm, char **av)
+void work(t_farm *farm, char **av)
 {
-    if ((av[1] && av[1][0] == '-' && av[1][1] == 'w') ||
-        (av[2] && av[2][0] == '-' && av[2][1] == 'w') ||
-        (av[3] && av[3][0] == '-' && av[3][1] == 'w'))//to turn on ways
-        print_ways(farm);
-}
+    t_ant *ants;
 
-void bonus_lines(t_farm farm, char **av)
-{
-    if ((av[1] && av[1][0] == '-' && av[1][1] == 'l') ||
-        (av[2] && av[2][0] == '-' && av[2][1] == 'l') ||
-        (av[3] && av[3][0] == '-' && av[3][1] == 'l'))//to turn on ways
-        ft_printf("Here lines : %d\n", farm.lines);
+    if (is_valid_map(*farm) && is_answer(*farm))
+    {
+        ft_printf("\n");
+        farm->ways = (t_list_room**) malloc(sizeof(t_list_room*));
+        find_ways(farm, 0);
+        bonus_ways(*farm, av);
+        ants = create_ants(farm->ants_amount);
+        farm->lines = move_ants(*farm, ants);
+        bonus_lines(*farm, av);
+    }
+    free_farm(farm);
 }
 
 int main(int ac, char **av)
@@ -168,7 +176,6 @@ int main(int ac, char **av)
     int fd;
     char *line;
     t_farm farm;
-    t_ant *ants;
 
     i = 0;
     fd = 0;//open("/Users/ychufist/lem-in/test", O_RDONLY);
@@ -189,7 +196,7 @@ int main(int ac, char **av)
             {
                 if (farm.flag == 0)
                 {
-                    make_room(&farm);// сделали комнаты
+                    make_room(&farm);
                     farm.flag = 1;
                 }
                 if (!find_link(&farm, line, 0))
@@ -205,19 +212,8 @@ int main(int ac, char **av)
             ft_strdel(&line);
         }
     }
-    if (is_valid_map(farm) && is_answer(farm))
-    {
-        ft_printf("\n");
-        farm.ways = (t_list_room**) malloc(sizeof(t_list_room*));
-        find_ways(&farm, 0);
-        bonus_ways(farm, av);
-        ants = create_ants(farm.ants_amount);
-        farm.lines = move_ants(farm, ants);
-        bonus_lines(farm, av);
-    }
-    ft_printf("\nIf you want colorful output, enter '-c' after name of file\n");
-    ft_printf("If you want to see all possible ways, enter '-w' after name of file\n");
-    ft_printf("If you want to see amount of lines in output, enter '-l' after name of file\n");
+    work(&farm, av);
+    the_end();
 //    system("leaks lem-in");
     return (0 * ac);
 }

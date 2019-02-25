@@ -87,6 +87,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/lem_in.dir/ft_list_room.c.o"
   "CMakeFiles/lem_in.dir/ft_ways.c.o"
   "CMakeFiles/lem_in.dir/parse.c.o"
+  "CMakeFiles/lem_in.dir/ft_bonuses.c.o"
   "lem_in.pdb"
   "lem_in"
 )

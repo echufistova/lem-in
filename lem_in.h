@@ -89,6 +89,9 @@ int is_coord(t_farm farm, t_list_room *room);
 void write_error(char *s);
 void free_links(int size, int *links);
 void	ft_lstrm_del(t_list_room **alst);
+void bonus_ways(t_farm farm, char **av);
+void bonus_lines(t_farm farm, char **av);
+void the_end(void);
 
 
 #endif
