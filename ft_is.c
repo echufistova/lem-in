@@ -21,7 +21,6 @@ void write_error(char *s)
 
 int is_valid_name(t_farm farm, const char *name)
 {
-    int i;
     t_list_room *dop;
 
     dop = farm.dop;
@@ -31,7 +30,6 @@ int is_valid_name(t_farm farm, const char *name)
         write_error("NAME ERROR\n");
         return (0);
     }
-    i = -1;
     while (dop->next)
     {
         if (ft_strcmp(dop->name, name) == 0)
@@ -71,10 +69,8 @@ int is_valid_map(t_farm farm)
 
 int is_coord(t_farm farm, t_list_room *room)
 {
-    int i;
     t_list_room *dop2;
 
-    i = -1;
     dop2 = farm.dop;
     while (dop2->next)
     {
