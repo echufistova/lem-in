@@ -98,19 +98,26 @@ int get_info(t_farm *farm, char *line, int *i)
     return (1);
 }
 
-void init(t_farm *farm)
+void init(t_farm *farm, const char *b1, const char *b2)
 {
-    int		i;
+    int i;
 
     i = 0;
-    farm->colors = (char **)ft_memalloc(sizeof(char *) * 5);
-    while (i < 5)
-        farm->colors[i++] = (char *)ft_memalloc(sizeof(char) * 8);
-    farm->colors[0] = ft_strcpy(farm->colors[0], "\e[91m");
-    farm->colors[1] = ft_strcpy(farm->colors[1], "\e[92m");
-    farm->colors[2] = ft_strcpy(farm->colors[2], "\e[93m");
-    farm->colors[3] = ft_strcpy(farm->colors[3], "\e[94m");
-    farm->colors[4] = ft_strcpy(farm->colors[4], "\e[95m");
+    if ((b1 && b1[0] == '-' && b1[1] == 'c') ||
+        (b2 && b2[0] == '-' && b2[1] == 'c'))
+    {
+        farm->colors = (char **) ft_memalloc(sizeof(char *) * 5);
+        while (i < 5)
+            farm->colors[i++] = (char *) ft_memalloc(sizeof(char) * 8);
+        farm->colors[0] = ft_strcpy(farm->colors[0], "\e[91m");
+        farm->colors[1] = ft_strcpy(farm->colors[1], "\e[92m");
+        farm->colors[2] = ft_strcpy(farm->colors[2], "\e[93m");
+        farm->colors[3] = ft_strcpy(farm->colors[3], "\e[94m");
+        farm->colors[4] = ft_strcpy(farm->colors[4], "\e[95m");
+        farm->col = 0;
+    }
+    else
+        farm->col = -1;
     farm->flag = 0;
     farm->room_amount = 0;
     farm->ways_amount = 0;
@@ -119,7 +126,6 @@ void init(t_farm *farm)
     farm->init = (t_list_room*)malloc(sizeof(t_list_room));
     farm->init->next = NULL;
     farm->dop = farm->init;
-    farm->col = 0;
 }
 
 void free_farm(t_farm *farm)
@@ -140,18 +146,13 @@ void free_farm(t_farm *farm)
 
 }
 
-void bonuses(t_farm farm, const char *b1, const char *b2)
+void bonuses(t_farm *farm, const char *b1, const char *b2)
 {
-    if (b1[0] == '-' && b1[1] == 'c')//to turn on colors
-        ft_printf("colors\n");
-    if (b2[0] == '-' && b2[1] == 'w')//to turn on colors
-    {
-        print_ways(farm);
-    }
-
+    if ((b1 && b1[0] == '-' && b1[1] == 'w') || (b2 && b2[0] == '-' && b2[1] == 'w'))//to turn on ways
+        print_ways(*farm);
 }
 
-int main(void)
+int main(int ac, char **av)
 {
     int i;
     int fd;
@@ -162,7 +163,7 @@ int main(void)
     i = 0;
     fd = open("/Users/ychufist/lem-in/test", O_RDONLY);
     line = NULL;
-    init(&farm);
+    init(&farm, av[1], av[2]);
     while (get_next_line(fd, &line) > 0)
     {
         if (ft_strlen(line) != 0) {
@@ -197,11 +198,14 @@ int main(void)
         ft_printf("\n");
         farm.ways = (t_list_room**) malloc(sizeof(t_list_room*));
         find_ways(&farm, 0);
-//        bonuses(farm, av[1], av[2]);
+        if (ac > 1)
+            bonuses(&farm, av[1], av[2]);
         ft_printf("kolvo ways %d\n", farm.ways_amount);
         ants = create_ants(farm.ants_amount);
         move_ants(farm, ants);
     }
+    ft_printf("If you want colorful output, enter '-c' after name of file\n");
+    ft_printf("If you want to see all posible ways, enter '-w' after name of file\n");
 //    system("leaks lem-in");
     return (0);
 }

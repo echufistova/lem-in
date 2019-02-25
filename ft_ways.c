@@ -49,7 +49,8 @@ void get_way(t_farm *farm, t_list_room *way, int flag)
     farm->ways[farm->ways_amount] = dop;
     farm->ways[farm->ways_amount]->size = ft_list_size(farm->ways[
             farm->ways_amount]) - 1;
-    farm->ways[farm->ways_amount]->color = farm->colors[farm->col++];
+    if (farm->col != -1)
+        farm->ways[farm->ways_amount]->color = farm->colors[farm->col++];
     if (farm->col == 5)
         farm->col = 0;
     farm->ways_amount++;
