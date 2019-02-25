@@ -50,7 +50,7 @@ int is_valid_map(t_farm farm)
     {
         ft_printf("NAME ERROR\n");
         return (0);
-    }/////
+    }
     if (farm.start_room_id == -1)
     {
         write_error("THERE IS NO START ROOM");

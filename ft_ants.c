@@ -55,7 +55,11 @@ void print_ants_movings(t_ant * ants, int ants_amount) {
         while(++j < ants[i].currnet_index)
             tmp_way = tmp_way->next;
         if(ants[i].currnet_index != 0)
+        {
+            write(1, ants[i].way->color, 5);
             ft_printf("L%d-%s ", ants[i].number, tmp_way->name);
+            write(1, "\e[0m", 4);
+        }
     }
     ft_printf("\n");
 }

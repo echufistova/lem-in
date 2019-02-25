@@ -41,6 +41,7 @@ typedef struct      s_list_room
     int         *links;
     int         links_amount;
     int         size;
+    char        *color;
     struct s_list_room	*prev;
     struct s_list_room	*next;
 }                   t_list_room;
@@ -51,8 +52,10 @@ typedef struct		s_farm
     int             room_amount;
     int             ways_amount;
     int             flag;
+    int             col;
     int             start_room_id;
     int             end_room_id;
+    char            **colors;
     t_list_room		*init;
     t_list_room		*dop;
     t_room			*rooms;

@@ -100,6 +100,17 @@ int get_info(t_farm *farm, char *line, int *i)
 
 void init(t_farm *farm)
 {
+    int		i;
+
+    i = 0;
+    farm->colors = (char **)ft_memalloc(sizeof(char *) * 5);
+    while (i < 5)
+        farm->colors[i++] = (char *)ft_memalloc(sizeof(char) * 8);
+    farm->colors[0] = ft_strcpy(farm->colors[0], "\e[91m");
+    farm->colors[1] = ft_strcpy(farm->colors[1], "\e[92m");
+    farm->colors[2] = ft_strcpy(farm->colors[2], "\e[93m");
+    farm->colors[3] = ft_strcpy(farm->colors[3], "\e[94m");
+    farm->colors[4] = ft_strcpy(farm->colors[4], "\e[95m");
     farm->flag = 0;
     farm->room_amount = 0;
     farm->ways_amount = 0;
@@ -108,6 +119,7 @@ void init(t_farm *farm)
     farm->init = (t_list_room*)malloc(sizeof(t_list_room));
     farm->init->next = NULL;
     farm->dop = farm->init;
+    farm->col = 0;
 }
 
 void free_farm(t_farm *farm)
