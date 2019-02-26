@@ -93,5 +93,4 @@ void bonus_ways(t_farm farm, char **av);
 void bonus_lines(t_farm farm, char **av);
 void the_end(void);
 
-
 #endif

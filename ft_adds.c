@@ -47,6 +47,7 @@ void add_link(t_farm *farm, char *line, int i)
     farm->rooms[i].links_amount++;
 }
 
+
 int find_link(t_farm *farm, char *line, int k)
 {
     t_point ij;

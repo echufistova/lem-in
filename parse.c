@@ -68,6 +68,30 @@ void make_room(t_farm *farm)
     }
 }
 
+int get_cood(t_farm *farm, char **line, int n)
+{
+    int i;
+    char *dopline;
+
+    i = 0;
+    dopline = *line;
+    while ((*line)[i] == ' ')
+        i++;
+    while ((*line)[i] != ' ' && (*line)[i] != '\0')
+    {
+        if (!ft_isdigit((*line)[i++]))
+        {
+            write_error("INCORRECT INPUT. ERROR");
+            return (0);
+        }
+    }
+    (*line)++;
+    if (n == 1)
+        farm->init->coord.x = ft_atoi(dopline);
+    else if (n == 2)
+        farm->init->coord.y = ft_atoi(dopline);
+    return (1);
+}
 
 int get_info(t_farm *farm, char *line, int *i)
 {
@@ -85,8 +109,11 @@ int get_info(t_farm *farm, char *line, int *i)
         ft_strdel(&dop2);
         farm->init->id = farm->room_amount;
         farm->init->name = ft_strsub(line, 0, dop - line);
-        farm->init->coord.x = ft_atoi(dop++);
-        farm->init->coord.y = ft_atoi(ft_strchr(dop, ' '));
+        if (get_cood(farm, &dop, 1) == 0)
+            return (0);
+        dop = ft_strchr(dop, ' ');
+        if (get_cood(farm, &dop, 2) == 0)
+            return (0);
         if (!is_coord(*farm, farm->init))
             return (0);
         farm->init->links_amount = 0;
@@ -178,7 +205,7 @@ int main(int ac, char **av)
     t_farm farm;
 
     i = 0;
-    fd = 0;//open("/Users/ychufist/lem-in/test", O_RDONLY);
+    fd = open("/Users/ychufist/lem-in/test", O_RDONLY);
     line = NULL;
     init(&farm, av);
     while (get_next_line(fd, &line) > 0)

@@ -26,7 +26,6 @@ t_list_room *ft_list_room_new(t_room room)
         return (NULL);
     }
     res->id = room.id;
-//    ft_printf("res->id %d, room->id %d\n", res->id, room.id);
     res->name = room.name;
     res->links_amount = room.links_amount;
     res->links = (int*)malloc(sizeof(int) * room.links_amount);

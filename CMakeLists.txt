@@ -94,8 +94,9 @@ add_executable(lem_in
         libft/libft.h
         ft_adds.c
         ft_ants.c
+        ft_bonuses.c
         ft_is.c
         ft_list_room.c
         ft_ways.c
         lem_in.h
-        parse.c ft_bonuses.c)
+        parse.c)
