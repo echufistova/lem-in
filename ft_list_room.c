@@ -14,75 +14,46 @@
 
 t_list_room *ft_list_room_new(t_room room)
 {
-    int i;
-    t_list_room *res;
+	int i;
+	t_list_room *res;
 
-    i = -1;
-    if (!(res = (t_list_room*)malloc(sizeof(t_list_room))))
-        return (NULL);
-    if (!(res->name = (void*)malloc(ft_strlen(room.name))))
-    {
-        free(res);
-        return (NULL);
-    }
-    res->id = room.id;
-    res->name = room.name;
-    res->links_amount = room.links_amount;
-    res->links = (int*)malloc(sizeof(int) * room.links_amount);
-    while (++i < room.links_amount)
-        res->links[i] = room.links[i];
-    res->next = NULL;
-    return (res);
+	i = -1;
+	if (!(res = (t_list_room*)malloc(sizeof(t_list_room))))
+		return (NULL);
+	ft_bzero(res, sizeof(t_list_room));
+	res->id = room.id;
+	res->name = room.name;
+	res->links_amount = room.links_amount;
+	res->links = (int*)malloc(sizeof(int) * room.links_amount);
+	ft_bzero(res->links, sizeof(int) * room.links_amount);
+	res->size = 1;
+	res->next = NULL;
+	return (res);
 }
 
 int ft_list_room_find(t_list_room *room_list, int id)
 {
-    while (room_list)
-    {
-        if (room_list->id == id)
-            return (1);
-        room_list = room_list->next;
-    }
-    return (0);
+//	t_list_room *room_list;
+
+//	room_list = dop;
+	while (room_list)
+	{
+		if (room_list->id == id)
+			return (1);
+		room_list = room_list->next;
+	}
+	return (0);
 }
 
 int ft_list_size(t_list_room *room_list)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (room_list)
-    {
-        room_list = room_list->next;
-        i++;
-    }
-    return (i);
-}
-
-void	ft_lstrm_delone(t_list_room **alst)
-{
-    t_list_room	*dop;
-
-    if (alst && *alst)
-    {
-        dop = (*alst)->next;
-//        free((*alst)->name);
-        free(*alst);
-        *alst = NULL;
-    }
-}
-
-void	ft_lstrm_del(t_list_room **alst)
-{
-    t_list_room *dop;
-
-    if (alst && *alst)
-    {
-        while ((*alst))
-        {
-            dop = (*alst)->next;
-            ft_lstrm_delone(alst);
-            *alst = dop;
-        }
-    }
+	i = 0;
+	while (room_list)
+	{
+		room_list = room_list->next;
+		i++;
+	}
+	return (i);
 }

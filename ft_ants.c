@@ -12,6 +12,7 @@
 
 #include "lem_in.h"
 
+
 t_ant *create_ants(int ants_amount) {
     int  i;
 

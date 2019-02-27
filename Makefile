@@ -14,7 +14,7 @@ NAME = lem-in
 
 LIBFT = ./libft/libftprintf.a
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS =
 
 SRC = parse.c ft_adds.c ft_ants.c ft_is.c ft_list_room.c ft_ways.c ft_bonuses.c
 
@@ -28,7 +28,7 @@ lib:
 	make -C ./libft
 
 $(NAME): $(OUT) $(LIBFT)
-	gcc -o $(NAME) $(OUT) $(LIBFT)
+	gcc -g -o $(NAME) $(OUT) $(LIBFT)
 
 %.o: %.c $(HDR)
 	gcc $(FLAGS) -o $@ -c $< -I ./libft
@@ -41,5 +41,8 @@ clean:
 fclean: clean
 	make fclean -C ./libft
 	/bin/rm -f $(NAME)
+
+debug: FLAGS += -g 
+debug: all	
 
 re: fclean all

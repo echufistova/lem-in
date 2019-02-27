@@ -12,6 +12,18 @@
 
 #include "lem_in.h"
 
+void    free_list(t_list_room **dop)
+{
+    t_list_room *tmp;
+    while (*dop)
+    {
+        tmp = (*dop)->next;
+        free((*dop)->links);
+        free(*dop);
+        *dop = tmp;
+    }
+}
+
 int is_answer(t_farm farm)
 {
     int counter;
@@ -44,6 +56,39 @@ int is_answer(t_farm farm)
     return (0);
 }
 
+//int is_answer(t_farm farm)
+//{
+//    int j;
+//    t_list_room *room_list;
+//    t_list_room *dop2;
+//    t_list_room *dop;
+//
+//    room_list = ft_list_room_new(farm.rooms[farm.start_room_id]);
+//    dop = room_list;
+//    dop2 = room_list;
+//    while (dop2)
+//    {
+//        if (dop2->id == farm.end_room_id)
+//        {
+//            free_list(&dop);
+//            return (1);
+//        }
+//        j = -1;
+//        while (++j < dop2->links_amount)
+//        {
+//            if (!ft_list_room_find(dop, dop2->links[j]))
+//            {
+//                room_list->next = ft_list_room_new(farm.rooms[dop2->links[j]]);
+//                room_list = room_list->next;
+//            }
+//        }
+//        dop2 = dop2->next;
+//    }
+//    free_list(&dop);
+//    write_error("NO WAY TO END :(");
+//    return (0);
+//}
+
 void make_room(t_farm *farm)
 {
     int i;
@@ -53,13 +98,14 @@ void make_room(t_farm *farm)
     i = 0;
     farm->rooms = (t_room*)malloc(sizeof(t_room) * farm->room_amount);
     dop2 = farm->dop;
-    while (dop2->next)
+    while (dop2)
     {
         farm->rooms[i].id = dop2->id;
         farm->rooms[i].name = ft_strdup(dop2->name);
         farm->rooms[i].coord.x = dop2->coord.x;
         farm->rooms[i].coord.y = dop2->coord.y;
         farm->rooms[i].links_amount = dop2->links_amount;
+        farm->rooms[i].links = NULL;
         dop2 = dop2->next;
 //        free((farm->dop)->name);
 //        free(farm->dop);
@@ -105,8 +151,11 @@ int get_info(t_farm *farm, char *line, int *i)
         dop = ft_strchr(line, ' ');
         dop2 = ft_strsub(line, 0, dop - line);
         if (!is_valid_name(*farm, dop2))
+        {
+            free(dop2);
             return (0);
-        ft_strdel(&dop2);
+        }
+        free(dop2);
         farm->init->id = farm->room_amount;
         farm->init->name = ft_strsub(line, 0, dop - line);
         if (get_cood(farm, &dop, 1) == 0)
@@ -118,6 +167,7 @@ int get_info(t_farm *farm, char *line, int *i)
             return (0);
         farm->init->links_amount = 0;
         farm->init->next = (t_list_room*)malloc(sizeof(t_list_room));
+        ft_bzero(farm->init->next, sizeof(t_list_room));
         farm->init = farm->init->next;
         farm->init->next = NULL;
         farm->room_amount++;
@@ -152,6 +202,7 @@ void init(t_farm *farm, char **av)
     farm->end_room_id = -1;
     farm->init = (t_list_room*)malloc(sizeof(t_list_room));
     farm->init->next = NULL;
+    farm->init->links_amount = 1;
     farm->dop = farm->init;
 }
 
@@ -168,16 +219,16 @@ void free_farm(t_farm *farm)
         }
         free(farm->colors);
     }
-    if (farm->room_amount > 0)
-    {
-        i = -1;
-        while (++i < farm->room_amount)
-        {
-            ft_memdel((void**)&(farm->rooms[i].links));
-            ft_memdel((void**)&(farm->rooms[i].name));
-        }
-        ft_memdel((void**)&farm->rooms);
-    }
+//    if (farm->room_amount > 0)
+//    {
+//        i = -1;
+//        while (++i < farm->room_amount)
+//        {
+//            free(farm->rooms[i].links);
+//            free(farm->rooms[i].name);
+//        }
+//        free(farm->rooms);
+//    }
 }
 
 void work(t_farm *farm, char **av)
@@ -192,6 +243,7 @@ void work(t_farm *farm, char **av)
         bonus_ways(*farm, av);
         ants = create_ants(farm->ants_amount);
         farm->lines = move_ants(*farm, ants);
+        free(ants);
         bonus_lines(*farm, av);
     }
     free_farm(farm);

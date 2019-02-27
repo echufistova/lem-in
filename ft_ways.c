@@ -29,8 +29,10 @@ void get_way(t_farm *farm, t_list_room *way, int flag)
 {
     t_list_room *rm;
     t_list_room *dop;
+    t_list_room *tmp;
 
     bzero_ways(farm);
+    tmp = way;
     while (way->next)
         way = way->next;
     farm->ways[farm->ways_amount] = ft_list_room_new(farm->rooms[
@@ -54,11 +56,11 @@ void get_way(t_farm *farm, t_list_room *way, int flag)
     if (farm->col == 5)
         farm->col = 0;
     farm->ways_amount++;
-    ft_lstrm_del(&way);
+    free_list(&tmp);
     find_ways(farm, flag);
 }
 
-t_list_room *find_ways(t_farm *farm, int flag)
+void find_ways(t_farm *farm, int flag)
 {
     int j;
     t_list_room *way;
@@ -68,7 +70,6 @@ t_list_room *find_ways(t_farm *farm, int flag)
     way = ft_list_room_new(farm->rooms[farm->end_room_id]);
     dop = way;
     dop2 = way;
-
     while (dop2)
     {
         if (flag == 1)
@@ -87,7 +88,7 @@ t_list_room *find_ways(t_farm *farm, int flag)
                     way = way->next;
                     way->prev = dop2;
                     get_way(farm, dop, 1);
-                    return (way);
+                    return ;
                 }
                 if (dop2->links[j] != farm->end_room_id)
                 {
@@ -97,16 +98,15 @@ t_list_room *find_ways(t_farm *farm, int flag)
                     if (way->id == farm->start_room_id)
                     {
                         get_way(farm, dop, flag);
-                        return (way);
+                        return ;
                     }
                 }
             }
         }
         dop2 = dop2->next;
     }
-    ft_lstrm_del(&way);
+    free_list(&dop);
     bzero_ways(farm);
-    return (NULL);
 }
 
 void print_ways(t_farm farm)
@@ -134,3 +134,4 @@ void print_ways(t_farm farm)
     }
     ft_printf("\n");
 }
+
