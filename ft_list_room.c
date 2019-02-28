@@ -20,11 +20,6 @@ t_list_room *ft_list_room_new(t_room room)
     i = -1;
     if (!(res = (t_list_room*)malloc(sizeof(t_list_room))))
         return (NULL);
-    if (!(res->name = (void*)malloc(ft_strlen(room.name))))
-    {
-        free(res);
-        return (NULL);
-    }
     res->id = room.id;
     res->name = room.name;
     res->links_amount = room.links_amount;

@@ -241,6 +241,6 @@ int main(int ac, char **av)
     }
     work(&farm, av);
     the_end();
-//    system("leaks lem-in");
+    system("leaks lem-in");
     return (0 * ac);
 }
