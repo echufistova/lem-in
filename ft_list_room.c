@@ -30,8 +30,11 @@ t_list_room *ft_list_room_new(t_room room)
     return (res);
 }
 
-int ft_list_room_find(t_list_room *room_list, int id)
+int ft_list_room_find(t_list_room *dop, int id)
 {
+    t_list_room *room_list;
+
+    room_list = dop;
     while (room_list)
     {
         if (room_list->id == id)
