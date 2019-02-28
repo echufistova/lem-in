@@ -54,7 +54,7 @@ void get_way(t_farm *farm, t_list_room *way, int flag)
     if (farm->col == 5)
         farm->col = 0;
     farm->ways_amount++;
-    ft_lstrm_del(&way);
+    free_list(&way);
     find_ways(farm, flag);
 }
 
@@ -76,6 +76,8 @@ void find_ways(t_farm *farm, int flag)
         j = -1;
         while (++j < dop2->links_amount)
         {
+            ft_printf("fw %s %d %d %s\n", dop2->name, dop2->links_amount, dop2->links[j],
+                    farm->rooms[dop2->links[j]].name);
             if (farm->rooms[dop2->links[j]].flag != 1 &&
                 farm->rooms[dop2->links[j]].flag != 2)
             {
@@ -104,7 +106,7 @@ void find_ways(t_farm *farm, int flag)
         }
         dop2 = dop2->next;
     }
-    ft_lstrm_del(&way);
+    free_list(&way);
     bzero_ways(farm);
 }
 
