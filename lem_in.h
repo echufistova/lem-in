@@ -80,7 +80,7 @@ int ft_list_room_find(t_list_room *room_list, int id);
 int ft_list_size(t_list_room *room_list);
 int is_valid_name(t_farm farm, const char *name);
 void get_way(t_farm *farm, t_list_room *way, int flag);
-t_list_room *find_ways(t_farm *farm, int flag);
+void find_ways(t_farm *farm, int flag);
 t_ant *create_ants(int ants_amount);
 int move_ants(t_farm farm, t_ant *ants);
 void print_ways(t_farm farm);
@@ -92,5 +92,6 @@ void	ft_lstrm_del(t_list_room **alst);
 void bonus_ways(t_farm farm, char **av);
 void bonus_lines(t_farm farm, char **av);
 void the_end(void);
+void    free_list(t_list_room **dop);
 
 #endif

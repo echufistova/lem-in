@@ -17,21 +17,29 @@ t_list_room *ft_list_room_new(t_room room)
     int i;
     t_list_room *res;
 
-    i = -1;
+    i = 0;
     if (!(res = (t_list_room*)malloc(sizeof(t_list_room))))
         return (NULL);
     res->id = room.id;
     res->name = room.name;
     res->links_amount = room.links_amount;
     res->links = (int*)malloc(sizeof(int) * room.links_amount);
-    while (++i < room.links_amount)
+    while (i < room.links_amount)
+    {
+        ft_printf("list new %s %d %d\n", room.name, room.links_amount, room.links[i]);
         res->links[i] = room.links[i];
+        ft_printf("list new %s %d %d\n", room.name, room.links_amount, room.links[i]);
+        i++;
+    }
     res->next = NULL;
     return (res);
 }
 
-int ft_list_room_find(t_list_room *room_list, int id)
+int ft_list_room_find(t_list_room *dop, int id)
 {
+    t_list_room *room_list;
+
+    room_list = dop;
     while (room_list)
     {
         if (room_list->id == id)
@@ -54,30 +62,15 @@ int ft_list_size(t_list_room *room_list)
     return (i);
 }
 
-void	ft_lstrm_delone(t_list_room **alst)
+
+void    free_list(t_list_room **dop)
 {
-    t_list_room	*dop;
-
-    if (alst && *alst)
+    t_list_room *tmp;
+    while (*dop)
     {
-        dop = (*alst)->next;
-//        free((*alst)->name);
-        free(*alst);
-        *alst = NULL;
-    }
-}
-
-void	ft_lstrm_del(t_list_room **alst)
-{
-    t_list_room *dop;
-
-    if (alst && *alst)
-    {
-        while ((*alst))
-        {
-            dop = (*alst)->next;
-            ft_lstrm_delone(alst);
-            *alst = dop;
-        }
+        tmp = (*dop)->next;
+        free((*dop)->links);
+        free(*dop);
+        *dop = tmp;
     }
 }

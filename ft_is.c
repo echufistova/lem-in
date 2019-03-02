@@ -26,7 +26,7 @@ int is_valid_name(t_farm farm, const char *name)
     dop = farm.dop;
 
     if (name[0] == 'L' || name[0] == '#' ||
-            (name[0] == '#' && ft_strlen(name) == 1))
+        (name[0] == '-' && ft_strlen(name) == 1))
     {
         write_error("NAME ERROR\n");
         return (0);

@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "lem_in.h"
 
 void free_links(int size, int *links)
@@ -31,19 +30,35 @@ void add_link(t_farm *farm, char *line, int i)
     int j;
     t_room dop_room;
 
-    j = -1;
-    dop_room.links = (int*)malloc(sizeof(int) * (farm->rooms[i].links_amount));
-    dop_room.links_amount = farm->rooms[i].links_amount;
-    while (++j < farm->rooms[i].links_amount)
-        dop_room.links[j] = farm->rooms[i].links[j];
-    free_links(farm->rooms[i].links_amount, farm->rooms[i].links);
-    farm->rooms[i].links = (int*)malloc(sizeof(int) *
-            (farm->rooms[i].links_amount + 1));
-    j = -1;
-    while (++j < farm->rooms[i].links_amount)
-        farm->rooms[i].links[j] = dop_room.links[j];
+    j = 0;
+    if (farm->rooms[i].links_amount > 0)
+    {
+        dop_room.name = NULL;
+        dop_room.flag = 0;
+        dop_room.links_amount = farm->rooms[i].links_amount;
+        dop_room.links = (int*)malloc(sizeof(int) * farm->rooms[i].links_amount);
+        j = -1;
+        ft_printf("start\n");
+        while (++j < farm->rooms[i].links_amount)
+        {
+            ft_printf("%d %d %d\n", j, farm->rooms[i].links_amount, farm->rooms[i].links[j]);
+            dop_room.links[j] = farm->rooms[i].links[j];
+
+        }
+        free(farm->rooms[i].links);
+        farm->rooms[i].links = (int*)malloc(sizeof(int) * (farm->rooms[i].links_amount + 1));
+        j = -1;
+        while (++j < farm->rooms[i].links_amount)
+        {
+            ft_printf("%d %d %d\n", j, dop_room.links_amount, dop_room.links[j]);
+            farm->rooms[i].links[j] = dop_room.links[j];
+        }
+        ft_printf("end\n");
+        free(dop_room.links);
+    }
+    else
+        farm->rooms[i].links = (int*)malloc(sizeof(int));
     farm->rooms[i].links[j] = is_room(*farm, line);
-    free_links(dop_room.links_amount, dop_room.links);
     farm->rooms[i].links_amount++;
 }
 
