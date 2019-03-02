@@ -91,6 +91,5 @@ void bonus_ways(t_farm farm, char **av);
 void bonus_lines(t_farm farm, char **av);
 void    free_list(t_list_room **dop);
 void the_end(void);
-void    free_list(t_list_room **dop);
 
 #endif

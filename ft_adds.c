@@ -19,7 +19,8 @@ void free_links(int size, int *links)
     j = -1;
     while (++j < size)
     {
-        free(&links[j]);
+        ft_bzero(links, sizeof(int*));
+//        free(links[j]);
     }
     free(links);
 }
@@ -57,17 +58,6 @@ void add_link(t_farm *farm, char *line, int i)
     }
     else
         farm->rooms[i].links = (int*)malloc(sizeof(int));
-    j = -1;
-    dop_room.links = (int*)malloc(sizeof(int) * (farm->rooms[i].links_amount));
-    dop_room.links_amount = farm->rooms[i].links_amount;
-    while (++j < farm->rooms[i].links_amount)
-        dop_room.links[j] = farm->rooms[i].links[j];
-    free_links(farm->rooms[i].links_amount, farm->rooms[i].links);
-    farm->rooms[i].links = (int*)malloc(sizeof(int) *
-                                        (farm->rooms[i].links_amount + 1));
-    j = -1;
-    while (++j < farm->rooms[i].links_amount)
-        farm->rooms[i].links[j] = dop_room.links[j];
     farm->rooms[i].links[j] = is_room(*farm, line);
     farm->rooms[i].links_amount++;
 }
