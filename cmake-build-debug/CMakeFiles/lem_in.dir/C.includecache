@@ -10,6 +10,7 @@
 lem_in.h
 /Users/ychufist/lem-in/lem_in.h
 
+<<<<<<< HEAD
 /Users/ychufist/lem-in/ft_ants.c
 lem_in.h
 /Users/ychufist/lem-in/lem_in.h
@@ -30,6 +31,8 @@ lem_in.h
 lem_in.h
 /Users/ychufist/lem-in/lem_in.h
 
+=======
+>>>>>>> dd3fb12d34436179fb4b3276a549f0aa573295de
 /Users/ychufist/lem-in/lem_in.h
 libft/libft.h
 /Users/ychufist/lem-in/libft/libft.h
@@ -89,8 +92,4 @@ ctype.h
 -
 stdint.h
 -
-
-/Users/ychufist/lem-in/parse.c
-lem_in.h
-/Users/ychufist/lem-in/lem_in.h
 

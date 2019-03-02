@@ -29,8 +29,10 @@ void get_way(t_farm *farm, t_list_room *way, int flag)
 {
     t_list_room *rm;
     t_list_room *dop;
+    t_list_room *tmp;
 
     bzero_ways(farm);
+    tmp = way;
     while (way->next)
         way = way->next;
     farm->ways[farm->ways_amount] = ft_list_room_new(farm->rooms[
@@ -55,6 +57,7 @@ void get_way(t_farm *farm, t_list_room *way, int flag)
         farm->col = 0;
     farm->ways_amount++;
     free_list(&way);
+    free_list(&tmp);
     find_ways(farm, flag);
 }
 
@@ -68,7 +71,6 @@ void find_ways(t_farm *farm, int flag)
     way = ft_list_room_new(farm->rooms[farm->end_room_id]);
     dop = way;
     dop2 = way;
-
     while (dop2)
     {
         if (flag == 1)
@@ -107,6 +109,7 @@ void find_ways(t_farm *farm, int flag)
         dop2 = dop2->next;
     }
     free_list(&way);
+    free_list(&dop);
     bzero_ways(farm);
 }
 
@@ -135,3 +138,4 @@ void print_ways(t_farm farm)
     }
     ft_printf("\n");
 }
+

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 192
 #Here is the number of lines required: 68
 ##start
@@ -12267,3 +12268,25 @@ Zip2-Xjo7
 Cki8-Baf5
 T_f9-Hpe7
 #Here is the number of lines required: 68
+=======
+4
+3 2 2
+##start
+start 4 0
+##end
+end 4 6
+4 0 4
+1 4 2
+2 4 4
+5 8 2
+6 8 4
+start-1
+3-4
+2-4
+1-5
+6-5
+end-6
+1-2
+2-end
+3-start
+>>>>>>> dd3fb12d34436179fb4b3276a549f0aa573295de

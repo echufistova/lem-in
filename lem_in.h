@@ -73,7 +73,6 @@ typedef struct		s_ant
 
 void add_link(t_farm *farm, char *line, int i);
 int is_room(t_farm farm, char *name);
-//int is_room(t_farm farm, int id);
 int find_link(t_farm *farm, char *line, int k);
 t_list_room *ft_list_room_new(t_room room);
 int ft_list_room_find(t_list_room *room_list, int id);
@@ -88,9 +87,9 @@ int is_valid_map(t_farm farm);
 int is_coord(t_farm farm, t_list_room *room);
 void write_error(char *s);
 void free_links(int size, int *links);
-void	ft_lstrm_del(t_list_room **alst);
 void bonus_ways(t_farm farm, char **av);
 void bonus_lines(t_farm farm, char **av);
+void    free_list(t_list_room **dop);
 void the_end(void);
 void    free_list(t_list_room **dop);
 
