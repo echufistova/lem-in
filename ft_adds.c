@@ -41,7 +41,7 @@ void add_link(t_farm *farm, char *line, int i)
         ft_printf("start\n");
         while (++j < farm->rooms[i].links_amount)
         {
-            ft_printf("%d %d %d\n", j, farm->rooms[i].links_amount, farm->rooms[i].links[j]);
+//            ft_printf("%s %d %d %d\n", farm->rooms[i].name, j, farm->rooms[i].links_amount, farm->rooms[i].links[j]);
             dop_room.links[j] = farm->rooms[i].links[j];
 
         }
@@ -50,7 +50,7 @@ void add_link(t_farm *farm, char *line, int i)
         j = -1;
         while (++j < farm->rooms[i].links_amount)
         {
-            ft_printf("%d %d %d\n", j, dop_room.links_amount, dop_room.links[j]);
+//            ft_printf("%d %d %d\n", j, dop_room.links_amount, dop_room.links[j]);
             farm->rooms[i].links[j] = dop_room.links[j];
         }
         ft_printf("end\n");

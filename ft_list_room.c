@@ -49,11 +49,13 @@ int ft_list_room_find(t_list_room *dop, int id)
     return (0);
 }
 
-int ft_list_size(t_list_room *room_list)
+int ft_list_size(t_list_room *dop)
 {
     int i;
+    t_list_room *room_list;
 
     i = 0;
+    room_list = dop;
     while (room_list)
     {
         room_list = room_list->next;

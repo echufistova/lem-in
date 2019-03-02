@@ -26,7 +26,7 @@ int is_answer(t_farm farm)
     {
         if (dop2->id == farm.end_room_id)
         {
-            free_list(&dop);
+//            free_list(&dop);
             return (1);
         }
         j = -1;
@@ -34,6 +34,7 @@ int is_answer(t_farm farm)
         {
             if (!ft_list_room_find(dop, dop2->links[j]))
             {
+                ft_printf("is answer\n");
                 room_list->next = ft_list_room_new(farm.rooms[dop2->links[j]]);
                 room_list = room_list->next;
             }
@@ -53,6 +54,8 @@ void make_room(t_farm *farm)
     i = 0;
     farm->rooms = (t_room*)malloc(sizeof(t_room) * farm->room_amount);
     dop2 = farm->dop;
+    farm->dop->size = ft_list_size(farm->dop);
+    ft_printf("%d\n", farm->dop->size);
     while (dop2->next)
     {
         farm->rooms[i].id = dop2->id;
@@ -60,6 +63,7 @@ void make_room(t_farm *farm)
         farm->rooms[i].coord.x = dop2->coord.x;
         farm->rooms[i].coord.y = dop2->coord.y;
         farm->rooms[i].links_amount = 0;
+        farm->rooms[i].links = NULL;
         dop2 = dop2->next;
 //        free((farm->dop)->name);
 //        free(farm->dop);
