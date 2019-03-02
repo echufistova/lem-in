@@ -204,6 +204,33 @@ ft_bonuses.c.s:
 	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/ft_bonuses.c.s
 .PHONY : ft_bonuses.c.s
 
+ft_get.o: ft_get.c.o
+
+.PHONY : ft_get.o
+
+# target to build an object file
+ft_get.c.o:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/ft_get.c.o
+.PHONY : ft_get.c.o
+
+ft_get.i: ft_get.c.i
+
+.PHONY : ft_get.i
+
+# target to preprocess a source file
+ft_get.c.i:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/ft_get.c.i
+.PHONY : ft_get.c.i
+
+ft_get.s: ft_get.c.s
+
+.PHONY : ft_get.s
+
+# target to generate assembly for a file
+ft_get.c.s:
+	$(MAKE) -f CMakeFiles/lem_in.dir/build.make CMakeFiles/lem_in.dir/ft_get.c.s
+.PHONY : ft_get.c.s
+
 ft_is.o: ft_is.c.o
 
 .PHONY : ft_is.o
@@ -2544,6 +2571,9 @@ help:
 	@echo "... ft_bonuses.o"
 	@echo "... ft_bonuses.i"
 	@echo "... ft_bonuses.s"
+	@echo "... ft_get.o"
+	@echo "... ft_get.i"
+	@echo "... ft_get.s"
 	@echo "... ft_is.o"
 	@echo "... ft_is.i"
 	@echo "... ft_is.s"

@@ -93,6 +93,9 @@
 		<Unit filename="/Users/ychufist/lem-in/ft_bonuses.c">
 			<Option target="lem_in"/>
 		</Unit>
+		<Unit filename="/Users/ychufist/lem-in/ft_get.c">
+			<Option target="lem_in"/>
+		</Unit>
 		<Unit filename="/Users/ychufist/lem-in/ft_is.c">
 			<Option target="lem_in"/>
 		</Unit>

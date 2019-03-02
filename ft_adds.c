@@ -6,7 +6,7 @@
 /*   By: ychufist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 18:22:04 by ychufist          #+#    #+#             */
-/*   Updated: 2019/03/02 19:47:46 by ychufist         ###   ########.fr       */
+/*   Updated: 2019/03/02 20:07:27 by ychufist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,26 @@ int		is_room(t_farm farm, char *name)
 		}
 	}
 	return (-1);
+}
+
+void make_room(t_farm *farm)
+{
+	int i;
+	t_list_room *dop2;
+
+	i = 0;
+	farm->rooms = (t_room*)malloc(sizeof(t_room) * farm->room_amount);
+	dop2 = farm->dop;
+	farm->dop->size = ft_list_size(farm->dop);
+	while (dop2->next)
+	{
+		farm->rooms[i].id = dop2->id;
+		farm->rooms[i].name = ft_strdup(dop2->name);
+		farm->rooms[i].coord.x = dop2->coord.x;
+		farm->rooms[i].coord.y = dop2->coord.y;
+		farm->rooms[i].links_amount = 0;
+		farm->rooms[i].links = NULL;
+		dop2 = dop2->next;
+		i++;
+	}
 }

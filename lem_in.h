@@ -6,7 +6,7 @@
 /*   By: ychufist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 14:33:27 by ychufist          #+#    #+#             */
-/*   Updated: 2019/03/02 19:26:25 by ychufist         ###   ########.fr       */
+/*   Updated: 2019/03/02 20:08:38 by ychufist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct			s_ant
 }						t_ant;
 
 int						is_room(t_farm farm, char *name);
+int						is_answer(t_farm farm);
 int						is_valid_name(t_farm farm, const char *name);
 int						is_valid_map(t_farm farm);
 int						is_coord(t_farm farm, t_list_room *room);
@@ -79,16 +80,21 @@ int						find_link(t_farm *farm, char *line, int k);
 void					add_link(t_farm *farm, char *line, int i);
 int						ft_list_room_find(t_list_room *room_list, int id);
 int						ft_list_size(t_list_room *room_list);
+int						get_start_end(t_farm *farm, char *line);
+int						get_info(t_farm *farm, char *line, int *i);
 void					get_way(t_farm *farm, t_list_room *way, int flag);
 void					find_ways(t_farm *farm, int flag);
 void					print_ways(t_farm farm);
 void					bonus_ways(t_farm farm, char **av);
 void					bonus_lines(t_farm farm, char **av);
+void					room_init(t_farm *farm);
+void					make_room(t_farm *farm);
 void					free_links(int size, int *links);
 void					free_list(t_list_room **dop);
 int						move_ants(t_farm farm, t_ant *ants);
 void					write_error(char *s);
 void					the_end(void);
+void					usage(void);
 t_ant					*create_ants(int ants_amount);
 t_list_room				*ft_list_room_new(t_room room);
 

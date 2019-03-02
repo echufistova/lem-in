@@ -87,3 +87,36 @@ int is_coord(t_farm farm, t_list_room *room)
     }
     return (1);
 }
+
+int is_answer(t_farm farm)
+{
+    int j;
+    t_list_room *room_list;
+    t_list_room *dop2;
+    t_list_room *dop;
+
+    room_list = ft_list_room_new(farm.rooms[farm.start_room_id]);
+    dop = room_list;
+    dop2 = room_list;
+    while (dop2)
+    {
+        if (dop2->id == farm.end_room_id)
+        {
+//            free_list(&dop);
+            return (1);
+        }
+        j = -1;
+        while (++j < dop2->links_amount)
+        {
+            if (!ft_list_room_find(dop, dop2->links[j]))
+            {
+                ft_printf("is answer\n");
+                room_list->next = ft_list_room_new(farm.rooms[dop2->links[j]]);
+                room_list = room_list->next;
+            }
+        }
+        dop2 = dop2->next;
+    }
+    write_error("NO WAY TO END :(");
+    return (0);
+}

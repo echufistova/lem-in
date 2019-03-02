@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/ychufist/lem-in/ft_adds.c" "/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/ft_adds.c.o"
   "/Users/ychufist/lem-in/ft_ants.c" "/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/ft_ants.c.o"
   "/Users/ychufist/lem-in/ft_bonuses.c" "/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/ft_bonuses.c.o"
+  "/Users/ychufist/lem-in/ft_get.c" "/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/ft_get.c.o"
   "/Users/ychufist/lem-in/ft_is.c" "/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/ft_is.c.o"
   "/Users/ychufist/lem-in/ft_list_room.c" "/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/ft_list_room.c.o"
   "/Users/ychufist/lem-in/ft_ways.c" "/Users/ychufist/lem-in/cmake-build-debug/CMakeFiles/lem_in.dir/ft_ways.c.o"
