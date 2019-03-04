@@ -6,5 +6,5 @@ C_FLAGS = -g   -std=gnu11
 
 C_DEFINES = 
 
-C_INCLUDES = -I/Users/ychufist/lem-in/. -I/Users/ychufist/lem-in/libft 
+C_INCLUDES = -I"/Users/ychufist/lem-in 6.14.32 PM/." -I"/Users/ychufist/lem-in 6.14.32 PM/libft" 
 

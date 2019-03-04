@@ -19,6 +19,12 @@ CMakeFiles/lem_in.dir/ft_bonuses.c.o: ../libft/ft_printf.h
 CMakeFiles/lem_in.dir/ft_bonuses.c.o: ../libft/get_next_line.h
 CMakeFiles/lem_in.dir/ft_bonuses.c.o: ../libft/libft.h
 
+CMakeFiles/lem_in.dir/ft_get.c.o: ../ft_get.c
+CMakeFiles/lem_in.dir/ft_get.c.o: ../lem_in.h
+CMakeFiles/lem_in.dir/ft_get.c.o: ../libft/ft_printf.h
+CMakeFiles/lem_in.dir/ft_get.c.o: ../libft/get_next_line.h
+CMakeFiles/lem_in.dir/ft_get.c.o: ../libft/libft.h
+
 CMakeFiles/lem_in.dir/ft_is.c.o: ../ft_is.c
 CMakeFiles/lem_in.dir/ft_is.c.o: ../lem_in.h
 CMakeFiles/lem_in.dir/ft_is.c.o: ../libft/ft_printf.h

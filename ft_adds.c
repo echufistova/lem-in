@@ -57,6 +57,7 @@ void	add_link(t_farm *farm, char *line, int i)
 
 int		find_link(t_farm *farm, char *line, int k)
 {
+    int i;
 	t_point	ij;
 	char	*dop;
 	char	*name;
@@ -65,7 +66,8 @@ int		find_link(t_farm *farm, char *line, int k)
 	dop = ft_strchr(line, '-');
 	name = ft_strsub(line, 0, dop - line);
 	ij.x = is_room(*farm, name);
-	if (ij.x > -1 && is_room(*farm, ++dop) > -1)
+	i = is_room(*farm, ++dop);
+	if (ij.x > -1 && i > -1 && ij.x != i)
 	{
 		while (++ij.y < farm->rooms[ij.x].links_amount)
 			if (farm->rooms[ij.x].links[ij.y] == is_room(*farm, dop))

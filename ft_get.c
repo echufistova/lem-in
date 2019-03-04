@@ -14,25 +14,30 @@
 
 int get_cood(t_farm *farm, char **line, int n)
 {
-    int i;
     char *dopline;
 
-    i = 0;
-    dopline = *line;
-    while ((*line)[i] == ' ')
-        i++;
-    while ((*line)[i] != ' ' && (*line)[i] != '\0')
+    if (!ft_isdigit((++(*line))[0]))
     {
-        if (!ft_isdigit((*line)[i++]))
+        write_error("INCORRECT INPUT. ERROR");
+        return (0);
+    }
+    dopline = *line;
+    while (**line != ' ' && **line != '\0')
+    {
+        if (!ft_isdigit((**line)))
         {
             write_error("INCORRECT INPUT. ERROR");
             return (0);
         }
+        ++(*line);
     }
-    (*line)++;
-    if (n == 1)
+    if (n == 0)
+    {
         farm->init->coord.x = ft_atoi(dopline);
-    else if (n == 2)
+        if (!get_cood(farm, line, 1))
+            return (0);
+    }
+    else if (n == 1)
         farm->init->coord.y = ft_atoi(dopline);
     return (1);
 }
@@ -56,10 +61,7 @@ int get_info(t_farm *farm, char *line, int *i)
         farm->init->id = farm->room_amount;
         farm->init->name = ft_strdup(dop2);
         ft_strdel(&dop2);
-        if (get_cood(farm, &dop, 1) == 0)
-            return (0);
-        dop = ft_strchr(dop, ' ');
-        if (get_cood(farm, &dop, 2) == 0)
+        if (get_cood(farm, &dop, 0) == 0)
             return (0);
         if (!is_coord(*farm, farm->init))
             return (0);
@@ -67,7 +69,6 @@ int get_info(t_farm *farm, char *line, int *i)
     }
     return (1);
 }
-
 int get_start_end(t_farm *farm, char *line)
 {
     if (ft_strcmp(line, "##start") == 0)

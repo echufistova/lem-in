@@ -17,7 +17,9 @@ void room_init(t_farm *farm)
     farm->init->links_amount = 0;
     farm->init->next = (t_list_room*)malloc(sizeof(t_list_room));
     farm->init = farm->init->next;
+    farm->init->color = NULL;
     farm->init->next = NULL;
+    farm->init->prev = NULL;
     farm->room_amount++;
 }
 
@@ -40,7 +42,10 @@ void init(t_farm *farm, char **av)
         farm->col = 0;
     }
     else
+    {
         farm->col = -1;
+        farm->colors = NULL;
+    }
     farm->flag = 0;
     farm->room_amount = 0;
     farm->ways_amount = 0;
@@ -48,32 +53,8 @@ void init(t_farm *farm, char **av)
     farm->end_room_id = -1;
     farm->init = (t_list_room*)malloc(sizeof(t_list_room));
     farm->init->next = NULL;
+    farm->init->prev = NULL;
     farm->dop = farm->init;
-}
-
-void free_farm(t_farm *farm)
-{
-    int i;
-
-    i = -1;
-    if (farm->col != -1)
-    {
-        while (++i < 5)
-        {
-            ft_bzero(farm->colors[i], sizeof(char *));
-        }
-        free(farm->colors);
-    }
-    if (farm->room_amount > 0)
-    {
-        i = -1;
-        while (++i < farm->room_amount)
-        {
-            ft_memdel((void**)&(farm->rooms[i].links));
-            ft_memdel((void**)&(farm->rooms[i].name));
-        }
-        ft_memdel((void**)&farm->rooms);
-    }
 }
 
 void work(t_farm *farm, char **av)
@@ -113,11 +94,17 @@ int main(int ac, char **av)
             write(1, line, ft_strlen(line));
             write(1, "\n", 1);
             if (ft_strchr(line, '#') && get_start_end(&farm, line))
+            {
+                ft_strdel(&line);
                 continue;
+            }
             else if (!ft_strchr(line, '#') && !ft_strchr(line, '-'))
             {
                 if (!get_info(&farm, line, &i))
+                {
+                    ft_strdel(&line);
                     return (0);
+                }
             }
             else if (!ft_strchr(line, '#') && ft_strchr(line, '-'))
             {
@@ -128,7 +115,8 @@ int main(int ac, char **av)
                 }
                 if (!find_link(&farm, line, 0))
                 {
-                    write_error("NO SUCH ROOM OR LINK. ERROR");
+                    write_error("INVALID ROOM OR LINK. ERROR");
+                    ft_strdel(&line);
                     return (0);
                 }
             }

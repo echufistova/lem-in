@@ -99,4 +99,5 @@ add_executable(lem_in
         ft_list_room.c
         ft_ways.c
         lem_in.h
-        parse.c)
+        parse.c
+        ft_get.c)
