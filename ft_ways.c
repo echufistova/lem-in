@@ -89,7 +89,7 @@ void find_ways(t_farm *farm, int flag)
                     way->next = ft_list_room_new(farm->rooms[dop2->links[j]]);
                     way = way->next;
                     way->prev = dop2;
-                    get_way(farm, dop, 1);
+                    get_way(farm, way, 1);
                     return ;
                 }
                 if (dop2->links[j] != farm->end_room_id)

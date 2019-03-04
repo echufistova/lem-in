@@ -12,17 +12,6 @@
 
 #include "lem_in.h"
 
-void	free_links(int size, int *links)
-{
-	int j;
-
-	j = -1;
-	while (++j < size)
-	{
-		ft_bzero(links, sizeof(int*));
-	}
-	free(links);
-}
 
 void	add_link(t_farm *farm, char *line, int i)
 {
@@ -39,7 +28,10 @@ void	add_link(t_farm *farm, char *line, int i)
 		j = -1;
 		ft_printf("start\n");
 		while (++j < farm->rooms[i].links_amount)
+		{
+			ft_printf("%d\n", farm->rooms[i].links_amount);
 			dop_rm.links[j] = farm->rooms[i].links[j];
+		}
 		free(farm->rooms[i].links);
 		farm->rooms[i].links = (int*)malloc(sizeof(int) *
 				(farm->rooms[i].links_amount + 1));
@@ -120,6 +112,8 @@ void make_room(t_farm *farm)
 		farm->rooms[i].coord.y = dop2->coord.y;
 		farm->rooms[i].links_amount = 0;
 		farm->rooms[i].links = NULL;
+//		if (i == 0)
+//			free(dop2->name);
 		dop2 = dop2->next;
 		i++;
 	}
