@@ -6,76 +6,76 @@
 /*   By: ychufist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 18:26:31 by ychufist          #+#    #+#             */
-/*   Updated: 2019/02/19 18:26:35 by ychufist         ###   ########.fr       */
+/*   Updated: 2019/03/05 18:53:07 by ychufist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void bzero_ways(t_farm *farm)
+void	bzero_ways(t_farm *farm)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (i < farm->room_amount)
-    {
-        if (farm->rooms[i].flag != 2)
-            farm->rooms[i].flag = 0;
-        i++;
-    }
+	i = 0;
+	while (i < farm->room_amount)
+	{
+		if (farm->rooms[i].flag != 2)
+			farm->rooms[i].flag = 0;
+		i++;
+	}
 }
 
-void get_way(t_farm *farm, t_list_room *way, int flag)
+void	get_way(t_farm *farm, t_list_room *way, int flag)
 {
-    t_list_room *rm;
-    t_list_room *dop;
-    t_list_room *new;
+	t_list_room *rm;
+	t_list_room *dop;
+	t_list_room *new;
 
-    bzero_ways(farm);
-    farm->ways[farm->ways_amount] = ft_list_room_new(farm->rooms[
-                                                             farm->start_room_id]);
-    dop = farm->ways[farm->ways_amount];
-    rm = way->prev;
-    while (rm->id!= farm->end_room_id)
-    {
-        farm->ways[farm->ways_amount]->next = ft_list_room_new(farm->rooms[rm->id]);
-        farm->ways[farm->ways_amount] = farm->ways[farm->ways_amount]->next;
-        farm->rooms[rm->id].flag = 2;
-        rm = rm->prev;
-    }
-    new = rm;
-    farm->ways[farm->ways_amount]->next = ft_list_room_new(farm->rooms[
-                                                                   rm->id]);
-    farm->ways[farm->ways_amount] = dop;
-    farm->ways[farm->ways_amount]->size = ft_list_size(farm->ways[
-                                                               farm->ways_amount]) - 1;
-    if (farm->col != -1)
-        farm->ways[farm->ways_amount]->color = farm->colors[farm->col++];
-    if (farm->col == 5)
-        farm->col = 0;
-    farm->ways_amount++;
-    free_list(&new);
-    find_ways(farm, flag);
+	bzero_ways(farm);
+	farm->ways[farm->ways_amount] = ft_list_room_new(farm->rooms[
+			farm->start_room_id]);
+	dop = farm->ways[farm->ways_amount];
+	rm = way->prev;
+	while (rm->id!= farm->end_room_id)
+	{
+		farm->ways[farm->ways_amount]->next = ft_list_room_new(farm->rooms[rm->id]);
+		farm->ways[farm->ways_amount] = farm->ways[farm->ways_amount]->next;
+		farm->rooms[rm->id].flag = 2;
+		rm = rm->prev;
+	}
+	new = rm;
+	farm->ways[farm->ways_amount]->next = ft_list_room_new(farm->rooms[
+			rm->id]);
+	farm->ways[farm->ways_amount] = dop;
+	farm->ways[farm->ways_amount]->size = ft_list_size(farm->ways[
+			farm->ways_amount]) - 1;
+	if (farm->col != -1)
+		farm->ways[farm->ways_amount]->color = farm->colors[farm->col++];
+	if (farm->col == 5)
+		farm->col = 0;
+	farm->ways_amount++;
+	free_list(&new);
+	find_ways(farm, flag);
 }
 
-void find_ways(t_farm *farm, int flag)
+void	find_ways(t_farm *farm, int flag)
 {
-    int j;
-    t_list_room *way;
-    t_list_room *dop2;
-    t_list_room *dop;
+	int			j;
+	t_list_room	*way;
+	t_list_room	*dop2;
+	t_list_room	*dop;
 
-    way = ft_list_room_new(farm->rooms[farm->end_room_id]);
-    dop = way;
-    dop2 = way;
-    while (dop2)
-    {
-        if (flag == 1)
-            break;
-        j = -1;
-        while (++j < dop2->links_amount)
-        {
-            if (farm->rooms[dop2->links[j]].flag != 1 &&
+	way = ft_list_room_new(farm->rooms[farm->end_room_id]);
+	dop = way;
+	dop2 = way;
+	while (dop2)
+	{
+		if (flag == 1)
+			break;
+		j = -1;
+		while (++j < dop2->links_amount)
+		{
+			if (farm->rooms[dop2->links[j]].flag != 1 &&
                 farm->rooms[dop2->links[j]].flag != 2)
             {
                 if (way->id != farm->end_room_id && way->id != -1)
