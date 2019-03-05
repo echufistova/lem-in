@@ -78,17 +78,15 @@ int		not_comment_but_links(t_farm *farm, char **line)
 		{
 			if (farm->start_room_id == -1 || farm->end_room_id == -1)
 			{
-				write_error("THERE IS NO START OR END ROOM. ERROR");
-				return (0);
+				return (write_error("THERE IS NO START OR END ROOM. ERROR"));
 			}
 			make_room(farm);
 			farm->flag = 1;
 		}
 		if (!find_link(farm, line, 0))
 		{
-			write_error("INVALID ROOM OR LINK. ERROR");
 			ft_strdel(line);
-			return (0);
+			return (write_error("INVALID ROOM OR LINK. ERROR"));
 		}
 	}
 	return (1);
@@ -125,9 +123,8 @@ int		main(int ac, char **av)
 		}
 		else
 		{
-			write_error("ERROR");
 			system("leaks lem-in");
-			return (0);
+			return (write_error("ERROR"));
 		}
 	}
 	work(&farm, av);
