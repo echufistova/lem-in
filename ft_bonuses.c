@@ -34,8 +34,3 @@ void the_end(void)
     ft_printf("If you want to see all possible ways, enter '-w' after name of file\n");
     ft_printf("If you want to see amount of lines in output, enter '-l' after name of file\n");
 }
-
-void usage(void)
-{
-        ft_printf("usage:\n ./lem-in < \"test_name_file\"\n");
-}

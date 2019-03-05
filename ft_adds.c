@@ -12,7 +12,6 @@
 
 #include "lem_in.h"
 
-
 void	add_link(t_farm *farm, char *line, int i)
 {
 	int		j;
