@@ -6,7 +6,7 @@
 /*   By: ychufist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 19:55:03 by ychufist          #+#    #+#             */
-/*   Updated: 2019/03/05 18:35:48 by ychufist         ###   ########.fr       */
+/*   Updated: 2019/03/05 19:27:03 by ychufist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int		get_info(t_farm *farm, char *line, int *i)
 	}
 	else if (ft_strchr(line, '-') == NULL)
 	{
-         if (ft_strchr(line, ' ') == NULL)
-            return (write_error("INCORRECT INPUT"));
+		if (ft_strchr(line, ' ') == NULL)
+			return (write_error("INCORRECT INPUT"));
 		dop = ft_strchr(line, ' ');
 		dop2 = ft_strsub(line, 0, dop - line);
 		if (!is_valid_name(*farm, dop2))
