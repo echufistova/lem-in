@@ -55,7 +55,7 @@ int		find_link(t_farm *farm, char **line, int k)
 	{
 		while (++ij.y < farm->rooms[ij.x].links_amount)
 			if (farm->rooms[ij.x].links[ij.y] == is_room(*farm, dop))
-				return (1);
+				return (0);
 		if ((ij.y == farm->rooms[ij.x].links_amount ||
 					ft_intlength(farm->rooms[ij.x].links[ij.y]) == 0))
 			add_link(farm, dop, ij.x);

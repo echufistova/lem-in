@@ -6,7 +6,7 @@
 /*   By: ychufist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 18:26:31 by ychufist          #+#    #+#             */
-/*   Updated: 2019/03/05 18:53:07 by ychufist         ###   ########.fr       */
+/*   Updated: 2019/03/05 19:23:37 by ychufist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ void	get_way(t_farm *farm, t_list_room *way, int flag)
 			farm->start_room_id]);
 	dop = farm->ways[farm->ways_amount];
 	rm = way->prev;
-	while (rm->id!= farm->end_room_id)
+	while (rm->id != farm->end_room_id)
 	{
-		farm->ways[farm->ways_amount]->next = ft_list_room_new(farm->rooms[rm->id]);
+		farm->ways[farm->ways_amount]->next = ft_list_room_new(farm->rooms
+				[rm->id]);
 		farm->ways[farm->ways_amount] = farm->ways[farm->ways_amount]->next;
 		farm->rooms[rm->id].flag = 2;
 		rm = rm->prev;
@@ -71,64 +72,64 @@ void	find_ways(t_farm *farm, int flag)
 	while (dop2)
 	{
 		if (flag == 1)
-			break;
+			break ;
 		j = -1;
 		while (++j < dop2->links_amount)
 		{
 			if (farm->rooms[dop2->links[j]].flag != 1 &&
-                farm->rooms[dop2->links[j]].flag != 2)
-            {
-                if (way->id != farm->end_room_id && way->id != -1)
-                    farm->rooms[way->id].flag = 1;
-                if (way->links_amount == 1 && way->links[0] == farm->start_room_id)
-                {
-                    way->next = ft_list_room_new(farm->rooms[dop2->links[j]]);
-                    way = way->next;
-                    way->prev = dop2;
-                    get_way(farm, way, 1);
-                    return ;
-                }
-                if (dop2->links[j] != farm->end_room_id)
-                {
-                    way->next = ft_list_room_new(farm->rooms[dop2->links[j]]);
-                    way = way->next;
-                    way->prev = dop2;
-                    if (way->id == farm->start_room_id)
-                    {
-                        get_way(farm, way, flag);
-                        return ;
-                    }
-                }
-            }
-        }
-        dop2 = dop2->next;
-    }
-    free_list(&dop);
-    bzero_ways(farm);
+					farm->rooms[dop2->links[j]].flag != 2)
+			{
+				if (way->id != farm->end_room_id && way->id != -1)
+					farm->rooms[way->id].flag = 1;
+				if (way->links_amount == 1 && way->links[0] ==
+						farm->start_room_id)
+				{
+					way->next = ft_list_room_new(farm->rooms[dop2->links[j]]);
+					way = way->next;
+					way->prev = dop2;
+					get_way(farm, way, 1);
+					return ;
+				}
+				if (dop2->links[j] != farm->end_room_id)
+				{
+					way->next = ft_list_room_new(farm->rooms[dop2->links[j]]);
+					way = way->next;
+					way->prev = dop2;
+					if (way->id == farm->start_room_id)
+					{
+						get_way(farm, way, flag);
+						return ;
+					}
+				}
+			}
+		}
+		dop2 = dop2->next;
+	}
+	free_list(&dop);
+	bzero_ways(farm);
 }
 
-void print_ways(t_farm farm)
+void	print_ways(t_farm farm)
 {
-    int i;
-    t_list_room *ways;
+	int			i;
+	t_list_room	*ways;
 
-    i = 0;
-
-    ft_printf("Amount of ways: %d\n", farm.ways_amount);
-    while (i < farm.ways_amount)
-    {
-        ways = farm.ways[i];
-        ft_printf("%d) %d : ",  i + 1, ways->size);
-        while (ways)
-        {
-            ft_printf("%s -> ", ways->name);
-            if (ways->next)
-                ways = ways->next;
-            else
-                break;
-        }
-        ft_printf("\n");
-        i++;
-    }
-    ft_printf("\n");
+	i = 0;
+	ft_printf("Amount of ways: %d\n", farm.ways_amount);
+	while (i < farm.ways_amount)
+	{
+		ways = farm.ways[i];
+		ft_printf("%d) %d : ", i + 1, ways->size);
+		while (ways)
+		{
+			ft_printf("%s -> ", ways->name);
+			if (ways->next)
+				ways = ways->next;
+			else
+				break ;
+		}
+		ft_printf("\n");
+		i++;
+	}
+	ft_printf("\n");
 }

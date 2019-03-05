@@ -32,10 +32,7 @@ int		is_valid_name(t_farm farm, const char *name)
 int		is_valid_map(t_farm farm)
 {
 	if (farm.ants_amount < 1 || farm.ants_amount > 2147483647)
-	{
-		write_error("NOT GOOD AMOUNT OF ANTS. ERROR");
-		return (0);
-	}
+		return (write_error("NOT GOOD AMOUNT OF ANTS. ERROR"));
 	if (farm.start_room_id == -1)
 		return (write_error("THERE IS NO START ROOM. ERROR"));
 	if (farm.end_room_id == -1)

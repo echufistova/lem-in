@@ -48,6 +48,8 @@ int		get_info(t_farm *farm, char *line, int *i)
 	}
 	else if (ft_strchr(line, '-') == NULL)
 	{
+         if (ft_strchr(line, ' ') == NULL)
+            return (write_error("INCORRECT INPUT"));
 		dop = ft_strchr(line, ' ');
 		dop2 = ft_strsub(line, 0, dop - line);
 		if (!is_valid_name(*farm, dop2))
@@ -67,13 +69,13 @@ int		get_info(t_farm *farm, char *line, int *i)
 
 int		get_start_end(t_farm *farm, char **line)
 {
-	if (ft_strcmp(*line, "##start") == 0)
+	if (ft_strcmp(*line, "##start") == 0 && farm->start_room_id == -1)
 	{
 		farm->start_room_id = farm->room_amount;
 		ft_strdel(line);
 		return (1);
 	}
-	else if (ft_strcmp(*line, "##end") == 0)
+	else if (ft_strcmp(*line, "##end") == 0 && farm->end_room_id == -1)
 	{
 		farm->end_room_id = farm->room_amount;
 		ft_strdel(line);
