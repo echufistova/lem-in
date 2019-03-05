@@ -76,6 +76,37 @@ void work(t_farm *farm, char **av)
 //    free_farm(farm);
 }
 
+int not_comment_not_links(t_farm *farm, char **line, int *i)
+{
+    if (!get_info(farm, *line, i))
+    {
+        ft_strdel(line);
+        return (0);
+    }
+    return (1);
+}
+
+int not_comment_but_links(t_farm *farm, char **line)
+{
+    if (farm->flag == 0)
+    {
+        if (farm->start_room_id == -1 || farm->end_room_id == -1)
+        {
+            write_error("THERE IS NO START OR END ROOM. ERROR");
+            return (0);
+        }
+        make_room(farm);
+        farm->flag = 1;
+    }
+    if (!find_link(farm, line, 0))
+    {
+        write_error("INVALID ROOM OR LINK. ERROR");
+        ft_strdel(line);
+        return (0);
+    }
+    return (1);
+}
+
 int main(int ac, char **av)
 {
     int i;
@@ -93,44 +124,29 @@ int main(int ac, char **av)
             write(1, "\n", 1);
             if (ft_strchr(line, '#') && get_start_end(&farm, &line))
                 continue;
-            else if (!ft_strchr(line, '#') && !ft_strchr(line, '-'))
+            else if (!ft_strchr(line, '#') && !ft_strchr(line, '-') &&
+                !not_comment_not_links(&farm, &line, &i))
             {
-                if (!get_info(&farm, line, &i))
-                {
-                    ft_strdel(&line);
-                    system("leaks lem-in");
-                    return (0);
-                }
-            }
-            else if (!ft_strchr(line, '#') && ft_strchr(line, '-'))
-            {
-                if (farm.flag == 0)
-                {
-                    make_room(&farm);
-                    farm.flag = 1;
-                }
-                if (!find_link(&farm, &line, 0))
-                {
-                    write_error("INVALID ROOM OR LINK. ERROR");
-                    return (0);
-                }
-            }
-            else
-                {
-                write_error("ERROR");
+                system("leaks lem-in");
                 return (0);
-                }
+            }
+            else if (!ft_strchr(line, '#') && ft_strchr(line, '-') &&
+                !not_comment_but_links(&farm, &line))
+            {
+                system("leaks lem-in");
+                return (0);
+            }
             ft_strdel(&line);
         }
         else
-            {
-                    write_error("ERROR");
-                    return (0);
-            }
+        {
+            write_error("ERROR");
+            system("leaks lem-in");
+            return (0);
+        }
     }
     work(&farm, av);
     the_end();
     system("leaks lem-in");
-
     return (0 * ac);
 }
