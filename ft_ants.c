@@ -121,7 +121,7 @@ int move_ants(t_farm farm, t_ant *ants)
     while (++j < farm.rooms[farm.start_room_id].links_amount)
         if (farm.rooms[farm.start_room_id].links[j] == farm.end_room_id &&
         from_start_to_end(farm, ants))
-            return (0);
+            return (1);
     while (current_ants_number <= farm.ants_amount ||
     !allAntsGotEnd(ants, farm.ants_amount))
     {

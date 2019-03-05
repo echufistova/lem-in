@@ -79,16 +79,13 @@ void work(t_farm *farm, char **av)
 int main(int ac, char **av)
 {
     int i;
-    int fd;
     char *line;
     t_farm farm;
 
     i = 0;
-    usage();
-    fd = open("/Users/ychufist/lem-in 6.14.32 PM/test", O_RDONLY);
     line = NULL;
     init(&farm, av);
-    while (get_next_line(fd, &line) > 0)
+    while (get_next_line(0, &line) > 0)
     {
         if (ft_strlen(line) != 0)
         {
@@ -115,27 +112,25 @@ int main(int ac, char **av)
                 if (!find_link(&farm, &line, 0))
                 {
                     write_error("INVALID ROOM OR LINK. ERROR");
-                    system("leaks lem-in");
                     return (0);
                 }
             }
             else
-            {
+                {
                 write_error("ERROR");
-                system("leaks lem-in");
                 return (0);
-            }
+                }
             ft_strdel(&line);
         }
         else
             {
-                system("leaks lem-in");
-                write_error("ERROR");
-            return (0);
-        }
+                    write_error("ERROR");
+                    return (0);
+            }
     }
     work(&farm, av);
     the_end();
     system("leaks lem-in");
+
     return (0 * ac);
 }

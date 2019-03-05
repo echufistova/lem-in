@@ -37,5 +37,5 @@ void the_end(void)
 
 void usage(void)
 {
-    ft_printf("usage:\n ./lem-in < \"test_name_file\"\n");
+        ft_printf("usage:\n ./lem-in < \"test_name_file\"\n");
 }
