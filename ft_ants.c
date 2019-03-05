@@ -91,6 +91,24 @@ int get_ants(t_farm farm, t_ant *ants, int current_ants_number)
     return (current_ants_number);
 }
 
+int from_start_to_end(t_farm farm, t_ant *ants)
+{
+    int i;
+
+    i = -1;
+    while (++i < farm.ants_amount)
+    {
+        if (farm.col != -1)
+            write(1, "\e[33m", 5);
+        ft_printf("L%d-%s ", ants[i].number,
+                farm.rooms[farm.end_room_id].name);
+        write(1, "\e[0m", 4);
+    }
+    ft_printf("\n");
+    return (1);
+}
+
+
 int move_ants(t_farm farm, t_ant *ants)
 {
     int j;
@@ -99,6 +117,11 @@ int move_ants(t_farm farm, t_ant *ants)
 
     counter = 0;
     current_ants_number = 1;
+    j = -1;
+    while (++j < farm.rooms[farm.start_room_id].links_amount)
+        if (farm.rooms[farm.start_room_id].links[j] == farm.end_room_id &&
+        from_start_to_end(farm, ants))
+            return (0);
     while (current_ants_number <= farm.ants_amount ||
     !allAntsGotEnd(ants, farm.ants_amount))
     {
