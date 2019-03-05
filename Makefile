@@ -16,7 +16,7 @@ LIBFT = ./libft/libftprintf.a
 
 FLAGS =
 
-SRC = parse.c ft_adds.c ft_ants.c ft_is.c ft_list_room.c ft_ways.c ft_bonuses.c ft_get.c
+SRC = main.c ft_adds.c ft_ants.c ft_is.c ft_list_room.c ft_ways.c ft_bonuses.c ft_get.c
 
 OUT = $(SRC:.c=.o)
 
