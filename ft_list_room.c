@@ -6,7 +6,7 @@
 /*   By: ychufist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 18:24:33 by ychufist          #+#    #+#             */
-/*   Updated: 2019/03/02 18:40:57 by ychufist         ###   ########.fr       */
+/*   Updated: 2019/03/05 18:49:04 by ychufist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,15 @@ t_list_room		*ft_list_room_new(t_room room)
 	res->links_amount = room.links_amount;
 	if (room.links_amount != 0)
 	{
-        res->links = (int *) malloc(sizeof(int) * room.links_amount);
-
-        while (i < room.links_amount)
-        {
-            res->links[i] = room.links[i];
-            i++;
-        }
-    }
+		res->links = (int *)malloc(sizeof(int) * room.links_amount);
+		while (i < room.links_amount)
+		{
+			res->links[i] = room.links[i];
+			i++;
+		}
+	}
 	else
-	    res->links = NULL;
+		res->links = NULL;
 	res->next = NULL;
 	res->prev = NULL;
 	res->color = NULL;
