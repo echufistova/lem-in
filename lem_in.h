@@ -71,6 +71,7 @@ typedef struct			s_ant
 	int					currnet_index;
 }						t_ant;
 
+void init2(t_farm *farm, char **av);
 int						is_room(t_farm farm, char *name);
 int						is_answer(t_farm farm);
 int						is_valid_name(t_farm farm, const char *name);

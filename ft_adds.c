@@ -6,7 +6,7 @@
 /*   By: ychufist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 18:22:04 by ychufist          #+#    #+#             */
-/*   Updated: 2019/03/02 20:07:27 by ychufist         ###   ########.fr       */
+/*   Updated: 2019/03/05 18:03:29 by ychufist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	add_link(t_farm *farm, char *line, int i)
 		dop_rm.links_amount = farm->rooms[i].links_amount;
 		dop_rm.links = (int*)malloc(sizeof(int) * farm->rooms[i].links_amount);
 		j = -1;
-
 		while (++j < farm->rooms[i].links_amount)
 			dop_rm.links[j] = farm->rooms[i].links[j];
 		free(farm->rooms[i].links);
@@ -44,7 +43,6 @@ void	add_link(t_farm *farm, char *line, int i)
 
 int		find_link(t_farm *farm, char **line, int k)
 {
-    int i;
 	t_point	ij;
 	char	*dop;
 	char	*name;
@@ -53,8 +51,7 @@ int		find_link(t_farm *farm, char **line, int k)
 	dop = ft_strchr(*line, '-');
 	name = ft_strsub(*line, 0, dop - *line);
 	ij.x = is_room(*farm, name);
-	i = is_room(*farm, ++dop);
-	if (ij.x > -1 && i > -1 && ij.x != i)
+	if (ij.x > -1 && is_room(*farm, ++dop) > -1 && ij.x != is_room(*farm, dop))
 	{
 		while (++ij.y < farm->rooms[ij.x].links_amount)
 			if (farm->rooms[ij.x].links[ij.y] == is_room(*farm, dop))
@@ -92,10 +89,10 @@ int		is_room(t_farm farm, char *name)
 	return (-1);
 }
 
-void make_room(t_farm *farm)
+void	make_room(t_farm *farm)
 {
-	int i;
-	t_list_room *dop2;
+	int			i;
+	t_list_room	*dop2;
 
 	i = 0;
 	farm->rooms = (t_room*)malloc(sizeof(t_room) * farm->room_amount);
@@ -109,8 +106,6 @@ void make_room(t_farm *farm)
 		farm->rooms[i].coord.y = dop2->coord.y;
 		farm->rooms[i].links_amount = 0;
 		farm->rooms[i].links = NULL;
-//		if (i == 0)
-//			free(dop2->name);
 		dop2 = dop2->next;
 		i++;
 	}

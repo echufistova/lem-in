@@ -94,3 +94,27 @@ int get_start_end(t_farm *farm, char **line)
     ft_strdel(line);
     return (0);
 }
+
+void room_init(t_farm *farm)
+{
+    farm->init->links_amount = 0;
+    farm->init->next = (t_list_room*)malloc(sizeof(t_list_room));
+    farm->init = farm->init->next;
+    farm->init->color = NULL;
+    farm->init->next = NULL;
+    farm->init->prev = NULL;
+    farm->room_amount++;
+}
+
+void init2(t_farm *farm, char **av)
+{
+    farm->flag = 0;
+    farm->room_amount = 0;
+    farm->ways_amount = 0;
+    farm->start_room_id = -1;
+    farm->end_room_id = -1;
+    farm->init = (t_list_room*)malloc(sizeof(t_list_room));
+    farm->init->next = NULL;
+    farm->init->prev = NULL;
+    farm->dop = farm->init;
+}
