@@ -77,7 +77,7 @@ int		is_coord(t_farm farm, t_list_room *room)
 		if (dop2->coord.x == room->coord.x &&
 				dop2->coord.y == room->coord.y)
 		{
-			write_error("THE ROOM WITH THE SAME COORD"
+			write_error("THE ROOM WITH THE SAME COORD "
 		"IS PRESENT OR THERE ARE PROBLEMS WITH INPUT. ERROR");
 			return (0);
 		}
@@ -108,13 +108,13 @@ int		is_answer(t_farm farm)
 		{
 			if (!ft_list_room_find(dop, dop2->links[j]))
 			{
-				ft_printf("is answer\n");
 				room_list->next = ft_list_room_new(farm.rooms[dop2->links[j]]);
 				room_list = room_list->next;
 			}
 		}
 		dop2 = dop2->next;
 	}
+    free_list(&dop);
 	write_error("NO WAY TO END :(");
 	return (0);
 }

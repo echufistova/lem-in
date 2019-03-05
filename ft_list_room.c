@@ -27,12 +27,9 @@ t_list_room		*ft_list_room_new(t_room room)
 	{
         res->links = (int *) malloc(sizeof(int) * room.links_amount);
 
-        while (i < room.links_amount) {
-            ft_printf("list new %s %d %d\n", room.name, room.links_amount,
-                      room.links[i]);
+        while (i < room.links_amount)
+        {
             res->links[i] = room.links[i];
-            ft_printf("list new %s %d %d\n", room.name, room.links_amount,
-                      room.links[i]);
             i++;
         }
     }
@@ -41,6 +38,7 @@ t_list_room		*ft_list_room_new(t_room room)
 	res->next = NULL;
 	res->prev = NULL;
 	res->color = NULL;
+	res->size = 1;
 	return (res);
 }
 

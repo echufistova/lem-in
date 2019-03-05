@@ -32,21 +32,18 @@ void get_way(t_farm *farm, t_list_room *way, int flag)
     t_list_room *new;
 
     bzero_ways(farm);
-    ft_printf("get way\n");
     farm->ways[farm->ways_amount] = ft_list_room_new(farm->rooms[
                                                              farm->start_room_id]);
     dop = farm->ways[farm->ways_amount];
     rm = way->prev;
     while (rm->id!= farm->end_room_id)
     {
-        ft_printf("while\n");
         farm->ways[farm->ways_amount]->next = ft_list_room_new(farm->rooms[rm->id]);
         farm->ways[farm->ways_amount] = farm->ways[farm->ways_amount]->next;
         farm->rooms[rm->id].flag = 2;
         rm = rm->prev;
     }
     new = rm;
-    ft_printf("here look\n");
     farm->ways[farm->ways_amount]->next = ft_list_room_new(farm->rooms[
                                                                    rm->id]);
     farm->ways[farm->ways_amount] = dop;
@@ -85,7 +82,6 @@ void find_ways(t_farm *farm, int flag)
                     farm->rooms[way->id].flag = 1;
                 if (way->links_amount == 1 && way->links[0] == farm->start_room_id)
                 {
-                    ft_printf("if 1\n");
                     way->next = ft_list_room_new(farm->rooms[dop2->links[j]]);
                     way = way->next;
                     way->prev = dop2;
@@ -94,7 +90,6 @@ void find_ways(t_farm *farm, int flag)
                 }
                 if (dop2->links[j] != farm->end_room_id)
                 {
-                    ft_printf("if 2\n");
                     way->next = ft_list_room_new(farm->rooms[dop2->links[j]]);
                     way = way->next;
                     way->prev = dop2;

@@ -64,7 +64,8 @@ void work(t_farm *farm, char **av)
     if (is_valid_map(*farm) && is_answer(*farm))
     {
         ft_printf("\n");
-        farm->ways = (t_list_room**) malloc(sizeof(t_list_room*));
+        farm->ways = (t_list_room**) malloc(sizeof(t_list_room*) *
+                farm->rooms[farm->end_room_id].links_amount);
         find_ways(farm, 0);
         bonus_ways(*farm, av);
         ants = create_ants(farm->ants_amount);
@@ -84,7 +85,7 @@ int main(int ac, char **av)
 
     i = 0;
     usage();
-    fd = open("/Users/ychufist/lem-in/test", O_RDONLY);
+    fd = open("/Users/ychufist/lem-in 6.14.32 PM/test", O_RDONLY);
     line = NULL;
     init(&farm, av);
     while (get_next_line(fd, &line) > 0)
@@ -93,16 +94,14 @@ int main(int ac, char **av)
         {
             write(1, line, ft_strlen(line));
             write(1, "\n", 1);
-            if (ft_strchr(line, '#') && get_start_end(&farm, line))
-            {
-                ft_strdel(&line);
+            if (ft_strchr(line, '#') && get_start_end(&farm, &line))
                 continue;
-            }
             else if (!ft_strchr(line, '#') && !ft_strchr(line, '-'))
             {
                 if (!get_info(&farm, line, &i))
                 {
                     ft_strdel(&line);
+                    system("leaks lem-in");
                     return (0);
                 }
             }
@@ -113,22 +112,24 @@ int main(int ac, char **av)
                     make_room(&farm);
                     farm.flag = 1;
                 }
-                if (!find_link(&farm, line, 0))
+                if (!find_link(&farm, &line, 0))
                 {
                     write_error("INVALID ROOM OR LINK. ERROR");
-                    ft_strdel(&line);
+                    system("leaks lem-in");
                     return (0);
                 }
             }
             else
             {
                 write_error("ERROR");
+                system("leaks lem-in");
                 return (0);
             }
             ft_strdel(&line);
         }
         else
             {
+                system("leaks lem-in");
                 write_error("ERROR");
             return (0);
         }

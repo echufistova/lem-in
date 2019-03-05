@@ -26,19 +26,15 @@ void	add_link(t_farm *farm, char *line, int i)
 		dop_rm.links_amount = farm->rooms[i].links_amount;
 		dop_rm.links = (int*)malloc(sizeof(int) * farm->rooms[i].links_amount);
 		j = -1;
-		ft_printf("start\n");
+
 		while (++j < farm->rooms[i].links_amount)
-		{
-			ft_printf("%d\n", farm->rooms[i].links_amount);
 			dop_rm.links[j] = farm->rooms[i].links[j];
-		}
 		free(farm->rooms[i].links);
 		farm->rooms[i].links = (int*)malloc(sizeof(int) *
 				(farm->rooms[i].links_amount + 1));
 		j = -1;
 		while (++j < farm->rooms[i].links_amount)
 			farm->rooms[i].links[j] = dop_rm.links[j];
-		ft_printf("end\n");
 		free(dop_rm.links);
 	}
 	else
@@ -47,7 +43,7 @@ void	add_link(t_farm *farm, char *line, int i)
 	farm->rooms[i].links_amount++;
 }
 
-int		find_link(t_farm *farm, char *line, int k)
+int		find_link(t_farm *farm, char **line, int k)
 {
     int i;
 	t_point	ij;
@@ -55,8 +51,8 @@ int		find_link(t_farm *farm, char *line, int k)
 	char	*name;
 
 	ij.y = -1;
-	dop = ft_strchr(line, '-');
-	name = ft_strsub(line, 0, dop - line);
+	dop = ft_strchr(*line, '-');
+	name = ft_strsub(*line, 0, dop - *line);
 	ij.x = is_room(*farm, name);
 	i = is_room(*farm, ++dop);
 	if (ij.x > -1 && i > -1 && ij.x != i)
@@ -70,11 +66,13 @@ int		find_link(t_farm *farm, char *line, int k)
 		if (++k < 2)
 		{
 			dop = ft_strcat(ft_strcat(dop, "-"), name);
-			find_link(farm, dop, k);
+			find_link(farm, &dop, k);
 		}
 		ft_strdel(&name);
 		return (1);
 	}
+	ft_strdel(&name);
+	ft_strdel(line);
 	return (0);
 }
 

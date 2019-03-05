@@ -57,11 +57,14 @@ int get_info(t_farm *farm, char *line, int *i)
         dop = ft_strchr(line, ' ');
         dop2 = ft_strsub(line, 0, dop - line);
         if (!is_valid_name(*farm, dop2))
+        {
+            ft_strdel(&dop2);
             return (0);
+        }
         farm->init->id = farm->room_amount;
         farm->init->name = ft_strdup(dop2);
         ft_strdel(&dop2);
-        if (get_cood(farm, &dop, 0) == 0)
+        if (!get_cood(farm, &dop, 0))
             return (0);
         if (!is_coord(*farm, farm->init))
             return (0);
@@ -69,19 +72,25 @@ int get_info(t_farm *farm, char *line, int *i)
     }
     return (1);
 }
-int get_start_end(t_farm *farm, char *line)
+int get_start_end(t_farm *farm, char **line)
 {
-    if (ft_strcmp(line, "##start") == 0)
+    if (ft_strcmp(*line, "##start") == 0)
     {
         farm->start_room_id = farm->room_amount;
+        ft_strdel(line);
         return (1);
     }
-    else if (ft_strcmp(line, "##end") == 0)
+    else if (ft_strcmp(*line, "##end") == 0)
     {
         farm->end_room_id = farm->room_amount;
+        ft_strdel(line);
         return (1);
     }
-    else if (line[0] == '#')
+    else if ((*line)[0] == '#')
+    {
+        ft_strdel(line);
         return (1);
+    }
+    ft_strdel(line);
     return (0);
 }
