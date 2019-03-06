@@ -6,7 +6,7 @@
 /*   By: ychufist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 14:24:19 by ychufist          #+#    #+#             */
-/*   Updated: 2019/03/06 16:52:50 by ychufist         ###   ########.fr       */
+/*   Updated: 2019/03/06 19:25:37 by ychufist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	init(t_farm *farm, char **av)
 	init2(farm, av);
 }
 
-int 	work(t_farm *farm, char **av)
+int		work(t_farm *farm, char **av)
 {
 	t_ant *ants;
 
