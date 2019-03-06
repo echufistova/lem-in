@@ -82,3 +82,29 @@ void			free_list(t_list_room **dop)
 		*dop = tmp;
 	}
 }
+
+void			print_ants_movings(t_ant *ants, int ants_amount)
+{
+	int			i;
+	int			j;
+	t_list_room	*tmp_way;
+
+	i = -1;
+	while (++i < ants_amount)
+	{
+		if (ants[i].currnet_index > ants[i].way_size)
+			continue;
+		tmp_way = ants[i].way;
+		j = -1;
+		while (++j < ants[i].currnet_index)
+			tmp_way = tmp_way->next;
+		if (ants[i].currnet_index != 0)
+		{
+			if (ants[i].way->color != NULL)
+				write(1, ants[i].way->color, 5);
+			ft_printf("L%d-%s ", ants[i].number, tmp_way->name);
+			write(1, "\e[0m", 4);
+		}
+	}
+	ft_printf("\n");
+}

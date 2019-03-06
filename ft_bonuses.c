@@ -6,7 +6,7 @@
 /*   By: ychufist <marvin@43.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 19:44:16 by ychufist          #+#    #+#             */
-/*   Updated: 2019/03/05 19:26:43 by ychufist         ###   ########.fr       */
+/*   Updated: 2019/03/06 16:32:11 by ychufist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,17 @@ int		write_error(char *s)
 	ft_printf("%s\n", s);
 	write(1, "\e[0m", 4);
 	return (0);
+}
+
+void	bzero_ways(t_farm *farm)
+{
+	int i;
+
+	i = 0;
+	while (i < farm->room_amount)
+	{
+		if (farm->rooms[i].flag != 2)
+			farm->rooms[i].flag = 0;
+		i++;
+	}
 }

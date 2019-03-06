@@ -6,7 +6,7 @@
 /*   By: ychufist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 14:24:19 by ychufist          #+#    #+#             */
-/*   Updated: 2019/03/05 17:56:37 by ychufist         ###   ########.fr       */
+/*   Updated: 2019/03/06 16:30:44 by ychufist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,14 @@ int		not_comment_not_links(t_farm *farm, char **line, int *i)
 {
 	if (!ft_strchr(*line, '#') && !ft_strchr(*line, '-'))
 	{
+		if (*i > 0 && !ft_strchr(*line, ' '))
+			return (write_error("INCORRECT INPUT"));
 		if (!get_info(farm, *line, i))
 		{
 			ft_strdel(line);
 			return (0);
 		}
+		return (1);
 	}
 	return (1);
 }
@@ -105,29 +108,18 @@ int		main(int ac, char **av)
 	{
 		if (ft_strlen(line) != 0)
 		{
-			write(1, line, ft_strlen(line));
-			write(1, "\n", 1);
+			write_line(line);
 			if (ft_strchr(line, '#') && get_start_end(&farm, &line))
 				continue;
 			else if (!not_comment_not_links(&farm, &line, &i))
-			{
-				system("leaks lem-in");
 				return (0);
-			}
 			else if (!not_comment_but_links(&farm, &line))
-			{
-				system("leaks lem-in");
 				return (0);
-			}
 			ft_strdel(&line);
 		}
 		else
-		{
-			system("leaks lem-in");
 			return (write_error("ERROR"));
-		}
 	}
 	work(&farm, av);
-	system("leaks lem-in");
 	return (0 * ac);
 }

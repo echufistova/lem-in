@@ -12,17 +12,14 @@
 
 #include "lem_in.h"
 
-void	bzero_ways(t_farm *farm)
+void	get_way_dop(t_farm *farm, t_list_room **new)
 {
-	int i;
-
-	i = 0;
-	while (i < farm->room_amount)
-	{
-		if (farm->rooms[i].flag != 2)
-			farm->rooms[i].flag = 0;
-		i++;
-	}
+	if (farm->col != -1)
+		farm->ways[farm->ways_amount]->color = farm->colors[farm->col++];
+	if (farm->col == 5)
+		farm->col = 0;
+	farm->ways_amount++;
+	free_list(new);
 }
 
 void	get_way(t_farm *farm, t_list_room *way, int flag)
@@ -50,18 +47,41 @@ void	get_way(t_farm *farm, t_list_room *way, int flag)
 	farm->ways[farm->ways_amount] = dop;
 	farm->ways[farm->ways_amount]->size = ft_list_size(farm->ways[
 			farm->ways_amount]) - 1;
-	if (farm->col != -1)
-		farm->ways[farm->ways_amount]->color = farm->colors[farm->col++];
-	if (farm->col == 5)
-		farm->col = 0;
-	farm->ways_amount++;
-	free_list(&new);
+	get_way_dop(farm, &new);
 	find_ways(farm, flag);
+}
+
+int		find_ways_dop(t_farm *farm, t_list_room **way,
+	t_list_room *dop2, t_point i)
+{
+	if ((*way)->id != farm->end_room_id && (*way)->id != -1)
+		farm->rooms[(*way)->id].flag = 1;
+	if ((*way)->links_amount == 1 && (*way)->links[0] ==
+						farm->start_room_id)
+	{
+		(*way)->next = ft_list_room_new(farm->rooms[dop2->links[i.x]]);
+		(*way) = (*way)->next;
+		(*way)->prev = dop2;
+		get_way(farm, (*way), 1);
+		return (0);
+	}
+	if (dop2->links[i.x] != farm->end_room_id)
+	{
+		(*way)->next = ft_list_room_new(farm->rooms[dop2->links[i.x]]);
+		(*way) = (*way)->next;
+		(*way)->prev = dop2;
+		if ((*way)->id == farm->start_room_id)
+		{
+			get_way(farm, (*way), i.y);
+			return (0);
+		}
+	}
+	return (1);
 }
 
 void	find_ways(t_farm *farm, int flag)
 {
-	int			j;
+	t_point		i;
 	t_list_room	*way;
 	t_list_room	*dop2;
 	t_list_room	*dop;
@@ -69,39 +89,17 @@ void	find_ways(t_farm *farm, int flag)
 	way = ft_list_room_new(farm->rooms[farm->end_room_id]);
 	dop = way;
 	dop2 = way;
+	i.y = flag;
 	while (dop2)
 	{
 		if (flag == 1)
 			break ;
-		j = -1;
-		while (++j < dop2->links_amount)
+		i.x = -1;
+		while (++i.x < dop2->links_amount)
 		{
-			if (farm->rooms[dop2->links[j]].flag != 1 &&
-					farm->rooms[dop2->links[j]].flag != 2)
-			{
-				if (way->id != farm->end_room_id && way->id != -1)
-					farm->rooms[way->id].flag = 1;
-				if (way->links_amount == 1 && way->links[0] ==
-						farm->start_room_id)
-				{
-					way->next = ft_list_room_new(farm->rooms[dop2->links[j]]);
-					way = way->next;
-					way->prev = dop2;
-					get_way(farm, way, 1);
-					return ;
-				}
-				if (dop2->links[j] != farm->end_room_id)
-				{
-					way->next = ft_list_room_new(farm->rooms[dop2->links[j]]);
-					way = way->next;
-					way->prev = dop2;
-					if (way->id == farm->start_room_id)
-					{
-						get_way(farm, way, flag);
-						return ;
-					}
-				}
-			}
+			if (farm->rooms[dop2->links[i.x]].flag != 1 && farm->rooms[
+		dop2->links[i.x]].flag != 2 && !find_ways_dop(farm, &way, dop2, i))
+				return ;
 		}
 		dop2 = dop2->next;
 	}

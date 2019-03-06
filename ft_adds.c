@@ -6,7 +6,7 @@
 /*   By: ychufist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 18:22:04 by ychufist          #+#    #+#             */
-/*   Updated: 2019/03/05 18:03:29 by ychufist         ###   ########.fr       */
+/*   Updated: 2019/03/06 16:31:47 by ychufist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ int		find_link(t_farm *farm, char **line, int k)
 		while (++ij.y < farm->rooms[ij.x].links_amount)
 			if (farm->rooms[ij.x].links[ij.y] == is_room(*farm, dop))
 				return (0);
-		if ((ij.y == farm->rooms[ij.x].links_amount ||
-					ft_intlength(farm->rooms[ij.x].links[ij.y]) == 0))
-			add_link(farm, dop, ij.x);
+		add_link(farm, dop, ij.x);
 		if (++k < 2)
 		{
 			dop = ft_strcat(ft_strcat(dop, "-"), name);
@@ -109,4 +107,10 @@ void	make_room(t_farm *farm)
 		dop2 = dop2->next;
 		i++;
 	}
+}
+
+void	write_line(char *line)
+{
+	write(1, line, ft_strlen(line));
+	write(1, "\n", 1);
 }

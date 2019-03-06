@@ -48,8 +48,6 @@ int		get_info(t_farm *farm, char *line, int *i)
 	}
 	else if (ft_strchr(line, '-') == NULL)
 	{
-		if (ft_strchr(line, ' ') == NULL)
-			return (write_error("INCORRECT INPUT"));
 		dop = ft_strchr(line, ' ');
 		dop2 = ft_strsub(line, 0, dop - line);
 		if (!is_valid_name(*farm, dop2))
