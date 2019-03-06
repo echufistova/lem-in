@@ -6,7 +6,7 @@
 /*   By: ychufist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 14:24:19 by ychufist          #+#    #+#             */
-/*   Updated: 2019/03/06 16:30:44 by ychufist         ###   ########.fr       */
+/*   Updated: 2019/03/06 16:52:50 by ychufist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ void	init(t_farm *farm, char **av)
 	init2(farm, av);
 }
 
-void	work(t_farm *farm, char **av)
+int 	work(t_farm *farm, char **av)
 {
 	t_ant *ants;
 
-	if (is_valid_map(*farm) && is_answer(*farm))
+	if (farm->flag == 1 && is_valid_map(*farm) && is_answer(*farm))
 	{
 		ft_printf("\n");
 		farm->ways = (t_list_room**)malloc(sizeof(t_list_room*) *
@@ -54,13 +54,22 @@ void	work(t_farm *farm, char **av)
 		free(ants);
 		bonus_lines(*farm, av);
 		the_end();
+		return (1);
 	}
+	return (write_error("ERROR"));
 }
 
 int		not_comment_not_links(t_farm *farm, char **line, int *i)
 {
+	if (!ft_isalnum((*line)[0]))
+		return (0);
 	if (!ft_strchr(*line, '#') && !ft_strchr(*line, '-'))
 	{
+		if (farm->flag == 1)
+		{
+			farm->flag = 2;
+			return (0);
+		}
 		if (*i > 0 && !ft_strchr(*line, ' '))
 			return (write_error("INCORRECT INPUT"));
 		if (!get_info(farm, *line, i))
@@ -75,14 +84,14 @@ int		not_comment_not_links(t_farm *farm, char **line, int *i)
 
 int		not_comment_but_links(t_farm *farm, char **line)
 {
+	if (!ft_isalnum((*line)[0]) || farm->flag == 2)
+		return (0);
 	if (!ft_strchr(*line, '#') && ft_strchr(*line, '-'))
 	{
 		if (farm->flag == 0)
 		{
 			if (farm->start_room_id == -1 || farm->end_room_id == -1)
-			{
 				return (write_error("THERE IS NO START OR END ROOM. ERROR"));
-			}
 			make_room(farm);
 			farm->flag = 1;
 		}
@@ -102,24 +111,24 @@ int		main(int ac, char **av)
 	t_farm	farm;
 
 	i = 0;
-	line = NULL;
 	init(&farm, av);
 	while (get_next_line(0, &line) > 0)
 	{
 		if (ft_strlen(line) != 0)
 		{
-			write_line(line);
+			write(1, line, ft_strlen(line));
+			write(1, "\n", 1);
 			if (ft_strchr(line, '#') && get_start_end(&farm, &line))
 				continue;
 			else if (!not_comment_not_links(&farm, &line, &i))
-				return (0);
+				break ;
 			else if (!not_comment_but_links(&farm, &line))
-				return (0);
+				break ;
 			ft_strdel(&line);
 		}
 		else
 			return (write_error("ERROR"));
 	}
-	work(&farm, av);
-	return (0 * ac);
+	system("leaks lem-in");
+	return (work(&farm, av) * ac);
 }

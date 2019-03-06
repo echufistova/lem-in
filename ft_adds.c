@@ -41,6 +41,17 @@ void	add_link(t_farm *farm, char *line, int i)
 	farm->rooms[i].links_amount++;
 }
 
+int		find_link_dop(t_farm farm, char *dop, char **name, t_point ij)
+{
+	while (++ij.y < farm.rooms[ij.x].links_amount)
+		if (farm.rooms[ij.x].links[ij.y] == is_room(farm, dop))
+		{
+			ft_strdel(name);
+			return (0);
+		}
+	return (1);
+}
+
 int		find_link(t_farm *farm, char **line, int k)
 {
 	t_point	ij;
@@ -53,9 +64,8 @@ int		find_link(t_farm *farm, char **line, int k)
 	ij.x = is_room(*farm, name);
 	if (ij.x > -1 && is_room(*farm, ++dop) > -1 && ij.x != is_room(*farm, dop))
 	{
-		while (++ij.y < farm->rooms[ij.x].links_amount)
-			if (farm->rooms[ij.x].links[ij.y] == is_room(*farm, dop))
-				return (0);
+		if (!find_link_dop(*farm, dop, &name, ij))
+			return (0);
 		add_link(farm, dop, ij.x);
 		if (++k < 2)
 		{
@@ -107,10 +117,4 @@ void	make_room(t_farm *farm)
 		dop2 = dop2->next;
 		i++;
 	}
-}
-
-void	write_line(char *line)
-{
-	write(1, line, ft_strlen(line));
-	write(1, "\n", 1);
 }

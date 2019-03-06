@@ -32,7 +32,11 @@ int		get_cood(t_farm *farm, char **line, int n)
 			return (0);
 	}
 	else if (n == 1)
+	{
+		if (**line == ' ')
+			return (0);
 		farm->init->coord.y = ft_atoi(dopline);
+	}
 	return (1);
 }
 
@@ -79,13 +83,15 @@ int		get_start_end(t_farm *farm, char **line)
 		ft_strdel(line);
 		return (1);
 	}
+	else if (ft_strcmp(*line, "##end") == 0 || !ft_strcmp(*line, "##start"))
+		return (0);
 	else if ((*line)[0] == '#')
 	{
 		ft_strdel(line);
 		return (1);
 	}
-	ft_strdel(line);
-	return (0);
+	else
+		return (0);
 }
 
 void	room_init(t_farm *farm)
