@@ -6,26 +6,34 @@
 /*   By: ychufist <marvin@43.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 19:44:16 by ychufist          #+#    #+#             */
-/*   Updated: 2019/03/06 16:32:11 by ychufist         ###   ########.fr       */
+/*   Updated: 2019/03/06 20:38:40 by ychufist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	bonus_ways(t_farm farm, char **av)
+int		bonus_ways(t_farm farm, char **av)
 {
-	if ((av[1] && av[1][0] == '-' && av[1][1] == 'w') ||
-		(av[2] && av[2][0] == '-' && av[2][1] == 'w') ||
-		(av[3] && av[3][0] == '-' && av[3][1] == 'w'))
+	if ((av[1] && av[1][0] == '-' && av[1][1] == 'w' && ft_strlen(av[1]) == 2)
+	|| (av[2] && av[2][0] == '-' && av[2][1] == 'w' && ft_strlen(av[2]) == 2)
+	|| (av[3] && av[3][0] == '-' && av[3][1] == 'w' && ft_strlen(av[2]) == 2))
+	{
 		print_ways(farm);
+		return (1);
+	}
+	return (0);
 }
 
-void	bonus_lines(t_farm farm, char **av)
+int		bonus_lines(t_farm farm, char **av)
 {
-	if ((av[1] && av[1][0] == '-' && av[1][1] == 'l') ||
-		(av[2] && av[2][0] == '-' && av[2][1] == 'l') ||
-		(av[3] && av[3][0] == '-' && av[3][1] == 'l'))
+	if ((av[1] && av[1][0] == '-' && av[1][1] == 'w' && ft_strlen(av[1]) == 2)
+	|| (av[2] && av[2][0] == '-' && av[2][1] == 'w' && ft_strlen(av[2]) == 2)
+	|| (av[3] && av[3][0] == '-' && av[3][1] == 'w' && ft_strlen(av[2]) == 2))
+	{
 		ft_printf("Here lines : %d\n", farm.lines);
+		return (1);
+	}
+	return (0);
 }
 
 void	the_end(void)

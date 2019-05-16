@@ -17,8 +17,9 @@ void	init(t_farm *farm, char **av)
 	int i;
 
 	i = 0;
-	if ((av[1] && av[1][0] == '-' && av[1][1] == 'c') || (av[2] && av[2][0] ==
-	'-' && av[2][1] == 'c') || (av[3] && av[3][0] == '-' && av[3][1] == 'c'))
+	if ((av[1] && av[1][0] == '-' && av[1][1] == 'c' && ft_strlen(av[1]) == 2)
+	|| (av[2] && av[2][0] == '-' && av[2][1] == 'c' && ft_strlen(av[2]) == 2)
+	|| (av[3] && av[3][0] == '-' && av[3][1] == 'c' && ft_strlen(av[3]) == 2))
 	{
 		farm->colors = (char**)malloc(sizeof(char*) * 5);
 		while (i < 5)
@@ -35,7 +36,7 @@ void	init(t_farm *farm, char **av)
 		farm->col = -1;
 		farm->colors = NULL;
 	}
-	init2(farm, av);
+	init2(farm);
 }
 
 int		work(t_farm *farm, char **av)
@@ -52,7 +53,8 @@ int		work(t_farm *farm, char **av)
 		ants = create_ants(farm->ants_amount);
 		farm->lines = move_ants(*farm, ants);
 		free(ants);
-		bonus_lines(*farm, av);
+		if (!bonus_lines(*farm, av))
+			return (0);
 		the_end();
 		return (1);
 	}
@@ -129,6 +131,5 @@ int		main(int ac, char **av)
 		else
 			return (write_error("ERROR"));
 	}
-	system("leaks lem-in");
 	return (work(&farm, av) * ac);
 }

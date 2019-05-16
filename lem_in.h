@@ -71,7 +71,7 @@ typedef struct			s_ant
 	int					currnet_index;
 }						t_ant;
 
-void					init2(t_farm *farm, char **av);
+void					init2(t_farm *farm);
 int						is_room(t_farm farm, char *name);
 int						is_answer(t_farm farm);
 int						is_valid_name(t_farm farm, const char *name);
@@ -88,8 +88,8 @@ void					find_ways(t_farm *farm, int flag);
 void					print_ways(t_farm farm);
 void					bzero_ways(t_farm *farm);
 void					print_ants_movings(t_ant *ants, int ants_amount);
-void					bonus_ways(t_farm farm, char **av);
-void					bonus_lines(t_farm farm, char **av);
+int						bonus_ways(t_farm farm, char **av);
+int						bonus_lines(t_farm farm, char **av);
 void					room_init(t_farm *farm);
 void					make_room(t_farm *farm);
 void					free_list(t_list_room **dop);

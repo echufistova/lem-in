@@ -84,7 +84,7 @@ int		get_start_end(t_farm *farm, char **line)
 		return (1);
 	}
 	else if (ft_strcmp(*line, "##end") == 0 || !ft_strcmp(*line, "##start"))
-		return (0);
+		return (write_error("INCORRECT INPUT. ERROR"));
 	else if ((*line)[0] == '#')
 	{
 		ft_strdel(line);
@@ -105,7 +105,7 @@ void	room_init(t_farm *farm)
 	farm->room_amount++;
 }
 
-void	init2(t_farm *farm, char **av)
+void	init2(t_farm *farm)
 {
 	farm->flag = 0;
 	farm->room_amount = 0;

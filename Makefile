@@ -6,7 +6,7 @@
 #    By: ychufist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/19 16:49:26 by ychufist          #+#    #+#              #
-#    Updated: 2018/11/19 16:52:17 by ychufist         ###   ########.fr        #
+#    Updated: 2019/03/06 20:45:10 by ychufist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = lem-in
 
 LIBFT = ./libft/libftprintf.a
 
-FLAGS =
+FLAGS = -Wall -Wextra -Werror
 
 SRC = main.c ft_adds.c ft_ants.c ft_is.c ft_list_room.c ft_ways.c ft_bonuses.c ft_get.c
 
