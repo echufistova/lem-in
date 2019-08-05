@@ -11,13 +11,6 @@ Format of the output:
 Lx-y Lz-w Lr-o
 where x, z, r represents the ants’ numbers (going from 1 to number_of_ants) and y, w, o represents the rooms’ names.
 
-Output of this map:
-
-L1-1
-L1-4 L2-1
-
-L2-4
-
 Error management is present.
 
 To check the work of the project you need to compile it. In the root of repository write "make" in your terminal, press Enter and then exe named "lem-in" will be created. In the diectory to_test you can generate a test map for the ant farm like this "./generator --flow-one" or write "./generator --help" to see other options. To start write: " ../lem-in < test" in the terminal, where test is the file that contains generated map.
