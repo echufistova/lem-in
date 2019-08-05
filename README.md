@@ -11,25 +11,11 @@ Format of the output:
 Lx-y Lz-w Lr-o
 where x, z, r represents the ants’ numbers (going from 1 to number_of_ants) and y, w, o represents the rooms’ names.
 
-Example of valid map:
-2 
-1 0 2
-
-##start
-0 2 0
-##end
-4 2 6
-2 4 2
-3 4 4
-0-1
-0-2
-2-3
-3-4
-4-1
-
 Output of this map:
 L1-1
+
 L1-4 L2-1
+
 L2-4
 
 Error management is present.
