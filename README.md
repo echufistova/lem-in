@@ -14,6 +14,7 @@ where x, z, r represents the ants’ numbers (going from 1 to number_of_ants) an
 Example of valid map:
 2 
 1 0 2
+
 ##start
 0 2 0
 ##end
