@@ -12,8 +12,8 @@ Lx-y Lz-w Lr-o
 where x, z, r represents the ants’ numbers (going from 1 to number_of_ants) and y, w, o represents the rooms’ names.
 
 Output of this map:
-L1-1
 
+L1-1
 L1-4 L2-1
 
 L2-4
